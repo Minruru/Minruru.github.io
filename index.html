@@ -18,7 +18,7 @@
         - Report Info: Daily Itinerary -> Goal: Organize -> Viz/Method: Tabbed interface (HTML/JS) with emojis and time blocks, accompanied by a section image with dark theme -> Interaction: Clicking a tab reveals daily plan. Justification: Breaks down complex daily schedules into digestible, engaging sections, visually supported.
         - Report Info: Expense Breakdown -> Goal: Compare -> Viz/Method: Bar Chart (Chart.js/Canvas) & a detailed HTML table with updated colors for dark background, accompanied by a section image with dark theme -> Interaction: Hover on bars for values. Justification: Offers both visual comparison and granular financial detail, adapted to the new dark palette.
         - New: Attraction Details -> Goal: Organize/Inform -> Viz/Method: Nested tabbed interface by region, then individual attraction buttons revealing details (HTML/JS), each with a small placeholder image with dark theme and detailed text -> Interaction: Clicking region tab shows relevant attractions; clicking attraction button shows its info. Justification: Addresses clutter by categorizing a large number of attractions, improving navigation and user experience, and presenting details like mini-articles with visual context.
-        - New: Transportation Information -> Goal: Inform/Organize -> Viz/Method: Single-level tabbed interface with all routes listed directly -> Interaction: Clicking route button shows its info. Justification: Provides a flat, direct overview of all inter-location travel costs and methods for quick reference, addressing previous complexity.
+        - New: Transportation Information -> Goal: Inform/Organize -> Viz/Method: Single-level tabbed interface with all routes listed directly -> Interaction: Clicking route button shows its info. Justification: Provides a clear, navigable breakdown of inter-location travel costs and methods for quick reference, addressing previous complexity.
         - Report Info: Pre-trip Information -> Goal: Organize -> Viz/Method: Card-based checklist layout (HTML/CSS) with a section image with dark theme -> Interaction: Simple presentation. Justification: Converts prose into actionable steps, visually reinforced.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -209,7 +209,7 @@
             background-color: var(--primary-color); /* Darker Cyan on hover */
         }
         .attraction-tab-btn.active, .transportation-tab-btn.active {
-            background-color: var(--primary-color); /* Deep Cyan when active */
+            background-color: var(--primary-color);
             color: var(--text-light);
         }
         .section-image {
@@ -432,7 +432,7 @@
                         <li>🛍️ 13:30-15:30 探索下北澤一番街的獨特店鋪與古著店</li>
                         <li>🍮 16:00-17:00 白髭泡芙工房 吃龍貓泡芙</li>
                         <li>🚶 17:00-18:00 在下北澤街道繼續閒逛</li>
-                        <li>🥩 18:00-19:00 下北澤燒烤店 YAZAWA 用餐</li>
+                        <li>🍔 18:00-19:00 Village Vanguard Diner Shimokitazawa 用餐</li>
                         <li>🌃 19:00-20:00 到下北澤夜市逛逛，看有沒有便宜衣服</li>
                         <li>🚿 20:00-22:00 回到飯店洗澡休息</li>
                         <li>✅ 22:00-23:00 確認隔日行程並準備睡覺</li>
@@ -541,7 +541,7 @@
                         <button data-attraction-tab="shirahige-choux" class="attraction-tab-btn">白髭泡芙工房</button>
                         <button data-attraction-tab="shimokita-night-market" class="attraction-tab-btn">下北澤夜市</button>
                         <button data-attraction-tab="ekuburi" class="attraction-tab-btn">下北澤えくぶり</button>
-                        <button data-attraction-tab="yazawa-yakitori" class="attraction-tab-btn">下北澤燒烤店 YAZAWA</button>
+                        <button data-attraction-tab="village-vanguard-diner" class="attraction-tab-btn">Village Vanguard Diner</button>
                     </div>
                     <div id="hotel-shimokitazawa" class="attraction-content hidden">
                         <img src="https://placehold.co/400x140/3A3A3A/D1E8E4?text=Hotel+Shimokita" alt="Hotel Shimokitazawa Image" class="attraction-detail-image max-h-32 sm:max-h-40 md:max-h-48">
@@ -626,16 +626,15 @@
                             <li>參考資料：<a href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">日本餐廳評論網站</a></li>
                         </ul>
                     </div>
-                     <div id="yazawa-yakitori" class="attraction-content hidden">
-                        <img src="https://placehold.co/400x140/3A3A3A/D1E8E4?text=Yazawa+Yakiniku" alt="下北澤燒烤店 YAZAWA Image" class="attraction-detail-image max-h-32 sm:max-h-40 md:max-h-48">
-                        <h3 class="text-xl sm:text-2xl font-bold mb-4">下北澤燒烤店 YAZAWA 🥩</h3>
-                        <p>這是一家提供美味日式燒肉的餐廳，位於下北澤區，提供高品質的肉品，是享受晚餐的絕佳選擇。</p>
+                     <div id="village-vanguard-diner" class="attraction-content hidden">
+                        <img src="https://placehold.co/400x140/3A3A3A/D1E8E4?text=Village+Vanguard+Diner" alt="Village Vanguard Diner Shimokitazawa Image" class="attraction-detail-image max-h-32 sm:max-h-40 md:max-h-48">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-4">Village Vanguard Diner Shimokitazawa 🍔</h3>
+                        <p>這是一家由知名雜貨店Village Vanguard經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。店內裝潢具有美式復古風格。</p>
                         <ul>
-                            <li>地點：東京都世田谷区北沢2-10-12</li>
-                            <li>推薦料理：日式燒肉，可選擇不同部位的肉品，搭配啤酒或清酒。</li>
-                            <li>每人平均用餐價位：¥3,000- ¥3,999</li>
-                            <li>支付方式：可接受信用卡、不接受電子現金（西瓜卡等）</li>
-                            <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1318/A131802/13127942/" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">日本餐廳評論網站</a></li>
+                            <li>推薦料理：多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。</li>
+                            <li>每人平均用餐價位：午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。</li>
+                            <li>支付方式：可接受信用卡付款、可接受電子現金（部分電子錢包）</li>
+                            <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">日本餐廳評論網站</a></li>
                         </ul>
                     </div>
                 </div>
@@ -895,8 +894,8 @@
                         <li>約需時間: 約 60 分鐘</li>
                         <li>預估費用 (每人): ¥2,670 (JR ¥170 + 京成Skyliner ¥2,500)</li>
                         <li>備註: Skyliner速度快且班次多，是前往成田機場的首選。</li>
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
                 <div id="shimokita-local" class="transportation-content hidden">
                     <h3 class="text-xl sm:text-2xl font-bold mb-4">下北澤區域內移動 🚶‍♀️/🚆</h3>
                     <p>在下北澤區域內活動，多以步行為主，若有短程需求可搭乘當地列車。</p>
@@ -1107,6 +1106,10 @@
                         <input type="checkbox" id="pre_japan_sim" class="mr-2 accent-cyan-500">
                         <label for="pre_japan_sim" class="text-base sm:text-lg" style="color: var(--text-dark);">日本網卡 📶</label>
                     </li>
+                     <li>
+                        <input type="checkbox" id="pre_common_meds" class="mr-2 accent-cyan-500">
+                        <label for="pre_common_meds" class="text-base sm:text-lg" style="color: var(--text-dark);">常用藥物購買（防止胃脹氣、胃酸過多；消炎止痛藥、透氣膠帶、ＯＫ蹦）🩹</label>
+                    </li>
                 </ul>
 
                 <h3 class="text-xl sm:text-2xl font-bold mb-4 mt-8" style="color: var(--primary-color);">旅遊必備品</h3>
@@ -1166,6 +1169,10 @@
                     <li>
                         <input type="checkbox" id="item_hand_luggage" class="mr-2 accent-cyan-500">
                         <label for="item_hand_luggage" class="text-base sm:text-lg" style="color: var(--text-dark);">手提行李包 💼</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="item_twd_cash" class="mr-2 accent-cyan-500">
+                        <label for="item_twd_cash" class="text-base sm:text-lg" style="color: var(--text-dark);">台幣現鈔（5000以內以備不時之需）💵</label>
                     </li>
                 </ul>
             </div>
