@@ -5,881 +5,646 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>第一次去東京就上手｜朝聖MyGO、孤獨搖滾旅遊手冊</title>
     
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
-        /* --- 🎨 全局設計與色彩配置 --- */
-        :root {
-            --bg-dark: #121212;
-            --bg-light: #1E1E1E;
-            --card-bg: #2A2A2A;
-            --primary-color: #29D8E4; /* 主題色 - 亮青色 */
-            --secondary-color: #F7B733; /* 強調色 - 暖黃色 */
-            --gemini-grad-start: #8E44AD;
-            --gemini-grad-end: #3498DB;
-            --text-main: #EAEAEA;
-            --text-muted: #A0A0A0;
-            --border-color: #444444;
-        }
-
-        html { scroll-behavior: smooth; }
         body {
-            background-color: var(--bg-dark); color: var(--text-main); font-family: 'Noto Sans TC', sans-serif;
-            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
         }
-
-        /* --- ✒️ 字體排版 --- */
-        h1, h2, h3, h4 { font-family: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif; font-weight: 700; }
-        h1, h2 { color: var(--primary-color); margin-bottom: 1rem; }
-        h3, h4 { color: var(--text-main); margin-bottom: 0.75rem; }
-        p { color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
-        a { color: var(--secondary-color); text-decoration: none; transition: color 0.3s; }
-        a:hover { color: #ffc95e; }
-
-        /* --- 🌟 動畫效果 --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- 📄 主體與區塊結構 --- */
-        .main-content-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 1rem; }
-        @media (min-width: 768px) { .main-content-wrapper { padding: 0 2rem; } }
-        section { padding: 5rem 0; border-bottom: 1px solid var(--border-color); }
-        section:last-of-type { border-bottom: none; }
-
-        /* --- 🚀 封面頁設計 --- */
-        #cover-page {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 1rem;
-            background-image: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; border-bottom: 1px solid var(--border-color);
+        .font-display {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
         }
-        #cover-page h1 { font-size: 3rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        #cover-page p { font-size: 1.25rem; font-weight: 300; }
-        @media (min-width: 768px) { #cover-page h1 { font-size: 4.5rem; } #cover-page p { font-size: 1.5rem; } }
-        #cover-page .explore-btn {
-            margin-top: 2rem; padding: 0.8rem 2rem; background-color: var(--primary-color); color: var(--bg-dark);
-            border-radius: 50px; font-size: 1rem; font-weight: 700; box-shadow: 0 4px 20px rgba(41, 216, 228, 0.3);
-            transition: all 0.3s ease; border: none; cursor: pointer;
+        .gradient-text {
+            background: linear-gradient(45deg, #4f46e5, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        #cover-page .explore-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(41, 216, 228, 0.4); }
-
-        /* --- 🧭 導覽列 --- */
-        header.sticky-header {
-            position: sticky; top: 0; z-index: 1000; background-color: rgba(18, 18, 18, 0.85);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color);
+        .tab-btn.active {
+            background-color: #ec4899;
+            color: white;
         }
-        header nav {
-            max-width: 1200px; margin: 0 auto; padding: 0.75rem 1rem; display: flex;
-            justify-content: space-between; align-items: center;
+        .category-tab-btn.active {
+            background-color: #4f46e5;
+            color: white;
         }
-        header .nav-title { font-size: 1.25rem; font-weight: 700; color: var(--primary-color); }
-        header .nav-links a {
-            color: var(--text-muted); text-decoration: none; margin: 0 0.5rem; padding: 0.5rem 0;
-            position: relative; transition: color 0.3s ease; font-size: 0.9rem;
+        .attraction-tab-btn.active, .transportation-tab-btn.active {
+            background-color: #6d28d9;
+            color: white;
         }
-        @media (min-width: 1200px) { header .nav-links a { margin: 0 0.75rem; font-size: 1rem;} }
-        header .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background-color: var(--primary-color); transition: width 0.3s ease;
+        .interactive-checklist input:checked + label::before {
+            background-color: #ec4899;
+            border-color: #ec4899;
         }
-        header .nav-links a:hover, header .nav-links a.active { color: var(--text-main); }
-        header .nav-links a:hover::after, header .nav-links a.active::after { width: 100%; }
-        .mobile-nav-container { display: none; }
-        .print-btn {
-            background: none; border: 1px solid var(--border-color); color: var(--text-muted);
-            padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; margin-left: 1rem;
+        .interactive-checklist input:checked + label {
+            text-decoration: line-through;
+            color: #6b7280;
         }
-        .print-btn:hover { background-color: var(--primary-color); color: var(--bg-dark); border-color: var(--primary-color); }
-        @media (max-width: 1024px) {
-            header .nav-links { display: none; }
-            .mobile-nav-container { display: block; }
-            #mobile-nav {
-                background-color: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color);
-                border-radius: 8px; padding: 0.5rem;
-            }
+        main > section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
         }
-
-        /* --- 🃏 卡片與元件設計 --- */
-        .card {
-            background-color: var(--card-bg); border-radius: 12px; padding: 1.5rem;
-            border: 1px solid var(--border-color); transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        @media (min-width: 768px) { .card { padding: 2rem; } }
-        .section-header { text-align: center; margin-bottom: 3rem; }
-        .section-header h2 { font-size: 2.25rem; }
-        .section-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-        .grid { display: grid; gap: 2rem; }
-        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-        @media (min-width: 768px) { .md-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .lg-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        .mb-12 { margin-bottom: 3rem; }
-        .stat-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .stat-card-icon {
-            background-color: var(--bg-light); border-radius: 50%; width: 60px; height: 60px;
-            display: flex; justify-content: center; align-items: center; margin-bottom: 1rem; color: var(--primary-color);
-        }
-        .stat-card-icon svg { width: 2rem; height: 2rem; }
-        .stat-card span:nth-of-type(1) { color: var(--text-muted); }
-        .stat-card span:nth-of-type(2) { font-size: 1.8rem; font-weight: 700; margin-top: 0.25rem; }
-
-        /* --- 🖼️ 圖片與燈箱 --- */
-        .section-image, .attraction-detail-image {
-            width: 100%; object-fit: cover; border-radius: 12px;
-            margin-bottom: 2rem; cursor: pointer; transition: all 0.3s ease;
-        }
-        .section-image { height: 250px; }
-        .attraction-detail-image { height: 200px; }
-        .section-image:hover, .attraction-detail-image:hover { filter: brightness(1.2); transform: scale(1.02); }
-        #lightbox {
-            position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center;
-        }
-        #lightbox.active { display: flex; animation: fadeIn 0.3s; }
-        #lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
-        #lightbox .close {
-            position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px;
-            font-weight: bold; transition: 0.3s; cursor: pointer;
-        }
-
-        /* --- 🗂️ 頁籤/分頁系統 --- */
-        .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
-        .tab-btn, .category-tab-btn, .attraction-tab-btn, .transportation-tab-btn {
-            background-color: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted);
-            padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-weight: 500;
-        }
-        .attraction-tab-btn, .transportation-tab-btn { font-size: 0.8rem; padding: 0.5rem 1rem; border-radius: 20px; }
-        .tab-btn:hover, .category-tab-btn:hover, .attraction-tab-btn:hover, .transportation-tab-btn:hover {
-            background-color: var(--primary-color); color: var(--bg-dark); border-color: var(--primary-color); transform: translateY(-2px);
-        }
-        .tab-btn.active, .category-tab-btn.active, .attraction-tab-btn.active, .transportation-tab-btn.active {
-            background-color: var(--primary-color); color: var(--bg-dark); border-color: var(--primary-color);
-            box-shadow: 0 4px 15px rgba(41, 216, 228, 0.2); font-weight: 700;
-        }
-        .tab-content, .category-tab-content, .attraction-content, .transportation-content { animation: fadeIn 0.5s; }
-        .hidden { display: none; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- ✅ 清單樣式 --- */
-        .prose-custom ul { list-style-type: none; padding-left: 0; }
-        .prose-custom li { position: relative; padding-left: 2em; margin-bottom: 1rem; }
-        .prose-custom li::before {
-            position: absolute; left: 0; top: 0.1em; font-size: 1.2em; color: var(--primary-color);
-        }
-        #itinerary .prose-custom li::before { content: '➡️'; }
-        #attractions .prose-custom li::before { content: '✨'; }
-        #transportation .prose-custom li::before { content: '🚌'; }
-        .interactive-checklist ul { padding-left: 0; list-style: none; }
-        .interactive-checklist li { padding-left: 2.5rem; position: relative; margin-bottom: 1rem; }
-        .interactive-checklist input[type="checkbox"] { position: absolute; opacity: 0; cursor: pointer; }
-        .interactive-checklist label { cursor: pointer; display: block; }
-        .interactive-checklist label::before {
-            content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-            width: 24px; height: 24px; border: 2px solid var(--border-color);
-            border-radius: 6px; background-color: var(--bg-light); transition: all 0.2s ease;
-        }
-        .interactive-checklist input:checked + label::before { background-color: var(--secondary-color); border-color: var(--secondary-color); }
-        .interactive-checklist input:checked + label { color: var(--text-muted); text-decoration: line-through; }
-        .interactive-checklist label::after {
-            content: '✔'; position: absolute; left: 6px; top: 50%; transform: translateY(-50%) scale(0);
-            font-size: 16px; color: var(--bg-dark); transition: transform 0.2s ease;
-        }
-        .interactive-checklist input:checked + label::after { transform: translateY(-50%) scale(1); }
-
-        /* --- 📈 圖表與表格 --- */
-        .chart-container { position: relative; height: 350px; width: 100%; }
-        .chart-container.h-96 { height: 24rem; }
-        table { width: 100%; border-collapse: collapse; color: var(--text-muted); }
-        th, td { padding: 0.75rem 1rem; text-align: left; }
-        thead { border-bottom: 2px solid var(--primary-color); color: var(--text-main); }
-        tbody tr { border-bottom: 1px solid var(--border-color); }
-        tbody tr:last-child { border-bottom: none; }
-        tbody tr:hover { background-color: var(--bg-light); }
-        tbody tr .font-medium { color: var(--text-main); }
-        table tfoot { font-weight: bold; color: var(--primary-color); font-size: 1.1rem; }
-        .text-right { text-align: right; }
-
-        /* --- ✨ Gemini AI 功能 --- */
-        .gemini-btn {
-            background-image: linear-gradient(45deg, var(--gemini-grad-start), var(--gemini-grad-end));
-            color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 20px;
-            cursor: pointer; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;
-            transition: all 0.3s ease; margin-top: 1rem;
-        }
-        .gemini-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); }
-        
-        #gemini-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10001;
-            background-color: rgba(0,0,0,0.7); display: flex; justify-content: center;
-            align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease;
-        }
-        #gemini-modal.active { opacity: 1; visibility: visible; }
-        .gemini-modal-content {
-            background-color: var(--card-bg); border-radius: 12px; padding: 2rem;
-            width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;
-            border: 1px solid var(--border-color);
-            position: relative;
-            transform: scale(0.9); transition: transform 0.3s ease;
-        }
-        #gemini-modal.active .gemini-modal-content { transform: scale(1); }
-        .gemini-modal-close {
-            position: absolute; top: 1rem; right: 1rem; background: none; border: none;
-            color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
-        }
-        #gemini-modal-title { color: var(--primary-color); margin-bottom: 1rem; }
-        #gemini-modal-body { color: var(--text-main); line-height: 1.8; white-space: pre-wrap; }
-        #gemini-modal-body ul { list-style-position: inside; padding-left: 1rem;}
-        #gemini-modal-body li { margin-bottom: 0.5rem; }
-
-        .loader {
-            width: 48px; height: 48px; border: 5px solid var(--primary-color);
-            border-bottom-color: transparent; border-radius: 50%; display: inline-block;
-            box-sizing: border-box; animation: rotation 1s linear infinite; margin: 2rem auto; display: block;
-        }
-        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* --- 🖨️ 列印樣式 --- */
-        @media print {
-            body { background-color: #fff; color: #000; font-size: 10pt; }
-            header, footer, #cover-page, .print-btn, .tabs, .section-image, #lightbox, .gemini-btn, #gemini-modal { display: none !important; }
-            .main-content-wrapper, section { padding: 0; border: none; margin-top: 1.5rem; }
-            .card { box-shadow: none; border: 1px solid #ccc; padding: 1rem; page-break-inside: avoid; }
-            a { text-decoration: none; color: #000; }
-            a[href^="http"]::after { content: " (" attr(href) ")"; color: #555; }
-            h1, h2, h3, h4 { color: #000; page-break-after: avoid; }
-            .reveal { opacity: 1; transform: translateY(0); }
-            .chart-container, .grid { page-break-inside: avoid; }
-            .tab-content, .category-tab-content, .attraction-content, .transportation-content, .hidden {
-                display: block !important; border-top: 1px solid #eee; padding-top: 1rem; margin-top: 1rem;
+        @media (min-width: 768px) {
+            main > section {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
             }
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <div id="cover-page">
-        <h1 class="reveal">第一次去東京就上手</h1>
-        <p class="reveal">您的專屬動漫聖地與美食探險之旅</p>
-        <button onclick="document.getElementById('overview').scrollIntoView();" class="explore-btn reveal">
+    <!-- Cover Page -->
+    <div class="h-screen bg-cover bg-center flex flex-col justify-center items-center text-white text-center p-4" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop');">
+        <h1 class="font-display text-5xl md:text-7xl font-bold drop-shadow-lg">第一次去東京就上手</h1>
+        <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">您的專屬動漫聖地與美食探險之旅</p>
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'});" class="mt-8 px-8 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105">
             開始探索
         </button>
     </div>
 
-    <header class="sticky-header">
-        <nav>
-            <div class="nav-title">東京動漫聖地巡禮</div>
-            <div class="nav-links">
-                <a href="#overview" class="nav-link active">總覽</a>
-                <a href="#itinerary" class="nav-link">每日行程</a>
-                <a href="#attractions" class="nav-link">景點美食介紹</a>
-                <a href="#transportation" class="nav-link">交通資訊</a>
-                <a href="#budget" class="nav-link">預算分析</a>
-                <a href="#shopping-list" class="nav-link">購物&伴手禮清單</a>
-                <a href="#checklist" class="nav-link">行前準備</a>
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-md">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="font-display text-2xl font-bold gradient-text">東京動漫聖地巡禮</div>
+            <div class="hidden lg:flex items-center space-x-6">
+                <a href="#overview" class="text-gray-600 hover:text-pink-500 transition">總覽</a>
+                <a href="#itinerary" class="text-gray-600 hover:text-pink-500 transition">每日行程</a>
+                <a href="#attractions" class="text-gray-600 hover:text-pink-500 transition">景點美食</a>
+                <a href="#transportation" class="text-gray-600 hover:text-pink-500 transition">交通資訊</a>
+                <a href="#budget" class="text-gray-600 hover:text-pink-500 transition">預算分析</a>
+                <a href="#shopping-list" class="text-gray-600 hover:text-pink-500 transition">購物清單</a>
+                <a href="#checklist" class="text-gray-600 hover:text-pink-500 transition">行前準備</a>
             </div>
-            <div class="flex items-center">
-                <div class="mobile-nav-container">
-                    <select id="mobile-nav" onchange="document.querySelector(this.value).scrollIntoView();">
-                        <option value="#overview">總覽</option>
-                        <option value="#itinerary">每日行程</option>
-                        <option value="#attractions">景點美食介紹</option>
-                        <option value="#transportation">交通資訊</option>
-                        <option value="#budget">預算分析</option>
-                        <option value="#shopping-list">購物&伴手禮清單</option>
-                        <option value="#checklist">行前準備</option>
-                    </select>
-                </div>
-                <button class="print-btn" onclick="window.print()">🖨️ 列印</button>
+             <button class="hidden lg:block print-btn px-4 py-2 border border-gray-300 rounded-full text-gray-600 hover:bg-gray-100 transition" onclick="window.print()">🖨️ 列印</button>
+            <div class="lg:hidden">
+                <select id="mobile-nav" class="border border-gray-300 rounded-md p-2" onchange="document.querySelector(this.value).scrollIntoView({behavior: 'smooth'});">
+                    <option value="#overview">總覽</option>
+                    <option value="#itinerary">每日行程</option>
+                    <option value="#attractions">景點美食介紹</option>
+                    <option value="#transportation">交通資訊</option>
+                    <option value="#budget">預算分析</option>
+                    <option value="#shopping-list">購物清單</option>
+                    <option value="#checklist">行前準備</option>
+                </select>
             </div>
         </nav>
     </header>
 
-    <main class="main-content-wrapper">
+    <main class="container mx-auto px-6">
 
-        <section id="overview">
-            <div class="section-header reveal">
-                <h2>行程總覽</h2>
-                <p>一目了然您的東京之旅核心資訊：費用、時間與目的地。</p>
+        <!-- Overview Section -->
+        <section id="overview" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">行程總覽</h2>
+                <p class="mt-2 text-lg text-gray-600">一目了然您的東京之旅核心資訊：費用、時間與目的地。</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1513407030348-c983a97b98d8?q=80&w=1200&auto=format&fit=crop" alt="Tokyo Overview Image" class="section-image reveal lightbox-trigger">
-            <div class="grid grid-cols-1 md-grid-cols-3 mb-12">
-                <div class="card stat-card reveal" style="transition-delay: 0.1s;">
-                    <div class="stat-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 10v-1m0-13a9 9 0 110 18 9 9 0 010-18z"></path></svg></div>
-                    <span>預估總費用</span>
-                    <span id="totalCost"></span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <span class="text-4xl">💰</span>
+                    <h3 class="mt-2 text-lg font-semibold text-gray-500">預估總費用</h3>
+                    <p id="totalCost" class="text-3xl font-bold text-indigo-600"></p>
                 </div>
-                <div class="card stat-card reveal" style="transition-delay: 0.2s;">
-                    <div class="stat-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
-                    <span>旅行期間</span>
-                    <span>6天5夜</span>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <span class="text-4xl">🗓️</span>
+                    <h3 class="mt-2 text-lg font-semibold text-gray-500">旅行期間</h3>
+                    <p class="text-3xl font-bold text-indigo-600">6天5夜</p>
                 </div>
-                 <div class="card stat-card reveal" style="transition-delay: 0.3s;">
-                    <div class="stat-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
-                    <span>核心目的地</span>
-                    <span style="font-size: 1.5rem;">下北澤/澀谷/秋葉原</span>
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <span class="text-4xl">📍</span>
+                    <h3 class="mt-2 text-lg font-semibold text-gray-500">核心目的地</h3>
+                    <p class="text-2xl font-bold text-indigo-600">下北澤/澀谷/秋葉原</p>
                 </div>
             </div>
-            <div class="card reveal">
-                <h3 class="text-center">預算費用分佈</h3>
-                <div class="chart-container">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="font-display text-2xl font-bold text-center mb-6">預算費用分佈</h3>
+                <div class="chart-container h-80 mx-auto" style="max-width: 400px;">
                     <canvas id="budgetDonutChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <section id="itinerary">
-            <div class="section-header reveal">
-                <h2>每日行程規劃</h2>
-                <p>點擊下方日期，探索每一天的詳細活動與動漫聖地巡禮！</p>
+        <!-- Itinerary Section -->
+        <section id="itinerary" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">每日行程規劃</h2>
+                <p class="mt-2 text-lg text-gray-600">點擊下方日期，探索每一天的詳細活動與動漫聖地巡禮！</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1539382430256-11b025a7d0d1?q=80&w=1200&auto=format&fit=crop" alt="Daily Itinerary Image" class="section-image reveal lightbox-trigger">
-            <div class="tabs reveal">
-                <button data-tab="day1" class="tab-btn active">Day 1 (8/18 一)</button>
-                <button data-tab="day2" class="tab-btn">Day 2 (8/19 二)</button>
-                <button data-tab="day3" class="tab-btn">Day 3 (8/20 三)</button>
-                <button data-tab="day4" class="tab-btn">Day 4 (8/21 四)</button>
-                <button data-tab="day5" class="tab-btn">Day 5 (8/22 五)</button>
-                <button data-tab="day6" class="tab-btn">Day 6 (8/23 六)</button>
+            <div class="tabs flex flex-wrap justify-center gap-2 mb-8">
+                <button data-tab="day1" class="tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-pink-500 hover:text-white active">Day 1 (8/18 一)</button>
+                <button data-tab="day2" class="tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-pink-500 hover:text-white">Day 2 (8/19 二)</button>
+                <button data-tab="day3" class="tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-pink-500 hover:text-white">Day 3 (8/20 三)</button>
+                <button data-tab="day4" class="tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-pink-500 hover:text-white">Day 4 (8/21 四)</button>
+                <button data-tab="day5" class="tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-pink-500 hover:text-white">Day 5 (8/22 五)</button>
+                <button data-tab="day6" class="tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-pink-500 hover:text-white">Day 6 (8/23 六)</button>
             </div>
-            <div class="card reveal">
-                <div class="prose-custom">
-                    <div id="day1" class="tab-content">
-                        <h3>Day 1 (8/18 一): 抵達與下北澤探索</h3>
-                        <p>抵達東京成田機場(NRT)後，搭乘 N'EX 至澀谷，再轉乘京王井之頭線抵達充滿文青與復古風情的下北澤。入住飯店後，準備開始您的《孤獨搖滾！》聖地巡禮！</p>
-                        <ul>
-                            <li>🛌 08:00-09:30 起床梳洗，準備行李</li>
-                            <li>✈️ 09:30-11:30 抵達桃園國際機場</li>
-                            <li>📝 11:30-12:30 準備登機手續並過關</li>
-                            <li>🍔 12:30-14:15 過關後在機場進食</li>
-                            <li>🛫 14:15-18:35 桃園國際機場到東京成田機場</li>
-                            <li>🏨 18:35-20:30 抵達下北澤芥末飯店</li>
-                            <li>🛒 20:30-21:30 飯店附近的超商解決晚餐</li>
-                            <li>🛀 21:30-23:00 洗澡休息</li>
-                            <li>😴 23:00-07:00 睡覺</li>
-                        </ul>
-                        <button class="gemini-btn itinerary-ai-btn">✨ AI 幫我看看</button>
-                    </div>
-                    <div id="day2" class="tab-content hidden">
-                        <h3>Day 2 (8/19 二): 下北澤探索</h3>
-                        <p>今日將深度探索下北澤，進行《孤獨搖滾！》聖地巡禮，並品嚐當地特色美食。</p>
-                        <ul>
-                            <li>🛌 07:00-08:00 起床梳洗</li>
-                            <li>☕ 08:00-09:00 附近超商吃早餐</li>
-                            <li>🎸 09:00-12:00 前往孤獨搖滾聖地Shelter Live House (STARRY原型)、🅿️ Times 下北澤第八停車場 (團體照拍攝地)</li>
-                            <li>🍛 12:00-13:30 午餐 路地裏咖哩 侍 下北澤店 用餐</li>
-                            <li>🛍️ 13:30-15:30 探索下北澤一番街的獨特店鋪與古著店</li>
-                            <li>🍮 16:00-17:00 白髭泡芙工房 吃龍貓泡芙</li>
-                            <li>🚶 17:00-18:00 在下北澤街道繼續閒逛</li>
-                            <li>🍔 18:00-19:00 Village Vanguard Diner Shimokitazawa 用餐</li>
-                            <li>🌃 19:00-20:00 到下北澤夜市逛逛，看有沒有便宜衣服</li>
-                            <li>🚿 20:00-22:00 回到飯店洗澡休息</li>
-                            <li>✅ 22:00-23:00 確認隔日行程並準備睡覺</li>
-                            <li>😴 23:00-07:00 睡覺</li>
-                        </ul>
-                        <button class="gemini-btn itinerary-ai-btn">✨ AI 幫我看看</button>
-                    </div>
-                    <div id="day3" class="tab-content hidden">
-                        <h3>Day 3 (8/20 三): 澀谷、新宿一日遊 & 前進秋葉原</h3>
-                        <p>前往新宿、澀谷逛逛吃美食，傍晚，搭乘JR線前往動漫與電子的聖地——秋葉原，並入住新飯店。</p>
-                        <ul>
-                            <li>🛌 07:00-08:00 起床梳洗</li>
-                            <li>🏨 08:00-08:30 準備退房離開飯店</li>
-                            <li>☕ 08:30-10:00 えくぶり 用餐</li>
-                            <li>🚆 10:00-10:20 從下北澤搭車到涉谷站</li>
-                            <li>🛍️ 10:20-12:00 逛ユニクロ 渋谷道玄坂店、涉谷GU採買衣服（也要幫老媽買）</li>
-                            <li>🚶 12:00-12:10 抵達午餐地點</li>
-                            <li>🍖 12:10-13:40 吟味焼肉 じゃんか 道玄坂 用餐</li>
-                            <li>🚗 13:40-14:20 搭車前往Tokyo Bitcoin Base</li>
-                            <li>⛩️ 14:20-16:00 逛Tokyo Bitcoin Base</li>
-                            <li>🚆 16:00-16:50 搭車前往人形町今半 新宿髙島屋店（務必17:00前抵達）</li>
-                            <li>🍲 17:00-18:30 在人形町今半 新宿髙島屋店 用餐</li>
-                            <li>🧳 18:30-19:30 搭車前往東京中央大飯店 Check In</li>
-                            <li>🏪 19:30-20:30 逛一下飯店周邊與超商購買零食與明天早餐</li>
-                            <li>🛀 20:30-22:00 回到飯店洗澡休息</li>
-                            <li>✅ 22:00-23:00 確認明天行程</li>
-                            <li>😴 23:00-07:00 睡覺</li>
-                        </ul>
-                        <button class="gemini-btn itinerary-ai-btn">✨ AI 幫我看看</button>
-                    </div>
-                    <div id="day4" class="tab-content hidden">
-                        <h3>Day 4 (8/21 四): 《MyGO!!!!!》聖地巡禮日</h3>
-                        <p>今日是《MyGO!!!!!》的聖地巡禮日！前往飛鳥山公園、舊古河庭園，朝聖爽世與祥子戰鬥過，以及祥子成為人類的橋。</p>
-                        <ul>
-                            <li>🛌 07:00-08:00 起床梳洗</li>
-                            <li>☕ 08:00-09:30 吃昨天準備的早餐</li>
-                            <li>🌳 09:30-10:00 搭車前往飛鳥山公園</li>
-                            <li>🚶‍♀️ 10:00-11:00 朝聖爽世與祥子戰鬥過的地方，可搭鐵軌逛公園</li>
-                            <li>🏡 11:00-11:20 走路前往舊古河庭園</li>
-                            <li>🌸 11:20-12:20 在舊古河庭園朝聖祥子的家</li>
-                            <li>🚶 12:00-12:10 到旁邊的ココフル</li>
-                            <li>🍔 12:10-13:40 在ココフル 用餐</li>
-                            <li>🚗 13:40-14:30 搭車前往千登世步道橋，朝聖成為人類橋</li>
-                            <li>🤝 14:30-15:30 在千登世步道橋周圍逛逛</li>
-                            <li>🚆 15:30-16:10 搭車回到東京中央大飯店</li>
-                            <li>😴 16:10-17:10 在飯店休息</li>
-                            <li>🚶‍♀️ 17:10-17:30 走路到廚房南海 神保町店</li>
-                            <li>🍽️ 17:30-19:00 在 廚房南海 神保町店 用餐</li>
-                            <li>19:00-20:00 買好明天早餐並回到飯店</li>
-                            <li>🚿 20:00-22:00 回到飯店洗澡休息</li>
-                            <li>✅ 22:00-23:00 確認明天行程</li>
-                            <li>😴 23:00-07:00 睡覺</li>
-                        </ul>
-                        <button class="gemini-btn itinerary-ai-btn">✨ AI 幫我看看</button>
-                    </div>
-                    <div id="day5" class="tab-content hidden">
-                        <h3>Day 5 (8/22 五): 秋葉原動漫之旅</h3>
-                        <p>今日將深度探索秋葉原的動漫文化，從電器、模型到各式周邊商品，讓您滿載而歸！</p>
-                        <ul>
-                            <li>🛌 07:00-08:00 起床梳洗</li>
-                            <li>☕ 08:00-10:00 吃飯店的早餐或者附近超商</li>
-                            <li>📺 10:00-12:00 前往秋葉原ラジオ會館</li>
-                            <li>🚶 12:00-12:30 前往とんこつラーメン博多風龍 秋葉原総本店</li>
-                            <li>🍛 12:00-14:00 在とんこつラーメン博多風龍 秋葉原総本店 用餐</li>
-                            <li>🎮 14:00-17:00 繼續逛秋葉原ラジオ會館、e-earphone 秋葉原店等店面</li>
-                            <li>🛍️ 17:00-18:00 前往SEEKBASE、2k540手工藝品店逛逛</li>
-                            <li>🍜 18:00-19:10 前往とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 用餐</li>
-                            <li>🛒 19:10-20:30 先買明天早餐並回到飯店</li>
-                            <li>🚿 20:30-22:00 回到飯店洗澡休息</li>
-                            <li>✅ 22:00-23:00 確認明天行程與退房時間</li>
-                            <li>😴 23:00-08:00 睡覺</li>
-                        </ul>
-                        <button class="gemini-btn itinerary-ai-btn">✨ AI 幫我看看</button>
-                    </div>
-                    <div id="day6" class="tab-content hidden">
-                        <h3>Day 6 (8/23 六): 伴手禮採買日&啟程返家</h3>
-                        <p>整理行囊，享受在東京的最後一天。從秋葉原地區購買伴手禮，中午隨意吃喝，下午搭車到成田機場，準備搭晚上的班機平安返家。</p>
-                        <ul>
-                            <li>🛌 08:00-09:00 起床梳洗吃早餐</li>
-                            <li>🏨 09:00-10:00 準備行李與確認重要物品並退房</li>
-                            <li>10:00-10:30 前往秋葉原ラジオ會館</li>
-                            <li>10:30-12:30 在會館一樓的ギフトショップ The AkiBa 購買伴手禮</li>
-                            <li>12:30-14:30 隨便找一間店用餐</li>
-                            <li>14:30-15:30 在附近的全家購買蘋果乾兩包（子儀伴手禮）</li>
-                            <li>15:30-17:00 搭車前往成田機場</li>
-                            <li>17:00-19:00在機場準備登機手續與用餐</li>
-                            <li>19:00-19:30 搭接駁車到登機處</li>
-                            <li>19:30-22:35 揮手告別東京，搭機返回台灣</li>
-                            <li>22:35-23:35 搭計程車前往肥肥的大叔叔家</li>
-                        </ul>
-                        <button class="gemini-btn itinerary-ai-btn">✨ AI 幫我看看</button>
-                    </div>
-                </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg prose-custom">
+                <!-- Itinerary content will be dynamically inserted here -->
             </div>
         </section>
 
-        <section id="attractions">
-            <div class="section-header reveal">
-                <h2>景點、美食介紹</h2>
-                <p>深入了解行程中各個地點的特色與推薦資訊。</p>
+        <!-- Attractions Section -->
+        <section id="attractions" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">景點、美食介紹</h2>
+                <p class="mt-2 text-lg text-gray-600">深入了解行程中各個地點的特色與推薦資訊。</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1549767579-990e1f435a22?q=80&w=1200&auto=format&fit=crop" alt="Attractions and Food Image" class="section-image reveal lightbox-trigger">
-            <div class="tabs reveal">
-                <button data-category-tab="category-shimokita" class="category-tab-btn active">下北澤區域</button>
-                <button data-category-tab="category-shibuya-shinjuku" class="category-tab-btn">澀谷/新宿區域</button>
-                <button data-category-tab="category-mygo-area" class="category-tab-btn">MyGO!!!!!聖地</button>
-                <button data-category-tab="category-akiba" class="category-tab-btn">秋葉原/神保町</button>
+            <div class="tabs flex flex-wrap justify-center gap-2 mb-8">
+                <button data-category-tab="category-shimokita" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white active">下北澤區域</button>
+                <button data-category-tab="category-shibuya-shinjuku" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">澀谷/新宿區域</button>
+                <button data-category-tab="category-mygo-area" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">MyGO!!!!!聖地</button>
+                <button data-category-tab="category-akiba" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">秋葉原/神保町/人形町</button>
             </div>
-            <div class="card reveal">
-                <div class="prose-custom">
-                    <!-- Shimokitazawa Category -->
-                    <div id="category-shimokita" class="category-tab-content">
-                        <div class="tabs">
-                            <button data-attraction-tab="hotel-mustard" class="attraction-tab-btn active">下北澤芥末飯店</button>
-                            <button data-attraction-tab="shelter-live-house" class="attraction-tab-btn">Shelter Live House</button>
-                            <button data-attraction-tab="times-parking" class="attraction-tab-btn">Times停車場</button>
-                            <button data-attraction-tab="curry-samurai" class="attraction-tab-btn">路地裏咖哩 侍</button>
-                            <button data-attraction-tab="shirahige-choux" class="attraction-tab-btn">白髭泡芙工房</button>
-                            <button data-attraction-tab="village-vanguard-diner" class="attraction-tab-btn">Village Vanguard Diner</button>
-                            <button data-attraction-tab="ekuburi" class="attraction-tab-btn">えくぶり</button>
-                        </div>
-                        <div id="hotel-mustard" class="attraction-content">
-                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop" alt="下北澤芥末飯店" class="attraction-detail-image lightbox-trigger">
-                            <h4>下北澤芥末飯店 (MUSTARD HOTEL SHIMOKITAZAWA) 🏨</h4>
-                            <p>位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。</p>
-                        </div>
-                        <div id="shelter-live-house" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?q=80&w=1200&auto=format&fit=crop" alt="Shelter Live House" class="attraction-detail-image lightbox-trigger">
-                             <h4>Shelter Live House (STARRY原型) 🎤</h4>
-                             <p>東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。</p>
-                        </div>
-                        <div id="times-parking" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1616362355033-116416204155?q=80&w=1200&auto=format&fit=crop" alt="Times停車場" class="attraction-detail-image lightbox-trigger">
-                             <h4>Times 下北澤第八停車場 (團體照拍攝地) 🅿️</h4>
-                             <p>因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。</p>
-                        </div>
-                        <div id="curry-samurai" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1582243544237-2ea11e5a5944?q=80&w=1200&auto=format&fit=crop" alt="路地裏咖哩 侍" class="attraction-detail-image lightbox-trigger">
-                             <h4>路地裏咖哩 侍 下北澤店 🍛</h4>
-                             <p>下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。</p>
-                             <ul>
-                                <li>推薦料理：招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。</li>
-                                <li>每人平均用餐價位：￥1,320 - ￥2,255</li>
-                                <li>支付方式：不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
-                                <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="路地裏咖哩 侍 下北澤店">✨ AI 美食顧問</button>
-                        </div>
-                        <div id="shirahige-choux" class="attraction-content hidden">
-                              <img src="https://images.unsplash.com/photo-1620289299713-b5443a479493?q=80&w=1200&auto=format&fit=crop" alt="白髭泡芙工房" class="attraction-detail-image lightbox-trigger">
-                             <h4>白髭泡芙工房 🍮</h4>
-                             <p>宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。</p>
-                             <ul>
-                                <li>推薦料理：龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。</li>
-                                <li>每人平均用餐價位：￥999</li>
-                                <li>支付方式：不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
-                                <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="白髭泡芙工房">✨ AI 美食顧問</button>
-                        </div>
-                        <div id="village-vanguard-diner" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=1200&auto=format&fit=crop" alt="Village Vanguard Diner" class="attraction-detail-image lightbox-trigger">
-                             <h4>Village Vanguard Diner Shimokitazawa 🍔</h4>
-                             <p>由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。</p>
-                             <ul>
-                                <li>推薦料理：多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。</li>
-                                <li>每人平均用餐價位：午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。</li>
-                                <li>支付方式：接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）</li>
-                                <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="Village Vanguard Diner Shimokitazawa">✨ AI 美食顧問</button>
-                        </div>
-                         <div id="ekuburi" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=1200&auto=format&fit=crop" alt="えくぶり" class="attraction-detail-image lightbox-trigger">
-                             <h4>えくぶり ☕</h4>
-                             <p>這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。</p>
-                             <ul>
-                                 <li>推薦料理：日式早餐套餐、各式吐司、咖啡等。</li>
-                                 <li>參考資料：<a href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="下北澤早餐店 えくぶり">✨ AI 美食顧問</button>
-                        </div>
-                    </div>
-                    <!-- Shibuya/Shinjuku Category -->
-                    <div id="category-shibuya-shinjuku" class="category-tab-content hidden">
-                        <div class="tabs">
-                            <button data-attraction-tab="uniqlo-shibuya" class="attraction-tab-btn active">ユニクロ 渋谷道玄坂店</button>
-                            <button data-attraction-tab="gu-shibuya" class="attraction-tab-btn">GU 渋谷店</button>
-                            <button data-attraction-tab="janka-dogenzaka" class="attraction-tab-btn">吟味焼肉 じゃんか 道玄坂</button>
-                            <button data-attraction-tab="tokyo-bitcoin-base" class="attraction-tab-btn">Tokyo Bitcoin Base</button>
-                             <button data-attraction-tab="imahan-takashimaya" class="attraction-tab-btn">人形町今半 新宿髙島屋店</button>
-                        </div>
-                         <div id="uniqlo-shibuya" class="attraction-content">
-                             <img src="https://images.unsplash.com/photo-1593014343464-954a1a8cda48?q=80&w=1200&auto=format&fit=crop" alt="ユニクロ 渋谷道玄坂店" class="attraction-detail-image lightbox-trigger">
-                             <h4>ユニクロ 渋谷道玄坂店 👕</h4>
-                             <p>位於澀谷的 Uniqlo 分店，提供最新款式的服飾，是採購基本款與潮流單品的好去處。</p>
-                        </div>
-                        <div id="gu-shibuya" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=1200&auto=format&fit=crop" alt="GU 渋谷店" class="attraction-detail-image lightbox-trigger">
-                             <h4>GU 渋谷店 👖</h4>
-                             <p>Uniqlo 的姊妹品牌，以更親民的價格提供時尚潮流服飾，深受年輕人喜愛。</p>
-                        </div>
-                        <div id="janka-dogenzaka" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1200&auto=format&fit=crop" alt="吟味焼肉 じゃんか 道玄坂" class="attraction-detail-image lightbox-trigger">
-                             <h4>吟味焼肉 じゃんか 道玄坂 🍖</h4>
-                             <p>澀谷知名的燒肉店，以提供高品質的肉品（特別是和牛）聞名，讓您能品嚐到入口即化的美味燒肉。</p>
-                              <ul>
-                                <li>推薦料理：各部位的和牛燒肉、特選拼盤。</li>
-                                <li>每人平均用餐價位：￥1,000－￥1,999</li>
-                                <li>支付方式：可接受信用卡、不接受電子現金（西瓜卡等）、接受PayPay支付（QRCode）</li>
-                                <li>參考資料：<a href="https://tabelog.com/tokyo/A1303/A130301/13007287/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="吟味焼肉 じゃんか 道玄坂">✨ AI 美食顧問</button>
-                        </div>
-                        <div id="tokyo-bitcoin-base" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1642150348821-420958a74a27?q=80&w=1200&auto=format&fit=crop" alt="Tokyo Bitcoin Base" class="attraction-detail-image lightbox-trigger">
-                             <h4>Tokyo Bitcoin Base 🪙</h4>
-                             <p>一個與加密貨幣、區塊鏈相關的實體空間或社群據點，吸引著對區塊鏈技術和文化感興趣的人士。</p>
-                        </div>
-                        <div id="imahan-takashimaya" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1623405786356-8564a6f9479a?q=80&w=1200&auto=format&fit=crop" alt="人形町今半 新宿髙島屋店" class="attraction-detail-image lightbox-trigger">
-                             <h4>人形町今半 新宿髙島屋店 🍲</h4>
-                             <p>日本頂級的壽喜燒和涮涮鍋專門店，以嚴選和牛和傳統烹飪方式聞名，提供精緻且道地的日式用餐體驗。</p>
-                             <ul>
-                                <li>推薦料理：壽喜燒、涮涮鍋（和牛品質極高）。</li>
-                                <li>每人平均用餐價位：￥15,000－￥19,999</li>
-                                <li>支付方式：已線上預約並付款</li>
-                                <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1304/A130401/13004274/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="人形町今半 新宿髙島屋店">✨ AI 美食顧問</button>
-                        </div>
-                    </div>
-                    <!-- MyGO!!!!! Category -->
-                    <div id="category-mygo-area" class="category-tab-content hidden">
-                        <div class="tabs">
-                            <button data-attraction-tab="asukayama-park" class="attraction-tab-btn active">飛鳥山公園</button>
-                            <button data-attraction-tab="kyu-furukawa-garden" class="attraction-tab-btn">舊古河庭園</button>
-                             <button data-attraction-tab="chitose-bridge" class="attraction-tab-btn">千登世步道橋</button>
-                             <button data-attraction-tab="cocofulu" class="attraction-tab-btn">ココフル</button>
-                        </div>
-                        <div id="asukayama-park" class="attraction-content">
-                            <img src="https://images.unsplash.com/photo-1627725941490-5a331169a031?q=80&w=1200&auto=format&fit=crop" alt="飛鳥山公園" class="attraction-detail-image lightbox-trigger">
-                            <h4>飛鳥山公園 🌸</h4>
-                            <p>江戶時代起就是著名的賞櫻勝地，也是《MyGO!!!!!》動畫的聖地，可以尋找動畫中爽世與祥子「戰鬥」過的噴水池等景點。</p>
-                        </div>
-                        <div id="kyu-furukawa-garden" class="attraction-content hidden">
-                            <img src="https://images.unsplash.com/photo-1551537025-a64c06252924?q=80&w=1200&auto=format&fit=crop" alt="舊古河庭園" class="attraction-detail-image lightbox-trigger">
-                            <h4>舊古河庭園 🌹</h4>
-                            <p>融合了日式庭園與西式洋館的獨特設計，是《MyGO!!!!!》動畫中祥子家的原型地。</p>
-                        </div>
-                        <div id="chitose-bridge" class="attraction-content hidden">
-                            <img src="https://images.unsplash.com/photo-1532258380696-62635344395a?q=80&w=1200&auto=format&fit=crop" alt="千登世步道橋" class="attraction-detail-image lightbox-trigger">
-                            <h4>千登世步道橋 🌉</h4>
-                            <p>《MyGO!!!!!》動畫中，祥子邀請燈組成樂團，經典的「祥子成為人類的橋」，是粉絲必訪的朝聖地點。</p>
-                        </div>
-                        <div id="cocofulu" class="attraction-content hidden">
-                            <img src="https://images.unsplash.com/photo-1559305419-6f481a523a6c?q=80&w=1200&auto=format&fit=crop" alt="ココフル" class="attraction-detail-image lightbox-trigger">
-                            <h4>ココフル ☕</h4>
-                            <p>位於飛鳥山公園附近的咖啡店或簡餐店，適合在遊覽公園後稍作休息，補充能量。</p>
-                             <ul>
-                                <li>推薦料理：通常提供咖啡、輕食、或簡餐。</li>
-                                <li>每人平均用餐價位：￥1,000－￥1,999</li>
-                                <li>支付方式：可接受信用卡、可接受電子現金（西瓜卡等）</li>
-                                <li>參考資料：<a href="https://tabelog.com/tokyo/A1323/A132303/13202218/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                            <button class="gemini-btn food-ai-btn" data-restaurant="ココフルcocofulu">✨ AI 美食顧問</button>
-                        </div>
-                    </div>
-                    <!-- Akihabara/Jimbocho Category -->
-                    <div id="category-akiba" class="category-tab-content hidden">
-                         <div class="tabs">
-                            <button data-attraction-tab="hotel-grand-central" class="attraction-tab-btn active">東京中央大飯店</button>
-                            <button data-attraction-tab="kitchen-nankai" class="attraction-tab-btn">廚房南海 神保町店</button>
-                            <button data-attraction-tab="akiba-radio-hall" class="attraction-tab-btn">秋葉原ラジオ會館</button>
-                            <button data-attraction-tab="hakata-furyu" class="attraction-tab-btn">とんこつラーメン博多風龍</button>
-                            <button data-attraction-tab="e-earphone" class="attraction-tab-btn">e-earphone 秋葉原店</button>
-                            <button data-attraction-tab="tonkatsu-ippe" class="attraction-tab-btn">とんかつ檍のカレー屋 いっぺこっぺ</button>
-                            <button data-attraction-tab="the-akiba" class="attraction-tab-btn">ギフトショップ The AkiBa</button>
-                        </div>
-                        <div id="hotel-grand-central" class="attraction-content">
-                             <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop" alt="東京中央大飯店" class="attraction-detail-image lightbox-trigger">
-                             <h4>東京中央大飯店 (Grand Central Hotel, Tokyo) 🏨</h4>
-                             <p>位於交通樞紐，鄰近神田、秋葉原等地，是一家提供經典舒適住宿體驗的飯店，方便前往東京各個角落。</p>
-                        </div>
-                        <div id="kitchen-nankai" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1599939887324-743d0452a233?q=80&w=1200&auto=format&fit=crop" alt="廚房南海 神保町店" class="attraction-detail-image lightbox-trigger">
-                             <h4>廚房南海 神保町店 🍛</h4>
-                             <p>神保町地區的傳奇洋食老店，以其份量十足、價格實惠的黑色咖哩聞名，是當地人與學生們的最愛。</p>
-                             <ul>
-                                 <li>推薦料理：豬排咖哩飯、奶油可樂餅。</li>
-                                 <li>每人平均用餐價位：￥1,000－￥1,999</li>
-                                 <li>支付方式：只接受現金</li>
-                                 <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1310/A131003/13249021/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="廚房南海 神保町店">✨ AI 美食顧問</button>
-                        </div>
-                        <div id="akiba-radio-hall" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1613487957484-321c4196a39b?q=80&w=1200&auto=format&fit=crop" alt="秋葉原ラジオ會館" class="attraction-detail-image lightbox-trigger">
-                             <h4>秋葉原ラジオ會館 🗼</h4>
-                             <p>秋葉原的地標性建築之一，是動漫、模型、卡牌和偶像周邊商品的聚集地，動漫迷的天堂。</p>
-                        </div>
-                        <div id="hakata-furyu" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=1200&auto=format&fit=crop" alt="とんこつラーメン博多風龍" class="attraction-detail-image lightbox-trigger">
-                             <h4>とんこつラーメン博多風龍 秋葉原総本店 🍜</h4>
-                             <p>提供正宗的博多豚骨拉麵，以其濃郁的湯頭和可以免費續加兩次的細麵為特色，CP值極高。</p>
-                             <ul>
-                                 <li>推薦料理：豚骨拉麵，可自選麵的硬度。</li>
-                                 <li>每人平均用餐價位：￥1,000－￥1,999</li>
-                                 <li>支付方式：不接受信用卡、可接受電子現金（西瓜卡等）、可接受PayPay支付（QRCode）</li>
-                                 <li>參考資料：<a href="https://tabelog.com/tw/tokyo/A1311/A131101/13096267/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="とんこつラーメン博多風龍 秋葉原総本店">✨ AI 美食顧問</button>
-                        </div>
-                        <div id="e-earphone" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1590658262432-722617a01353?q=80&w=1200&auto=format&fit=crop" alt="e-earphone 秋葉原店" class="attraction-detail-image lightbox-trigger">
-                             <h4>e-earphone 秋葉原店 🎧</h4>
-                             <p>耳機與音響發燒友的聖地，提供極為豐富的各品牌耳機、播放器試聽與選購服務。</p>
-                        </div>
-                        <div id="tonkatsu-ippe" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1599033665338-34a8a54d6f3c?q=80&w=1200&auto=format&fit=crop" alt="とんかつ檍のカレー屋 いっぺこっぺ" class="attraction-detail-image lightbox-trigger">
-                             <h4>とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 🐷</h4>
-                             <p>以高品質的炸豬排和獨特的咖哩醬聞名，提供酥脆多汁的炸豬排與濃郁咖哩的完美結合。</p>
-                             <ul>
-                                 <li>推薦料理：招牌炸豬排咖哩飯。</li>
-                                 <li>每人平均用餐價位：￥1,000－￥1,999</li>
-                                 <li>支付方式：只接受日圓現金</li>
-                                 <li>參考資料：<a href="https://tabelog.com/tokyo/A1311/A131101/13259701/" target="_blank">日本餐廳評論網站</a></li>
-                             </ul>
-                             <button class="gemini-btn food-ai-btn" data-restaurant="とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店">✨ AI 美食顧問</button>
-                        </div>
-                        <div id="the-akiba" class="attraction-content hidden">
-                             <img src="https://images.unsplash.com/photo-1571848504955-a23b3a168936?q=80&w=1200&auto=format&fit=crop" alt="ギフトショップ The AkiBa" class="attraction-detail-image lightbox-trigger">
-                             <h4>ギフトショップ The AkiBa 🎁</h4>
-                             <p>位於秋葉原ラジオ會館一樓的伴手禮店，販售各種與秋葉原、動漫文化相關的特色商品與點心。</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg prose-custom">
+                <!-- Attractions content will be dynamically inserted here -->
             </div>
         </section>
 
-        <section id="transportation">
-            <div class="section-header reveal">
-                <h2>交通資訊</h2>
-                <p>各主要景點與餐廳之間的移動方式與交通費用概覽。</p>
+        <!-- Transportation Section -->
+        <section id="transportation" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">交通資訊</h2>
+                <p class="mt-2 text-lg text-gray-600">各主要景點與餐廳之間的移動方式與交通費用概覽。</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1533139143976-357121153202?q=80&w=1200&auto=format&fit=crop" alt="Transportation Map Image" class="section-image reveal lightbox-trigger">
-            <div class="card reveal">
-                <div class="tabs">
-                    <button data-transportation-tab="nrt-to-mustard" class="transportation-tab-btn active">機場 → 下北澤飯店</button>
-                    <button data-transportation-tab="mustard-to-grand" class="transportation-tab-btn">下北澤 → 東京中央</button>
-                    <button data-transportation-tab="grand-to-mygo" class="transportation-tab-btn">飯店 → MyGO聖地</button>
-                    <button data-transportation-tab="grand-to-nrt" class="transportation-tab-btn">飯店 → 機場</button>
-                </div>
-                <div class="prose-custom">
-                    <div id="nrt-to-mustard" class="transportation-content">
-                        <h4>成田機場 (NRT) → 下北澤芥末飯店 ✈️➡️🏨</h4>
-                        <ul>
-                            <li>方式: 成田特快 (N'EX) + 京王井之頭線</li>
-                            <li>說明: 搭乘N'EX至澀谷站，再轉乘京王井之頭線至下北澤站。</li>
-                            <li>預估費用 (每人): 約 ¥3,250</li>
-                        </ul>
-                    </div>
-                    <div id="mustard-to-grand" class="transportation-content hidden">
-                        <h4>下北澤芥末飯店 → 東京中央大飯店 🏨➡️🏨</h4>
-                        <ul>
-                            <li>方式: 京王井之頭線 + JR山手線/中央線</li>
-                            <li>說明: 從下北澤搭至澀谷或新宿，再轉乘JR線至神田站。</li>
-                            <li>預估費用 (每人): 約 ¥350</li>
-                        </ul>
-                    </div>
-                    <div id="grand-to-mygo" class="transportation-content hidden">
-                        <h4>東京中央大飯店 → MyGO聖地 (飛鳥山/舊古河庭園) 🏨➡️🌸</h4>
-                        <ul>
-                            <li>方式: JR山手線/京濱東北線</li>
-                            <li>說明: 從神田站搭乘JR線至王子站或上中里站。</li>
-                            <li>預估費用 (每人): 約 ¥170</li>
-                        </ul>
-                    </div>
-                    <div id="grand-to-nrt" class="transportation-content hidden">
-                        <h4>東京中央大飯店 → 成田機場 (NRT) 🏨➡️✈️</h4>
-                        <ul>
-                            <li>方式: JR山手線 + 京成Skyliner</li>
-                            <li>說明: 從神田站搭JR至日暮里或上野，再轉乘Skyliner。</li>
-                            <li>預估費用 (每人): 約 ¥2,720</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg prose-custom">
+                <!-- Transportation content will be dynamically inserted here -->
             </div>
         </section>
 
-        <section id="budget">
-            <div class="section-header reveal">
-                <h2>預算分析</h2>
-                <p>深入了解各項開銷的細節，有效控管您的旅行預算。</p>
+        <!-- Budget Section -->
+        <section id="budget" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">預算分析</h2>
+                <p class="mt-2 text-lg text-gray-600">深入了解各項開銷的細節，有效控管您的旅行預算。</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1565932887479-131ed3e1554a?q=80&w=1200&auto=format&fit=crop" alt="Travel Budget Image" class="section-image reveal lightbox-trigger">
-            <div class="grid grid-cols-1 lg-grid-cols-2">
-                <div class="card reveal">
-                    <h3 class="text-center">各項費用比較</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-display text-2xl font-bold text-center mb-6">各項費用比較 (JPY)</h3>
                     <div class="chart-container h-96">
                         <canvas id="expenseBarChart"></canvas>
                     </div>
                 </div>
-                <div class="card reveal">
-                     <h3 class="text-center">費用明細表</h3>
-                     <div>
-                        <table>
-                            <thead><tr><th>費用類別</th><th class="text-right">費用 (JPY)</th><th class="text-right">費用 (NTD)</th></tr></thead>
-                            <tbody>
-                            </tbody>
-                            <tfoot>
-                            </tfoot>
-                        </table>
-                        <p class="text-xs text-right mt-2">*日圓與台幣換算匯率以0.21估算，實際費用可能變動。</p>
-                     </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="font-display text-2xl font-bold text-center mb-6">費用明細表</h3>
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b-2 border-gray-200">
+                                <th class="py-2 text-left">費用類別</th>
+                                <th class="py-2 text-right">費用 (JPY)</th>
+                                <th class="py-2 text-right">費用 (NTD)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                    <p class="text-xs text-gray-500 mt-2 text-right">*日圓與台幣換算匯率以0.21估算，實際費用可能變動。</p>
                 </div>
             </div>
         </section>
 
-        <section id="shopping-list">
-            <div class="section-header reveal">
-                <h2>購物 & 伴手禮清單</h2>
-                <p>確保不漏掉任何想買的物品或送給親友的伴手禮！</p>
+        <!-- Shopping List Section -->
+        <section id="shopping-list" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">購物 & 伴手禮清單</h2>
+                <p class="mt-2 text-lg text-gray-600">確保不漏掉任何想買的物品或送給親友的伴手禮！</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1200&auto=format&fit=crop" alt="Shopping List Image" class="section-image reveal lightbox-trigger">
-            <div class="card reveal interactive-checklist" id="shopping-checklist">
-                <h3>購物清單 🛍️</h3>
-                <ul>
-                    <li><input type="checkbox" id="shop_toiletries"><label for="shop_toiletries">盥洗用品：牙刷、牙膏、洗面乳 🧴</label></li>
-                    <li><input type="checkbox" id="shop_3c"><label for="shop_3c">3C用品：藍芽耳機、手機殼與行動電源</label></li>
-                    <li><input type="checkbox" id="shop_medical"><label for="shop_medical">醫療用品：人工淚液（需確認是否可帶回國）👁️‍🗨️</label></li>
-                    <li><input type="checkbox" id="shop_clothes"><label for="shop_clothes">服飾：可在UN、GQ等便宜地方購買 👕</label></li>
-                </ul>
-                <h3 style="margin-top: 2rem;">伴手禮 🎁</h3>
-                <ul>
-                    <li><input type="checkbox" id="souvenir_top"><label for="souvenir_top">女性上衣（UN、GQ）👚</label></li>
-                    <li><input type="checkbox" id="souvenir_apple"><label for="souvenir_apple">全家蘋果乾兩包 🍎</label></li>
-                    <li><input type="checkbox" id="souvenir_akiba"><label for="souvenir_akiba">秋葉原百貨商店的伴手禮（家人、同事）🛍️</label></li>
-                </ul>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg interactive-checklist" id="shopping-checklist">
+                <!-- Shopping list content will be dynamically inserted here -->
             </div>
         </section>
-        
-        <section id="checklist">
-            <div class="section-header reveal">
-                <h2>行前準備清單</h2>
-                <p>確保萬事俱備，讓您的旅程順暢無憂。</p>
+
+        <!-- Checklist Section -->
+        <section id="checklist" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">行前準備清單</h2>
+                <p class="mt-2 text-lg text-gray-600">確保萬事俱備，讓您的旅程順暢無憂。</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1522202615453-3c42981a881e?q=80&w=1200&auto=format&fit=crop" alt="Travel Checklist Image" class="section-image reveal lightbox-trigger">
-            <div class="card reveal interactive-checklist" id="pre-trip-checklist">
-                <h3>行前準備</h3>
-                <ul>
-                    <li><input type="checkbox" id="pre_covid_vaccine"><label for="pre_covid_vaccine">新冠疫苗施打 💉</label></li>
-                    <li><input type="checkbox" id="pre_flu_vaccine"><label for="pre_flu_vaccine">流感疫苗施打 🤧</label></li>
-                    <li><input type="checkbox" id="pre_tigerair_email"><label for="pre_tigerair_email">虎航行程確認單（在Email裡）📧</label></li>
-                    <li><input type="checkbox" id="pre_visit_japan_web"><label for="pre_visit_japan_web">Visit Japan Web入境手續 ✅</label></li>
-                    <li><input type="checkbox" id="pre_travel_insurance"><label for="pre_travel_insurance">旅平險 🛡️</label></li>
-                    <li><input type="checkbox" id="pre_credit_card"><label for="pre_credit_card">申辦日本旅遊信用卡 💳</label></li>
-                    <li><input type="checkbox" id="pre_japan_sim"><label for="pre_japan_sim">日本網卡 📶</label></li>
-                    <li><input type="checkbox" id="pre_common_meds"><label for="pre_common_meds">常用藥物購買（防止胃脹氣、胃酸過多；消炎止痛藥、透氣膠帶、ＯＫ蹦）🩹</label></li>
-                    <li><input type="checkbox" id="pre_rest_order"><label for="pre_rest_order">餐廳事前預約🫕</label></li>
-                </ul>
-                <h3 style="margin-top: 2rem;">旅遊必備品</h3>
-                <ul>
-                    <li><input type="checkbox" id="item_passport"><label for="item_passport">護照 🛂</label></li>
-                    <li><input type="checkbox" id="item_phone"><label for="item_phone">手機 📱</label></li>
-                    <li><input type="checkbox" id="item_charger"><label for="item_charger">充電器 🔌</label></li>
-                    <li><input type="checkbox" id="item_power_bank"><label for="item_power_bank">行動電源 🔋</label></li>
-                    <li><input type="checkbox" id="item_universal_adapter"><label for="item_universal_adapter">萬國充 🌍</label></li>
-                    <li><input type="checkbox" id="item_wallet"><label for="item_wallet">錢包（信用卡）💰</label></li>
-                    <li><input type="checkbox" id="item_yen"><label for="item_yen">日圓（ATM領取或兌換）💴</label></li>
-                    <li><input type="checkbox" id="item_clothes"><label for="item_clothes">換洗衣物（三天份）👕👖</label></li>
-                    <li><input type="checkbox" id="item_toiletries"><label for="item_toiletries">盥洗用品（牙刷、牙膏、毛巾）🧴</label></li>
-                    <li><input type="checkbox" id="item_motion_sickness_med"><label for="item_motion_sickness_med">暈車藥吃了沒 💊</label></li>
-                    <li><input type="checkbox" id="item_room_key"><label for="item_room_key">房門鑰匙 🔑</label></li>
-                    <li><input type="checkbox" id="item_water_bottle"><label for="item_water_bottle">水瓶（一點點水）💧</label></li>
-                    <li><input type="checkbox" id="item_waist_bag"><label for="item_waist_bag">腰包 👝</label></li>
-                    <li><input type="checkbox" id="item_hand_luggage"><label for="item_hand_luggage">手提行李包 💼</label></li>
-                    <li><input type="checkbox" id="item_twd_cash"><label for="item_twd_cash">台幣現鈔（5000以內以備不時之需）💵</label></li>
-                </ul>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg interactive-checklist" id="pre-trip-checklist">
+                <!-- Pre-trip checklist content will be dynamically inserted here -->
             </div>
         </section>
 
     </main>
 
-    <footer class="text-center py-8 mt-12" style="background-color: var(--bg-light); border-top: 1px solid var(--border-color);">
-        <p class="text-sm" style="color: var(--text-muted);">此互動儀表板根據您提供的旅遊報告生成。</p>
+    <footer class="bg-gray-200 text-center py-8 mt-12">
+        <p class="text-gray-600">此互動儀表板根據您提供的旅遊報告生成。</p>
     </footer>
-
-    <div id="lightbox">
-        <span class="close">&times;</span>
-        <img id="lightbox-img" src="">
-    </div>
-
-    <div id="gemini-modal">
-        <div class="gemini-modal-content">
-            <button class="gemini-modal-close">&times;</button>
-            <h3 id="gemini-modal-title"></h3>
-            <div id="gemini-modal-body">
-                <div class="loader"></div>
-            </div>
-        </div>
-    </div>
-
+    
     <script>
+    // Content data (to be inserted dynamically)
+    const contentData = {
+        itinerary: `
+            <div id="day1" class="tab-content">
+                <h3 class="font-display text-2xl mb-4">Day 1 (8/18 一): 抵達與下北澤探索</h3>
+                <p>抵達東京成田機場(NRT)後，搭乘 N'EX 至澀谷，再轉乘京王井之頭線抵達充滿文青與復古風情的下北澤。入住飯店後，準備開始您的《孤獨搖滾！》聖地巡禮！</p>
+                <ul class="list-none space-y-2">
+                    <li>🛌 08:00-09:30 起床梳洗，準備行李</li>
+                    <li>✈️ 09:30-11:30 抵達桃園國際機場</li>
+                    <li>📝 11:30-12:30 準備登機手續並過關</li>
+                    <li>🍔 12:30-14:15 過關後在機場進食</li>
+                    <li>🛫 14:15-18:35 桃園國際機場到東京成田機場</li>
+                    <li>🏨 18:35-20:30 抵達下北澤芥末飯店</li>
+                    <li>🛒 20:30-21:30 飯店附近的超商解決晚餐</li>
+                    <li>🛀 21:30-23:00 洗澡休息</li>
+                    <li>😴 23:00-07:00 睡覺</li>
+                </ul>
+            </div>
+            <div id="day2" class="tab-content hidden">
+                <h3 class="font-display text-2xl mb-4">Day 2 (8/19 二): 下北澤探索</h3>
+                <p>今日將深度探索下北澤，進行《孤獨搖滾！》聖地巡禮，並品嚐當地特色美食。</p>
+                <ul class="list-none space-y-2">
+                    <li>🛌 07:00-08:00 起床梳洗</li>
+                    <li>☕ 08:00-09:00 附近超商吃早餐</li>
+                    <li>🎸 09:00-12:00 前往孤獨搖滾聖地Shelter Live House (STARRY原型)、🅿️ Times 下北澤第八停車場 (團體照拍攝地)</li>
+                    <li>🍛 12:00-13:30 午餐 路地裏咖哩 侍 下北澤店 用餐</li>
+                    <li>🛍️ 13:30-15:30 探索下北澤一番街的獨特店鋪與古著店</li>
+                    <li>🍮 16:00-17:00 白髭泡芙工房 吃龍貓泡芙</li>
+                    <li>🚶 17:00-18:00 在下北澤街道繼續閒逛</li>
+                    <li>🍔 18:00-19:00 Village Vanguard Diner Shimokitazawa 用餐（已預訂）</li>
+                    <li>🌃 19:00-20:00 到下北澤夜市逛逛，看有沒有便宜衣服</li>
+                    <li>🚿 20:00-22:00 回到飯店洗澡休息</li>
+                    <li>✅ 22:00-23:00 確認隔日行程並準備睡覺</li>
+                    <li>😴 23:00-07:00 睡覺</li>
+                </ul>
+            </div>
+            <div id="day3" class="tab-content hidden">
+                <h3 class="font-display text-2xl mb-4">Day 3 (8/20 三): 澀谷、新宿一日遊 & 前進秋葉原</h3>
+                <p>前往新宿、澀谷逛逛吃美食，傍晚，搭乘JR線前往動漫與電子的聖地——秋葉原，並入住新飯店。</p>
+                <ul class="list-none space-y-2">
+                    <li>🛌 07:00-08:00 起床梳洗</li>
+                    <li>🏨 08:00-08:30 準備退房離開飯店</li>
+                    <li>☕ 08:30-9:30 えくぶり 用餐</li>
+                    <li>🚆 9:30-10:20 從東北澤車站搭車到四谷站</li>
+                    <li>🪙 10:20-12:00 前往Tokyo Bitcoin Base，與當地人交流產業與推薦的幣圈餐廳與景點</li>
+                    <li>🚚 12:00-13:00 在Tokyo Bitcoin Base周遭的餐車用餐（可使用比特幣支付）</li>
+                    <li>🛍️ 13:00-13:40 前往ユニクロ 渋谷道玄坂店、涉谷GU</li>
+                    <li>👕 13:40-17:00 在上述地點採買衣服（也要幫老媽買）</li>
+                    <li>🚶 17:00-17:30 抵達吟味焼肉 じゃんか 道玄坂</li>
+                    <li>🍖 17:30-19:00 在吟味焼肉 じゃんか 道玄坂用餐（已預訂）</li>
+                    <li>🧳 19:00-20:00 搭車前往東京中央大飯店 Check In</li>
+                    <li>🏪 20:00-21:00 逛一下飯店周邊與超商購買零食與明天早餐</li>
+                    <li>🛀 21:00-22:30 回到飯店洗澡休息</li>
+                    <li>✅ 22:30-23:00 確認明天行程</li>
+                    <li>😴 23:00-07:00 睡覺</li>
+                </ul>
+            </div>
+            <div id="day4" class="tab-content hidden">
+                <h3 class="font-display text-2xl mb-4">Day 4 (8/21 四): 《MyGO!!!!!》聖地巡禮日</h3>
+                <p>今日是《MyGO!!!!!》的聖地巡禮日！前往飛鳥山公園、舊古河庭園，朝聖爽世與祥子戰鬥過，以及祥子成為人類的橋。</p>
+                <ul class="list-none space-y-2">
+                    <li>🛌 07:00-08:00 起床梳洗</li>
+                    <li>☕ 08:00-09:30 吃昨天準備的早餐</li>
+                    <li>🌳 09:30-10:00 搭車前往飛鳥山公園</li>
+                    <li>🚶‍♀️ 10:00-11:00 朝聖爽世與祥子戰鬥過的地方，可搭鐵軌逛公園</li>
+                    <li>🏡 11:00-11:20 走路前往舊古河庭園</li>
+                    <li>🌸 11:20-12:20 在舊古河庭園朝聖祥子的家</li>
+                    <li>🚶 12:00-12:10 到旁邊的ココフル</li>
+                    <li>🍔 12:10-13:40 在ココフル 用餐</li>
+                    <li>🚗 13:40-14:30 搭車前往千登世步道橋，朝聖成為人類橋</li>
+                    <li>🤝 14:30-15:30 在千登世步道橋周圍逛逛</li>
+                    <li>🚆 15:30-16:10 搭車回到東京中央大飯店</li>
+                    <li>😴 16:10-17:10 在飯店休息</li>
+                    <li>🚶‍♀️ 17:10-17:40 搭車前往人形町今半 人形町本店</li>
+                    <li>🍲 17:40-19:30 在 人形町今半 人形町本店 用餐（已預訂）</li>
+                    <li>🛒 19:30-20:30 回到飯店購買隔日早餐</li>
+                    <li>🚿 20:30-22:00 回到飯店洗澡休息</li>
+                    <li>✅ 22:00-23:00 確認明天行程</li>
+                    <li>😴 23:00-07:00 睡覺</li>
+                </ul>
+            </div>
+            <div id="day5" class="tab-content hidden">
+                <h3 class="font-display text-2xl mb-4">Day 5 (8/22 五): 秋葉原動漫之旅</h3>
+                <p>今日將深度探索秋葉原的動漫文化，從電器、模型到各式周邊商品，讓您滿載而歸！</p>
+                <ul class="list-none space-y-2">
+                    <li>🛌 07:00-08:00 起床梳洗</li>
+                    <li>☕ 08:00-10:00 吃飯店的早餐或者附近超商</li>
+                    <li>📺 10:00-12:00 前往秋葉原ラジオ會館</li>
+                    <li>🚶 12:00-12:30 前往とんこつラーメン博多風龍 秋葉原総本店</li>
+                    <li>🍛 12:30-14:00 在とんこつラーメン博多風龍 秋葉原総本店 用餐（無法預約）</li>
+                    <li>🎮 14:00-17:00 繼續逛秋葉原ラジオ會館、e-earphone 秋葉原店等店面</li>
+                    <li>🛍️ 17:00-18:00 前往SEEKBASE、2k540手工藝品店逛逛</li>
+                    <li>🍜 18:00-19:30 前往とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 用餐（無法預約）</li>
+                    <li>🛒 19:30-20:30 先買明天早餐並回到飯店</li>
+                    <li>🚿 20:30-22:00 回到飯店洗澡休息</li>
+                    <li>✅ 22:00-23:00 確認明天行程與退房時間</li>
+                    <li>😴 23:00-08:00 睡覺</li>
+                </ul>
+            </div>
+            <div id="day6" class="tab-content hidden">
+                <h3 class="font-display text-2xl mb-4">Day 6 (8/23 六): 伴手禮採買日&啟程返家</h3>
+                <p>整理行囊，享受在東京的最後一天。從秋葉原地區購買伴手禮，中午隨意吃喝，下午搭車到成田機場，準備搭晚上的班機平安返家。</p>
+                <ul class="list-none space-y-2">
+                    <li>🛌 08:00-09:00 起床梳洗吃早餐</li>
+                    <li>🏨 09:00-10:00 準備行李與確認重要物品並退房</li>
+                    <li>10:00-10:30 前往秋葉原ラジオ會館</li>
+                    <li>10:30-12:30 在會館一樓的ギフトショップ The AkiBa 購買伴手禮</li>
+                    <li>12:30-14:30 隨便找一間店用餐</li>
+                    <li>14:30-15:30 在附近的全家購買蘋果乾兩包（子儀伴手禮）</li>
+                    <li>15:30-17:00 搭車前往成田機場</li>
+                    <li>17:00-19:00在機場準備登機手續與用餐</li>
+                    <li>19:00-19:30 搭接駁車到登機處</li>
+                    <li>19:30-22:35 揮手告別東京，搭機返回台灣</li>
+                    <li>22:35-23:35 搭計程車前往肥肥的大叔叔家</li>
+                </ul>
+            </div>
+        `,
+        attractions: `
+            <!-- Shimokitazawa Category -->
+            <div id="category-shimokita" class="category-tab-content">
+                <div class="tabs">
+                    <button data-attraction-tab="hotel-mustard" class="attraction-tab-btn active">下北澤芥末飯店</button>
+                    <button data-attraction-tab="shelter-live-house" class="attraction-tab-btn">Shelter Live House</button>
+                    <button data-attraction-tab="times-parking" class="attraction-tab-btn">Times停車場</button>
+                    <button data-attraction-tab="curry-samurai" class="attraction-tab-btn">路地裏咖哩 侍</button>
+                    <button data-attraction-tab="shirahige-choux" class="attraction-tab-btn">白髭泡芙工房</button>
+                    <button data-attraction-tab="village-vanguard-diner" class="attraction-tab-btn">Village Vanguard Diner</button>
+                    <button data-attraction-tab="ekuburi" class="attraction-tab-btn">えくぶり</button>
+                </div>
+                <div id="hotel-mustard" class="attraction-content">
+                    <h4 class="font-display text-xl">下北澤芥末飯店 (MUSTARD HOTEL SHIMOKITAZAWA) 🏨</h4>
+                    <p>位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。</p>
+                </div>
+                <div id="shelter-live-house" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">Shelter Live House (STARRY原型) 🎤</h4>
+                     <p>東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。</p>
+                </div>
+                <div id="times-parking" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">Times 下北澤第八停車場 (團體照拍攝地) 🅿️</h4>
+                     <p>因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。</p>
+                </div>
+                <div id="curry-samurai" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">路地裏咖哩 侍 下北澤店 🍛</h4>
+                     <p>下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                        <li><strong>推薦料理：</strong>招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。</li>
+                        <li><strong>每人平均用餐價位：</strong>￥1,320 - ￥2,255</li>
+                        <li><strong>支付方式：</strong>不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
+                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                <div id="shirahige-choux" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">白髭泡芙工房 🍮</h4>
+                     <p>宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                        <li><strong>推薦料理：</strong>龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。</li>
+                        <li><strong>每人平均用餐價位：</strong>￥999</li>
+                        <li><strong>支付方式：</strong>不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
+                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                <div id="village-vanguard-diner" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">Village Vanguard Diner Shimokitazawa 🍔</h4>
+                     <p>由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                        <li><strong>推薦料理：</strong>多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。</li>
+                        <li><strong>每人平均用餐價位：</strong>午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。</li>
+                        <li><strong>支付方式：</strong>接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）</li>
+                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                 <div id="ekuburi" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">えくぶり ☕</h4>
+                     <p>這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                         <li><strong>推薦料理：</strong>日式早餐套餐、各式吐司、咖啡等。</li>
+                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a></li>
+                     </ul>
+                </div>
+            </div>
+            <!-- Shibuya/Shinjuku Category -->
+            <div id="category-shibuya-shinjuku" class="category-tab-content hidden">
+                <div class="tabs">
+                    <button data-attraction-tab="uniqlo-shibuya" class="attraction-tab-btn active">ユニクロ 渋谷道玄坂店</button>
+                    <button data-attraction-tab="gu-shibuya" class="attraction-tab-btn">GU 渋谷店</button>
+                    <button data-attraction-tab="janka-dogenzaka" class="attraction-tab-btn">吟味焼肉 じゃんか 道玄坂</button>
+                    <button data-attraction-tab="tokyo-bitcoin-base" class="attraction-tab-btn">Tokyo Bitcoin Base</button>
+                </div>
+                 <div id="uniqlo-shibuya" class="attraction-content">
+                     <h4 class="font-display text-xl">ユニクロ 渋谷道玄坂店 👕</h4>
+                     <p>位於澀谷的 Uniqlo 分店，提供最新款式的服飾，是採購基本款與潮流單品的好去處。</p>
+                </div>
+                <div id="gu-shibuya" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">GU 渋谷店 👖</h4>
+                     <p>Uniqlo 的姊妹品牌，以更親民的價格提供時尚潮流服飾，深受年輕人喜愛。</p>
+                </div>
+                <div id="janka-dogenzaka" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">吟味焼肉 じゃんか 道玄坂 🍖</h4>
+                     <p>澀谷知名的燒肉店，以提供高品質的肉品（特別是和牛）聞名，讓您能品嚐到入口即化的美味燒肉。</p>
+                      <ul class="list-none space-y-1 mt-4 text-sm">
+                        <li><strong>推薦料理：</strong>各部位的和牛燒肉、特選拼盤。</li>
+                        <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                        <li><strong>支付方式：</strong>可接受信用卡、不接受電子現金（西瓜卡等）、接受PayPay支付（QRCode）</li>
+                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1303/A130301/13007287/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                <div id="tokyo-bitcoin-base" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">Tokyo Bitcoin Base 🪙</h4>
+                     <p>一個與加密貨幣、區塊鏈相關的實體空間或社群據點，吸引著對區塊鏈技術和文化感興趣的人士。</p>
+                </div>
+            </div>
+            <!-- MyGO!!!!! Category -->
+            <div id="category-mygo-area" class="category-tab-content hidden">
+                <div class="tabs">
+                    <button data-attraction-tab="asukayama-park" class="attraction-tab-btn active">飛鳥山公園</button>
+                    <button data-attraction-tab="kyu-furukawa-garden" class="attraction-tab-btn">舊古河庭園</button>
+                     <button data-attraction-tab="chitose-bridge" class="attraction-tab-btn">千登世步道橋</button>
+                     <button data-attraction-tab="cocofulu" class="attraction-tab-btn">ココフル</button>
+                </div>
+                <div id="asukayama-park" class="attraction-content">
+                    <h4 class="font-display text-xl">飛鳥山公園 🌸</h4>
+                    <p>江戶時代起就是著名的賞櫻勝地，也是《MyGO!!!!!》動畫的聖地，可以尋找動畫中爽世與祥子「戰鬥」過的噴水池等景點。</p>
+                </div>
+                <div id="kyu-furukawa-garden" class="attraction-content hidden">
+                    <h4 class="font-display text-xl">舊古河庭園 🌹</h4>
+                    <p>融合了日式庭園與西式洋館的獨特設計，是《MyGO!!!!!》動畫中祥子家的原型地。</p>
+                </div>
+                <div id="chitose-bridge" class="attraction-content hidden">
+                    <h4 class="font-display text-xl">千登世步道橋 🌉</h4>
+                    <p>《MyGO!!!!!》動畫中，祥子邀請燈組成樂團，經典的「祥子成為人類的橋」，是粉絲必訪的朝聖地點。</p>
+                </div>
+                <div id="cocofulu" class="attraction-content hidden">
+                    <h4 class="font-display text-xl">ココフル ☕</h4>
+                    <p>位於飛鳥山公園附近的咖啡店或簡餐店，適合在遊覽公園後稍作休息，補充能量。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                        <li><strong>推薦料理：</strong>通常提供咖啡、輕食、或簡餐。</li>
+                        <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                        <li><strong>支付方式：</strong>可接受信用卡、可接受電子現金（西瓜卡等）</li>
+                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1323/A132303/13202218/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+            </div>
+            <!-- Akihabara/Jimbocho Category -->
+            <div id="category-akiba" class="category-tab-content hidden">
+                 <div class="tabs">
+                    <button data-attraction-tab="hotel-grand-central" class="attraction-tab-btn active">東京中央大飯店</button>
+                    <button data-attraction-tab="kitchen-nankai" class="attraction-tab-btn">廚房南海 神保町店</button>
+                    <button data-attraction-tab="akiba-radio-hall" class="attraction-tab-btn">秋葉原ラジオ會館</button>
+                    <button data-attraction-tab="hakata-furyu" class="attraction-tab-btn">とんこつラーメン博多風龍</button>
+                    <button data-attraction-tab="e-earphone" class="attraction-tab-btn">e-earphone 秋葉原店</button>
+                    <button data-attraction-tab="tonkatsu-ippe" class="attraction-tab-btn">とんかつ檍のカレー屋 いっぺこっぺ</button>
+                    <button data-attraction-tab="the-akiba" class="attraction-tab-btn">ギフトショップ The AkiBa</button>
+                    <button data-attraction-tab="imahan-honten" class="attraction-tab-btn">人形町今半 人形町本店</button>
+                </div>
+                <div id="hotel-grand-central" class="attraction-content">
+                     <h4 class="font-display text-xl">東京中央大飯店 (Grand Central Hotel, Tokyo) 🏨</h4>
+                     <p>位於交通樞紐，鄰近神田、秋葉原等地，是一家提供經典舒適住宿體驗的飯店，方便前往東京各個角落。</p>
+                </div>
+                <div id="kitchen-nankai" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">廚房南海 神保町店 🍛</h4>
+                     <p>神保町地區的傳奇洋食老店，以其份量十足、價格實惠的黑色咖哩聞名，是當地人與學生們的最愛。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                         <li><strong>推薦料理：</strong>豬排咖哩飯、奶油可樂餅。</li>
+                         <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                         <li><strong>支付方式：</strong>只接受現金</li>
+                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1310/A131003/13249021/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                <div id="akiba-radio-hall" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">秋葉原ラジオ會館 🗼</h4>
+                     <p>秋葉原的地標性建築之一，是動漫、模型、卡牌和偶像周邊商品的聚集地，動漫迷的天堂。</p>
+                </div>
+                <div id="hakata-furyu" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">とんこつラーメン博多風龍 秋葉原総本店 🍜</h4>
+                     <p>提供正宗的博多豚骨拉麵，以其濃郁的湯頭和可以免費續加兩次的細麵為特色，CP值極高。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                         <li><strong>推薦料理：</strong>豚骨拉麵，可自選麵的硬度。</li>
+                         <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                         <li><strong>支付方式：</strong>不接受信用卡、可接受電子現金（西瓜卡等）、可接受PayPay支付（QRCode）</li>
+                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1311/A131101/13096267/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                <div id="e-earphone" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">e-earphone 秋葉原店 🎧</h4>
+                     <p>耳機與音響發燒友的聖地，提供極為豐富的各品牌耳機、播放器試聽與選購服務。</p>
+                </div>
+                <div id="tonkatsu-ippe" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 🐷</h4>
+                     <p>以高品質的炸豬排和獨特的咖哩醬聞名，提供酥脆多汁的炸豬排與濃郁咖哩的完美結合。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                         <li><strong>推薦料理：</strong>招牌炸豬排咖哩飯。</li>
+                         <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                         <li><strong>支付方式：</strong>只接受日圓現金</li>
+                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1311/A131101/13259701/" target="_blank">日本餐廳評論網站</a></li>
+                     </ul>
+                </div>
+                <div id="the-akiba" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">ギフトショップ The AkiBa 🎁</h4>
+                     <p>位於秋葉原ラジオ會館一樓的伴手禮店，販售各種與秋葉原、動漫文化相關的特色商品與點心。</p>
+                </div>
+                <div id="imahan-honten" class="attraction-content hidden">
+                     <h4 class="font-display text-xl">人形町今半 人形町本店 🍲</h4>
+                     <p>創業於明治28年的壽喜燒超級名店，以最頂級的和牛與秘傳的醬汁聞名，提供極致的用餐體驗。</p>
+                     <ul class="list-none space-y-1 mt-4 text-sm">
+                         <li><strong>推薦料理：</strong>極上壽喜燒套餐。</li>
+                         <li><strong>每人平均用餐價位：</strong>￥15,000 - ￥25,000</li>
+                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1302/A130204/13003009/" target="_blank">Tabelog 連結</a></li>
+                     </ul>
+                </div>
+            </div>
+        `,
+        transportation: `
+            <div class="tabs">
+                <button data-transportation-tab="nrt-to-mustard" class="transportation-tab-btn active">機場 → 下北澤飯店</button>
+                <button data-transportation-tab="mustard-to-grand" class="transportation-tab-btn">下北澤 → 東京中央</button>
+                <button data-transportation-tab="grand-to-mygo" class="transportation-tab-btn">飯店 → MyGO聖地</button>
+                <button data-transportation-tab="grand-to-nrt" class="transportation-tab-btn">飯店 → 機場</button>
+            </div>
+            <div id="nrt-to-mustard" class="transportation-content">
+                <h4 class="font-display text-xl">成田機場 (NRT) → 下北澤芥末飯店 ✈️➡️🏨</h4>
+                <ul class="list-none space-y-1 mt-4">
+                    <li><strong>方式:</strong> 成田特快 (N'EX) + 京王井之頭線</li>
+                    <li><strong>說明:</strong> 搭乘N'EX至澀谷站，再轉乘京王井之頭線至下北澤站。</li>
+                    <li><strong>預估費用 (每人):</strong> 約 ¥3,250</li>
+                </ul>
+            </div>
+            <div id="mustard-to-grand" class="transportation-content hidden">
+                <h4 class="font-display text-xl">下北澤芥末飯店 → 東京中央大飯店 🏨➡️🏨</h4>
+                <ul class="list-none space-y-1 mt-4">
+                    <li><strong>方式:</strong> 京王井之頭線 + JR山手線/中央線</li>
+                    <li><strong>說明:</strong> 從下北澤搭至澀谷或新宿，再轉乘JR線至神田站。</li>
+                    <li><strong>預估費用 (每人):</strong> 約 ¥350</li>
+                </ul>
+            </div>
+            <div id="grand-to-mygo" class="transportation-content hidden">
+                <h4 class="font-display text-xl">東京中央大飯店 → MyGO聖地 (飛鳥山/舊古河庭園) 🏨➡️🌸</h4>
+                <ul class="list-none space-y-1 mt-4">
+                    <li><strong>方式:</strong> JR山手線/京濱東北線</li>
+                    <li><strong>說明:</strong> 從神田站搭乘JR線至王子站或上中里站。</li>
+                    <li><strong>預估費用 (每人):</strong> 約 ¥170</li>
+                </ul>
+            </div>
+            <div id="grand-to-nrt" class="transportation-content hidden">
+                <h4 class="font-display text-xl">東京中央大飯店 → 成田機場 (NRT) 🏨➡️✈️</h4>
+                <ul class="list-none space-y-1 mt-4">
+                    <li><strong>方式:</strong> JR山手線 + 京成Skyliner</li>
+                    <li><strong>說明:</strong> 從神田站搭JR至日暮里或上野，再轉乘Skyliner。</li>
+                    <li><strong>預估費用 (每人):</strong> 約 ¥2,720</li>
+                </ul>
+            </div>
+        `,
+        shoppingList: `
+            <h3 class="font-display text-2xl mb-4">購物清單 🛍️</h3>
+            <ul class="list-none space-y-3">
+                <li><input type="checkbox" id="shop_toiletries"><label for="shop_toiletries" class="ml-2">盥洗用品：牙刷、牙膏、洗面乳 🧴</label></li>
+                <li><input type="checkbox" id="shop_3c"><label for="shop_3c" class="ml-2">3C用品：藍芽耳機、手機殼與行動電源</label></li>
+                <li><input type="checkbox" id="shop_medical"><label for="shop_medical" class="ml-2">醫療用品：人工淚液（需確認是否可帶回國）👁️‍🗨️</label></li>
+                <li><input type="checkbox" id="shop_clothes"><label for="shop_clothes" class="ml-2">服飾：可在UN、GQ等便宜地方購買 👕</label></li>
+            </ul>
+            <h3 class="font-display text-2xl mt-8 mb-4">伴手禮 🎁</h3>
+            <ul class="list-none space-y-3">
+                <li><input type="checkbox" id="souvenir_top"><label for="souvenir_top" class="ml-2">女性上衣（UN、GQ）👚</label></li>
+                <li><input type="checkbox" id="souvenir_apple"><label for="souvenir_apple" class="ml-2">全家蘋果乾兩包 🍎</label></li>
+                <li><input type="checkbox" id="souvenir_akiba"><label for="souvenir_akiba" class="ml-2">秋葉原百貨商店的伴手禮（家人、同事）🛍️</label></li>
+            </ul>
+        `,
+        checklist: `
+            <h3 class="font-display text-2xl mb-4">行前準備</h3>
+            <ul class="list-none space-y-3">
+                <li><input type="checkbox" id="pre_covid_vaccine"><label for="pre_covid_vaccine" class="ml-2">新冠疫苗施打 💉</label></li>
+                <li><input type="checkbox" id="pre_flu_vaccine"><label for="pre_flu_vaccine" class="ml-2">流感疫苗施打 🤧</label></li>
+                <li><input type="checkbox" id="pre_tigerair_email"><label for="pre_tigerair_email" class="ml-2">虎航行程確認單（在Email裡）📧</label></li>
+                <li><input type="checkbox" id="pre_visit_japan_web"><label for="pre_visit_japan_web" class="ml-2">Visit Japan Web入境手續 ✅</label></li>
+                <li><input type="checkbox" id="pre_travel_insurance"><label for="pre_travel_insurance" class="ml-2">旅平險 🛡️</label></li>
+                <li><input type="checkbox" id="pre_credit_card"><label for="pre_credit_card" class="ml-2">申辦日本旅遊信用卡 💳</label></li>
+                <li><input type="checkbox" id="pre_japan_sim"><label for="pre_japan_sim" class="ml-2">日本網卡 📶</label></li>
+                <li><input type="checkbox" id="pre_common_meds"><label for="pre_common_meds" class="ml-2">常用藥物購買（防止胃脹氣、胃酸過多；消炎止痛藥、透氣膠帶、ＯＫ蹦）🩹</label></li>
+                <li><input type="checkbox" id="pre_rest_order"><label for="pre_rest_order" class="ml-2">餐廳事前預約🫕</label></li>
+            </ul>
+            <h3 class="font-display text-2xl mt-8 mb-4">旅遊必備品</h3>
+            <ul class="list-none space-y-3">
+                <li><input type="checkbox" id="item_passport"><label for="item_passport" class="ml-2">護照 🛂</label></li>
+                <li><input type="checkbox" id="item_phone"><label for="item_phone" class="ml-2">手機 📱</label></li>
+                <li><input type="checkbox" id="item_charger"><label for="item_charger" class="ml-2">充電器 🔌</label></li>
+                <li><input type="checkbox" id="item_power_bank"><label for="item_power_bank" class="ml-2">行動電源 🔋</label></li>
+                <li><input type="checkbox" id="item_universal_adapter"><label for="item_universal_adapter" class="ml-2">萬國充 🌍</label></li>
+                <li><input type="checkbox" id="item_wallet"><label for="item_wallet" class="ml-2">錢包（信用卡）💰</label></li>
+                <li><input type="checkbox" id="item_yen"><label for="item_yen" class="ml-2">日圓（ATM領取或兌換）💴</label></li>
+                <li><input type="checkbox" id="item_clothes"><label for="item_clothes" class="ml-2">換洗衣物（三天份）👕👖</label></li>
+                <li><input type="checkbox" id="item_toiletries"><label for="item_toiletries" class="ml-2">盥洗用品（牙刷、牙膏、毛巾）🧴</label></li>
+                <li><input type="checkbox" id="item_motion_sickness_med"><label for="item_motion_sickness_med" class="ml-2">暈車藥吃了沒 💊</label></li>
+                <li><input type="checkbox" id="item_room_key"><label for="item_room_key" class="ml-2">房門鑰匙 🔑</label></li>
+                <li><input type="checkbox" id="item_water_bottle"><label for="item_water_bottle" class="ml-2">水瓶（一點點水）💧</label></li>
+                <li><input type="checkbox" id="item_waist_bag"><label for="item_waist_bag" class="ml-2">腰包 👝</label></li>
+                <li><input type="checkbox" id="item_hand_luggage"><label for="item_hand_luggage" class="ml-2">手提行李包 💼</label></li>
+                <li><input type="checkbox" id="item_twd_cash"><label for="item_twd_cash" class="ml-2">台幣現鈔（5000以內以備不時之需）💵</label></li>
+            </ul>
+        `
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
+        // --- Dynamic Content Insertion ---
+        document.querySelector('#itinerary .prose-custom').innerHTML = contentData.itinerary;
+        document.querySelector('#attractions .prose-custom').innerHTML = contentData.attractions;
+        document.querySelector('#transportation .prose-custom').innerHTML = contentData.transportation;
+        document.getElementById('shopping-checklist').innerHTML = contentData.shoppingList;
+        document.getElementById('pre-trip-checklist').innerHTML = contentData.checklist;
+
+
         // Recalculate food cost for two people
         const mealCostsPerPerson = {
             '路地裏咖哩 侍 下北澤店': 2255,
@@ -887,13 +652,14 @@
             'Village Vanguard Diner Shimokitazawa': 2999,
             'えくぶり': 1999, // Assuming similar to Cocofulu
             '吟味焼肉 じゃんか 道玄坂': 1999,
-            '人形町今半 新宿髙島屋店': 19999,
+            '人形町今半 人形町本店': 19999,
             'ココフル': 1999,
             '廚房南海 神保町店': 1999,
             'とんこつラーメン博多風龍 秋葉原総本店': 1999,
             'とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店': 1999,
             '超商晚餐': 1000, // Estimate
             '超商早餐': 800, // Estimate
+            '餐車午餐': 1500, // Estimate for Bitcoin food truck
             '隨意午餐': 1500, // Estimate
             '機場晚餐': 2000 // Estimate
         };
@@ -901,13 +667,13 @@
         const itineraryMeals = [
             mealCostsPerPerson['超商晚餐'], // Day 1
             mealCostsPerPerson['超商早餐'], mealCostsPerPerson['路地裏咖哩 侍 下北澤店'], mealCostsPerPerson['白髭泡芙工房'], mealCostsPerPerson['Village Vanguard Diner Shimokitazawa'], // Day 2
-            mealCostsPerPerson['えくぶり'], mealCostsPerPerson['吟味焼肉 じゃんか 道玄坂'], mealCostsPerPerson['人形町今半 新宿髙島屋店'], // Day 3
-            0, mealCostsPerPerson['ココフル'], mealCostsPerPerson['廚房南海 神保町店'], // Day 4 (Breakfast from previous day)
+            mealCostsPerPerson['えくぶり'], mealCostsPerPerson['餐車午餐'], mealCostsPerPerson['吟味焼肉 じゃんか 道玄坂'], // Day 3
+            0, mealCostsPerPerson['ココフル'], mealCostsPerPerson['人形町今半 人形町本店'], // Day 4 (Breakfast from previous day)
             mealCostsPerPerson['超商早餐'], mealCostsPerPerson['とんこつラーメン博多風龍 秋葉原総本店'], mealCostsPerPerson['とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店'], // Day 5
             0, mealCostsPerPerson['隨意午餐'], mealCostsPerPerson['機場晚餐'] // Day 6 (Breakfast from previous day)
         ];
         
-        const totalFoodCostPerPerson = itineraryMeals.reduce((sum, cost) => sum + cost, 0);
+        const totalFoodCostPerPerson = itineraryMeals.reduce((sum, cost) => sum + (cost || 0), 0);
         const totalFoodCostTwoPeople = totalFoodCostPerPerson * 2;
 
 
@@ -920,7 +686,8 @@
                 tickets: 150
             },
             costsNTD: {
-                flights: 33076
+                flights: 33076,
+                prep: (878 + 394 + 159) * 2 // New prep costs for two people
             },
             exchangeRate: 0.21
         };
@@ -928,7 +695,7 @@
         const calculateTotal = () => {
             const totalJPY = Object.values(tripData.costsJPY).reduce((sum, cost) => sum + cost, 0);
             const jpyInNtd = totalJPY * tripData.exchangeRate;
-            const totalNTD = jpyInNtd + tripData.costsNTD.flights;
+            const totalNTD = jpyInNtd + tripData.costsNTD.flights + tripData.costsNTD.prep;
             
             document.getElementById('totalCost').textContent = `NTD ${Math.round(totalNTD).toLocaleString()}`;
 
@@ -941,6 +708,7 @@
                 <tr><td class="font-medium">餐飲</td><td class="text-right">${tripData.costsJPY.food.toLocaleString()}</td><td class="text-right">${Math.round(tripData.costsJPY.food * tripData.exchangeRate).toLocaleString()}</td></tr>
                 <tr><td class="font-medium">購物與雜項</td><td class="text-right">${tripData.costsJPY.shopping.toLocaleString()}</td><td class="text-right">${Math.round(tripData.costsJPY.shopping * tripData.exchangeRate).toLocaleString()}</td></tr>
                 <tr><td class="font-medium">景點門票</td><td class="text-right">${tripData.costsJPY.tickets.toLocaleString()}</td><td class="text-right">${Math.round(tripData.costsJPY.tickets * tripData.exchangeRate).toLocaleString()}</td></tr>
+                <tr><td class="font-medium">行前準備</td><td class="text-right">-</td><td class="text-right">${tripData.costsNTD.prep.toLocaleString()}</td></tr>
             `;
             budgetTableFoot.innerHTML = `<tr><td>總計</td><td class="text-right">¥${totalJPY.toLocaleString()}</td><td class="text-right">NTD ${Math.round(totalNTD).toLocaleString()}</td></tr>`;
 
@@ -988,13 +756,14 @@
                 borderColor: 'rgba(247, 183, 51, 0.5)', borderWidth: 1
             };
 
-            const costLabels = ['機票', '住宿', '交通', '餐飲', '購物與雜項', '景點門票'];
+            const costLabels = ['機票', '住宿', '餐飲', '購物', '行前準備', '交通', '景點門票'];
             const costValuesNTD = [
                 tripData.costsNTD.flights,
                 tripData.costsJPY.accommodation * tripData.exchangeRate,
-                tripData.costsJPY.transportation * tripData.exchangeRate,
                 tripData.costsJPY.food * tripData.exchangeRate,
                 tripData.costsJPY.shopping * tripData.exchangeRate,
+                tripData.costsNTD.prep,
+                tripData.costsJPY.transportation * tripData.exchangeRate,
                 tripData.costsJPY.tickets * tripData.exchangeRate
             ];
 
@@ -1006,13 +775,22 @@
                         labels: costLabels,
                         datasets: [{
                             data: costValuesNTD,
-                            backgroundColor: ['#29D8E4', '#F7B733', '#8E44AD', '#3498DB', '#E74C3C', '#2ECC71'],
-                            borderColor: '#1E1E1E', borderWidth: 4,
+                            backgroundColor: ['#4f46e5', '#ec4899', '#f59e0b', '#10b981', '#6366f1', '#8b5cf6', '#d946ef'],
+                            borderColor: '#f8f9fa', borderWidth: 4,
                         }]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
-                        plugins: { legend: { position: 'bottom', labels: { padding: 20 } }, tooltip: commonTooltip }
+                        plugins: { 
+                            legend: { 
+                                position: 'bottom', 
+                                labels: { 
+                                    padding: 20,
+                                    color: '#343a40'
+                                } 
+                            }, 
+                            tooltip: commonTooltip 
+                        }
                     }
                 });
             }
@@ -1031,11 +809,14 @@
                     type: 'bar',
                     data: { labels: barLabels, datasets: [{
                         label: '預估花費 (JPY)', data: barValuesJPY,
-                        backgroundColor: 'rgba(41, 216, 228, 0.6)', borderColor: 'rgba(41, 216, 228, 1)', borderWidth: 1
+                        backgroundColor: 'rgba(79, 70, 229, 0.6)', borderColor: 'rgba(79, 70, 229, 1)', borderWidth: 1
                     }]},
                     options: {
                         indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-                        scales: { x: { grid: { color: 'rgba(255,255,255,0.1)' } }, y: { grid: { display: false } } },
+                        scales: { 
+                            x: { grid: { color: '#e5e7eb' }, ticks: { color: '#4b5563' } }, 
+                            y: { grid: { display: false }, ticks: { color: '#4b5563' } } 
+                        },
                         plugins: { legend: { display: false }, tooltip: { ...commonTooltip, callbacks: {
                             label: function(context) {
                                 const valueJPY = context.raw;
@@ -1115,22 +896,6 @@
             });
         };
 
-        const setupLightbox = () => {
-            const lightbox = document.getElementById('lightbox');
-            if(!lightbox) return;
-            const lightboxImg = document.getElementById('lightbox-img');
-            const closeBtn = lightbox.querySelector('.close');
-            const closeLightbox = () => lightbox.classList.remove('active');
-            document.body.addEventListener('click', e => {
-                if (e.target.matches('.lightbox-trigger')) {
-                    lightboxImg.src = e.target.src;
-                    lightbox.classList.add('active');
-                }
-            });
-            closeBtn.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
-        };
-
         const highlightCurrentDay = () => {
             const tripStartDate = new Date('2025-08-18T00:00:00');
             const today = new Date();
@@ -1142,64 +907,6 @@
                 if (currentDayTab) { currentDayTab.click(); }
             }
         };
-
-        const geminiModal = document.getElementById('gemini-modal');
-        const geminiModalTitle = document.getElementById('gemini-modal-title');
-        const geminiModalBody = document.getElementById('gemini-modal-body');
-        const loadingIndicator = '<div class="loader"></div>';
-
-        async function callGeminiAPI(prompt) {
-            geminiModalBody.innerHTML = loadingIndicator;
-            geminiModal.classList.add('active');
-            
-            const apiKey = ""; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                if (!response.ok) { throw new Error(`API 錯誤: ${response.status}`); }
-                const result = await response.json();
-                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    geminiModalBody.innerHTML = text.replace(/\n/g, '<br>');
-                } else {
-                    geminiModalBody.textContent = '抱歉，無法從 AI 取得回應。請稍後再試。';
-                }
-            } catch (error) {
-                console.error('Gemini API 呼叫失敗:', error);
-                geminiModalBody.textContent = `發生錯誤：${error.message}，請檢查主控台以獲取詳細資訊。`;
-            }
-        }
-        
-        document.querySelectorAll('.itinerary-ai-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const contentContainer = e.target.closest('.tab-content');
-                const title = contentContainer.querySelector('h3').textContent;
-                const items = Array.from(contentContainer.querySelectorAll('li')).map(li => li.textContent.trim()).join('\n');
-                const prompt = `我是一位正在規劃日本東京自由行的旅客，以下是我其中一天的行程計畫：\n\n標題：${title}\n行程細節：\n${items}\n\n請以一個專業日本旅遊達人的口吻，用繁體中文，為我提供 3-4 個具體的優化建議。建議可以包含：\n- 更順暢的交通路線安排\n- 行程中可以順道加入的私房景點或特色小店\n- 值得注意的省錢小技巧或文化禮儀提醒\n- 推薦的拍照打卡點\n請用條列式的方式呈現，讓建議一目了然。`;
-                
-                geminiModalTitle.textContent = `AI 行程優化建議 - ${title.split(':')[0]}`;
-                callGeminiAPI(prompt);
-            });
-        });
-
-        document.querySelectorAll('.food-ai-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const restaurantName = e.target.dataset.restaurant;
-                const prompt = `我即將要去位於東京的餐廳「${restaurantName}」。請扮演一位活潑的美食部落客，用生動有趣且吸引人的語氣，以繁體中文為我介紹這家餐廳。\n\n請包含以下幾點：\n1.  **必點招牌菜**：推薦 2-3 道絕對不能錯過的菜色，並形容它們的口感與特色。\n2.  **餐廳特色或故事**：分享這家店的獨特之處，例如裝潢風格、創辦歷史或有趣的用餐體驗。\n3.  **推薦搭配**：建議適合搭配主餐的飲品或小菜。\n\n請讓你的回覆像一篇精彩的食記短文，讓我看完就迫不及待想去品嚐！`;
-
-                geminiModalTitle.textContent = `AI 美食顧問 - ${restaurantName}`;
-                callGeminiAPI(prompt);
-            });
-        });
-
-        geminiModal.querySelector('.gemini-modal-close').addEventListener('click', () => geminiModal.classList.remove('active'));
-        geminiModal.addEventListener('click', (e) => { if(e.target === geminiModal) geminiModal.classList.remove('active'); });
         
         // --- 🚀 執行所有初始化 ---
         calculateTotal();
@@ -1209,7 +916,6 @@
         setupTabs('#transportation', '.transportation-tab-btn', '.transportation-content');
         setupNestedTabs();
         setupChecklists();
-        setupLightbox();
         highlightCurrentDay();
     });
     </script>
