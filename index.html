@@ -55,6 +55,17 @@
                 padding-bottom: 6rem;
             }
         }
+        .tabelog-link {
+            color: #c026d3 !important;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+        .tabelog-link:hover {
+            color: #ec4899 !important;
+        }
+        .attraction-tab-btn {
+            border-radius: 9999px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -81,7 +92,6 @@
                 <a href="#shopping-list" class="text-gray-600 hover:text-pink-500 transition">購物清單</a>
                 <a href="#checklist" class="text-gray-600 hover:text-pink-500 transition">行前準備</a>
             </div>
-             <button class="hidden lg:block print-btn px-4 py-2 border border-gray-300 rounded-full text-gray-600 hover:bg-gray-100 transition" onclick="window.print()">🖨️ 列印</button>
             <div class="lg:hidden">
                 <select id="mobile-nav" class="border border-gray-300 rounded-md p-2" onchange="document.querySelector(this.value).scrollIntoView({behavior: 'smooth'});">
                     <option value="#overview">總覽</option>
@@ -158,7 +168,7 @@
                 <button data-category-tab="category-shimokita" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white active">下北澤區域</button>
                 <button data-category-tab="category-shibuya-shinjuku" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">澀谷/新宿區域</button>
                 <button data-category-tab="category-mygo-area" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">MyGO!!!!!聖地</button>
-                <button data-category-tab="category-akiba" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">秋葉原/神保町/人形町</button>
+                <button data-category-tab="category-akiba" class="category-tab-btn px-4 py-2 rounded-full font-semibold transition bg-gray-200 hover:bg-indigo-600 hover:text-white">秋葉原/人形町</button>
             </div>
             <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg prose-custom">
                 <!-- Attractions content will be dynamically inserted here -->
@@ -365,55 +375,58 @@
                     <button data-attraction-tab="village-vanguard-diner" class="attraction-tab-btn">Village Vanguard Diner</button>
                     <button data-attraction-tab="ekuburi" class="attraction-tab-btn">えくぶり</button>
                 </div>
-                <div id="hotel-mustard" class="attraction-content">
-                    <h4 class="font-display text-xl">下北澤芥末飯店 (MUSTARD HOTEL SHIMOKITAZAWA) 🏨</h4>
-                    <p>位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。</p>
-                </div>
-                <div id="shelter-live-house" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">Shelter Live House (STARRY原型) 🎤</h4>
-                     <p>東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。</p>
-                </div>
-                <div id="times-parking" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">Times 下北澤第八停車場 (團體照拍攝地) 🅿️</h4>
-                     <p>因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。</p>
-                </div>
-                <div id="curry-samurai" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">路地裏咖哩 侍 下北澤店 🍛</h4>
-                     <p>下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                        <li><strong>推薦料理：</strong>招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。</li>
-                        <li><strong>每人平均用餐價位：</strong>￥1,320 - ￥2,255</li>
-                        <li><strong>支付方式：</strong>不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
-                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                <div id="shirahige-choux" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">白髭泡芙工房 🍮</h4>
-                     <p>宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                        <li><strong>推薦料理：</strong>龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。</li>
-                        <li><strong>每人平均用餐價位：</strong>￥999</li>
-                        <li><strong>支付方式：</strong>不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
-                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                <div id="village-vanguard-diner" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">Village Vanguard Diner Shimokitazawa 🍔</h4>
-                     <p>由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                        <li><strong>推薦料理：</strong>多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。</li>
-                        <li><strong>每人平均用餐價位：</strong>午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。</li>
-                        <li><strong>支付方式：</strong>接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）</li>
-                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                 <div id="ekuburi" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">えくぶり ☕</h4>
-                     <p>這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                         <li><strong>推薦料理：</strong>日式早餐套餐、各式吐司、咖啡等。</li>
-                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a></li>
-                     </ul>
+                <div class="mt-8">
+                    <div id="hotel-mustard" class="attraction-content">
+                        <h4 class="font-display text-xl">下北澤芥末飯店 (MUSTARD HOTEL SHIMOKITAZAWA) 🏨</h4>
+                        <p>位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。</p>
+                    </div>
+                    <div id="shelter-live-house" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">Shelter Live House (STARRY原型) 🎤</h4>
+                         <p>東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。</p>
+                    </div>
+                    <div id="times-parking" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">Times 下北澤第八停車場 (團體照拍攝地) 🅿️</h4>
+                         <p>因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。</p>
+                    </div>
+                    <div id="curry-samurai" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">路地裏咖哩 侍 下北澤店 🍛</h4>
+                         <p>下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                            <li><strong>推薦料理：</strong>招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。</li>
+                            <li><strong>每人平均用餐價位：</strong>￥1,320 - ￥2,255</li>
+                            <li><strong>支付方式：</strong>不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
+                            <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
+                    <div id="shirahige-choux" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">白髭泡芙工房 🍮</h4>
+                         <p>宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                            <li><strong>推薦料理：</strong>龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。</li>
+                            <li><strong>每人平均用餐價位：</strong>￥999</li>
+                            <li><strong>支付方式：</strong>不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）</li>
+                            <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
+                    <div id="village-vanguard-diner" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">Village Vanguard Diner Shimokitazawa 🍔</h4>
+                         <p>由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                            <li><strong>推薦料理：</strong>多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。</li>
+                            <li><strong>每人平均用餐價位：</strong>午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。</li>
+                            <li><strong>支付方式：</strong>接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）</li>
+                            <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
+                     <div id="ekuburi" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">えくぶり ☕</h4>
+                         <p>這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                             <li><strong>推薦料理：</strong>日式早餐套餐、各式吐司、咖啡等。</li>
+                             <li><strong>每人平均用餐價位：</strong>￥999</li>
+                             <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a></li>
+                         </ul>
+                    </div>
                 </div>
             </div>
             <!-- Shibuya/Shinjuku Category -->
@@ -424,27 +437,29 @@
                     <button data-attraction-tab="janka-dogenzaka" class="attraction-tab-btn">吟味焼肉 じゃんか 道玄坂</button>
                     <button data-attraction-tab="tokyo-bitcoin-base" class="attraction-tab-btn">Tokyo Bitcoin Base</button>
                 </div>
-                 <div id="uniqlo-shibuya" class="attraction-content">
-                     <h4 class="font-display text-xl">ユニクロ 渋谷道玄坂店 👕</h4>
-                     <p>位於澀谷的 Uniqlo 分店，提供最新款式的服飾，是採購基本款與潮流單品的好去處。</p>
-                </div>
-                <div id="gu-shibuya" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">GU 渋谷店 👖</h4>
-                     <p>Uniqlo 的姊妹品牌，以更親民的價格提供時尚潮流服飾，深受年輕人喜愛。</p>
-                </div>
-                <div id="janka-dogenzaka" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">吟味焼肉 じゃんか 道玄坂 🍖</h4>
-                     <p>澀谷知名的燒肉店，以提供高品質的肉品（特別是和牛）聞名，讓您能品嚐到入口即化的美味燒肉。</p>
-                      <ul class="list-none space-y-1 mt-4 text-sm">
-                        <li><strong>推薦料理：</strong>各部位的和牛燒肉、特選拼盤。</li>
-                        <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
-                        <li><strong>支付方式：</strong>可接受信用卡、不接受電子現金（西瓜卡等）、接受PayPay支付（QRCode）</li>
-                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1303/A130301/13007287/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                <div id="tokyo-bitcoin-base" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">Tokyo Bitcoin Base 🪙</h4>
-                     <p>一個與加密貨幣、區塊鏈相關的實體空間或社群據點，吸引著對區塊鏈技術和文化感興趣的人士。</p>
+                <div class="mt-8">
+                     <div id="uniqlo-shibuya" class="attraction-content">
+                         <h4 class="font-display text-xl">ユニクロ 渋谷道玄坂店 👕</h4>
+                         <p>位於澀谷的 Uniqlo 分店，提供最新款式的服飾，是採購基本款與潮流單品的好去處。</p>
+                    </div>
+                    <div id="gu-shibuya" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">GU 渋谷店 👖</h4>
+                         <p>Uniqlo 的姊妹品牌，以更親民的價格提供時尚潮流服飾，深受年輕人喜愛。</p>
+                    </div>
+                    <div id="janka-dogenzaka" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">吟味焼肉 じゃんか 道玄坂 🍖</h4>
+                         <p>澀谷知名的燒肉店，以提供高品質的肉品（特別是和牛）聞名，讓您能品嚐到入口即化的美味燒肉。</p>
+                          <ul class="list-none space-y-1 mt-4 text-sm">
+                            <li><strong>推薦料理：</strong>各部位的和牛燒肉、特選拼盤。</li>
+                            <li><strong>每人平均用餐價位：</strong>￥4,000－￥4,999</li>
+                            <li><strong>支付方式：</strong>可接受信用卡、不接受電子現金（西瓜卡等）、接受PayPay支付（QRCode）</li>
+                            <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tokyo/A1303/A130301/13007287/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
+                    <div id="tokyo-bitcoin-base" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">Tokyo Bitcoin Base 🪙</h4>
+                         <p>一個與加密貨幣、區塊鏈相關的實體空間或社群據點，吸引著對區塊鏈技術和文化感興趣的人士。</p>
+                    </div>
                 </div>
             </div>
             <!-- MyGO!!!!! Category -->
@@ -455,34 +470,35 @@
                      <button data-attraction-tab="chitose-bridge" class="attraction-tab-btn">千登世步道橋</button>
                      <button data-attraction-tab="cocofulu" class="attraction-tab-btn">ココフル</button>
                 </div>
-                <div id="asukayama-park" class="attraction-content">
-                    <h4 class="font-display text-xl">飛鳥山公園 🌸</h4>
-                    <p>江戶時代起就是著名的賞櫻勝地，也是《MyGO!!!!!》動畫的聖地，可以尋找動畫中爽世與祥子「戰鬥」過的噴水池等景點。</p>
-                </div>
-                <div id="kyu-furukawa-garden" class="attraction-content hidden">
-                    <h4 class="font-display text-xl">舊古河庭園 🌹</h4>
-                    <p>融合了日式庭園與西式洋館的獨特設計，是《MyGO!!!!!》動畫中祥子家的原型地。</p>
-                </div>
-                <div id="chitose-bridge" class="attraction-content hidden">
-                    <h4 class="font-display text-xl">千登世步道橋 🌉</h4>
-                    <p>《MyGO!!!!!》動畫中，祥子邀請燈組成樂團，經典的「祥子成為人類的橋」，是粉絲必訪的朝聖地點。</p>
-                </div>
-                <div id="cocofulu" class="attraction-content hidden">
-                    <h4 class="font-display text-xl">ココフル ☕</h4>
-                    <p>位於飛鳥山公園附近的咖啡店或簡餐店，適合在遊覽公園後稍作休息，補充能量。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                        <li><strong>推薦料理：</strong>通常提供咖啡、輕食、或簡餐。</li>
-                        <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
-                        <li><strong>支付方式：</strong>可接受信用卡、可接受電子現金（西瓜卡等）</li>
-                        <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1323/A132303/13202218/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
+                <div class="mt-8">
+                    <div id="asukayama-park" class="attraction-content">
+                        <h4 class="font-display text-xl">飛鳥山公園 🌸</h4>
+                        <p>江戶時代起就是著名的賞櫻勝地，也是《MyGO!!!!!》動畫的聖地，可以尋找動畫中爽世與祥子「戰鬥」過的噴水池等景點。</p>
+                    </div>
+                    <div id="kyu-furukawa-garden" class="attraction-content hidden">
+                        <h4 class="font-display text-xl">舊古河庭園 🌹</h4>
+                        <p>融合了日式庭園與西式洋館的獨特設計，是《MyGO!!!!!》動畫中祥子家的原型地。</p>
+                    </div>
+                    <div id="chitose-bridge" class="attraction-content hidden">
+                        <h4 class="font-display text-xl">千登世步道橋 🌉</h4>
+                        <p>《MyGO!!!!!》動畫中，祥子邀請燈組成樂團，經典的「祥子成為人類的橋」，是粉絲必訪的朝聖地點。</p>
+                    </div>
+                    <div id="cocofulu" class="attraction-content hidden">
+                        <h4 class="font-display text-xl">ココフル ☕</h4>
+                        <p>位於飛鳥山公園附近的咖啡店或簡餐店，適合在遊覽公園後稍作休息，補充能量。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                            <li><strong>推薦料理：</strong>通常提供咖啡、輕食、或簡餐。</li>
+                            <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                            <li><strong>支付方式：</strong>可接受信用卡、可接受電子現金（西瓜卡等）</li>
+                            <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tokyo/A1323/A132303/13202218/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
                 </div>
             </div>
             <!-- Akihabara/Jimbocho Category -->
             <div id="category-akiba" class="category-tab-content hidden">
                  <div class="tabs">
                     <button data-attraction-tab="hotel-grand-central" class="attraction-tab-btn active">東京中央大飯店</button>
-                    <button data-attraction-tab="kitchen-nankai" class="attraction-tab-btn">廚房南海 神保町店</button>
                     <button data-attraction-tab="akiba-radio-hall" class="attraction-tab-btn">秋葉原ラジオ會館</button>
                     <button data-attraction-tab="hakata-furyu" class="attraction-tab-btn">とんこつラーメン博多風龍</button>
                     <button data-attraction-tab="e-earphone" class="attraction-tab-btn">e-earphone 秋葉原店</button>
@@ -490,60 +506,52 @@
                     <button data-attraction-tab="the-akiba" class="attraction-tab-btn">ギフトショップ The AkiBa</button>
                     <button data-attraction-tab="imahan-honten" class="attraction-tab-btn">人形町今半 人形町本店</button>
                 </div>
-                <div id="hotel-grand-central" class="attraction-content">
-                     <h4 class="font-display text-xl">東京中央大飯店 (Grand Central Hotel, Tokyo) 🏨</h4>
-                     <p>位於交通樞紐，鄰近神田、秋葉原等地，是一家提供經典舒適住宿體驗的飯店，方便前往東京各個角落。</p>
-                </div>
-                <div id="kitchen-nankai" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">廚房南海 神保町店 🍛</h4>
-                     <p>神保町地區的傳奇洋食老店，以其份量十足、價格實惠的黑色咖哩聞名，是當地人與學生們的最愛。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                         <li><strong>推薦料理：</strong>豬排咖哩飯、奶油可樂餅。</li>
-                         <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
-                         <li><strong>支付方式：</strong>只接受現金</li>
-                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1310/A131003/13249021/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                <div id="akiba-radio-hall" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">秋葉原ラジオ會館 🗼</h4>
-                     <p>秋葉原的地標性建築之一，是動漫、模型、卡牌和偶像周邊商品的聚集地，動漫迷的天堂。</p>
-                </div>
-                <div id="hakata-furyu" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">とんこつラーメン博多風龍 秋葉原総本店 🍜</h4>
-                     <p>提供正宗的博多豚骨拉麵，以其濃郁的湯頭和可以免費續加兩次的細麵為特色，CP值極高。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                         <li><strong>推薦料理：</strong>豚骨拉麵，可自選麵的硬度。</li>
-                         <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
-                         <li><strong>支付方式：</strong>不接受信用卡、可接受電子現金（西瓜卡等）、可接受PayPay支付（QRCode）</li>
-                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tw/tokyo/A1311/A131101/13096267/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                <div id="e-earphone" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">e-earphone 秋葉原店 🎧</h4>
-                     <p>耳機與音響發燒友的聖地，提供極為豐富的各品牌耳機、播放器試聽與選購服務。</p>
-                </div>
-                <div id="tonkatsu-ippe" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 🐷</h4>
-                     <p>以高品質的炸豬排和獨特的咖哩醬聞名，提供酥脆多汁的炸豬排與濃郁咖哩的完美結合。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                         <li><strong>推薦料理：</strong>招牌炸豬排咖哩飯。</li>
-                         <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
-                         <li><strong>支付方式：</strong>只接受日圓現金</li>
-                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1311/A131101/13259701/" target="_blank">日本餐廳評論網站</a></li>
-                     </ul>
-                </div>
-                <div id="the-akiba" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">ギフトショップ The AkiBa 🎁</h4>
-                     <p>位於秋葉原ラジオ會館一樓的伴手禮店，販售各種與秋葉原、動漫文化相關的特色商品與點心。</p>
-                </div>
-                <div id="imahan-honten" class="attraction-content hidden">
-                     <h4 class="font-display text-xl">人形町今半 人形町本店 🍲</h4>
-                     <p>創業於明治28年的壽喜燒超級名店，以最頂級的和牛與秘傳的醬汁聞名，提供極致的用餐體驗。</p>
-                     <ul class="list-none space-y-1 mt-4 text-sm">
-                         <li><strong>推薦料理：</strong>極上壽喜燒套餐。</li>
-                         <li><strong>每人平均用餐價位：</strong>￥15,000 - ￥25,000</li>
-                         <li><strong>參考資料：</strong><a href="https://tabelog.com/tokyo/A1302/A130204/13003009/" target="_blank">Tabelog 連結</a></li>
-                     </ul>
+                <div class="mt-8">
+                    <div id="hotel-grand-central" class="attraction-content">
+                         <h4 class="font-display text-xl">東京中央大飯店 (Grand Central Hotel, Tokyo) 🏨</h4>
+                         <p>位於交通樞紐，鄰近神田、秋葉原等地，是一家提供經典舒適住宿體驗的飯店，方便前往東京各個角落。</p>
+                    </div>
+                    <div id="akiba-radio-hall" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">秋葉原ラジオ會館 🗼</h4>
+                         <p>秋葉原的地標性建築之一，是動漫、模型、卡牌和偶像周邊商品的聚集地，動漫迷的天堂。</p>
+                    </div>
+                    <div id="hakata-furyu" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">とんこつラーメン博多風龍 秋葉原総本店 🍜</h4>
+                         <p>提供正宗的博多豚骨拉麵，以其濃郁的湯頭和可以免費續加兩次的細麵為特色，CP值極高。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                             <li><strong>推薦料理：</strong>豚骨拉麵，可自選麵的硬度。</li>
+                             <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                             <li><strong>支付方式：</strong>不接受信用卡、可接受電子現金（西瓜卡等）、可接受PayPay支付（QRCode）</li>
+                             <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1311/A131101/13096267/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
+                    <div id="e-earphone" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">e-earphone 秋葉原店 🎧</h4>
+                         <p>耳機與音響發燒友的聖地，提供極為豐富的各品牌耳機、播放器試聽與選購服務。</p>
+                    </div>
+                    <div id="tonkatsu-ippe" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 🐷</h4>
+                         <p>以高品質的炸豬排和獨特的咖哩醬聞名，提供酥脆多汁的炸豬排與濃郁咖哩的完美結合。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                             <li><strong>推薦料理：</strong>招牌炸豬排咖哩飯。</li>
+                             <li><strong>每人平均用餐價位：</strong>￥1,000－￥1,999</li>
+                             <li><strong>支付方式：</strong>只接受日圓現金</li>
+                             <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tokyo/A1311/A131101/13259701/" target="_blank">日本餐廳評論網站</a></li>
+                         </ul>
+                    </div>
+                    <div id="the-akiba" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">ギフトショップ The AkiBa 🎁</h4>
+                         <p>位於秋葉原ラジオ會館一樓的伴手禮店，販售各種與秋葉原、動漫文化相關的特色商品與點心。</p>
+                    </div>
+                    <div id="imahan-honten" class="attraction-content hidden">
+                         <h4 class="font-display text-xl">人形町今半 人形町本店 🍲</h4>
+                         <p>創業於明治28年的壽喜燒超級名店，以最頂級的和牛與秘傳的醬汁聞名，提供極致的用餐體驗。</p>
+                         <ul class="list-none space-y-1 mt-4 text-sm">
+                             <li><strong>推薦料理：</strong>極上壽喜燒套餐。</li>
+                             <li><strong>每人平均用餐價位：</strong>￥15,000 - ￥25,000</li>
+                             <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1302/A130204/13003059/" target="_blank">Tabelog 連結</a></li>
+                         </ul>
+                    </div>
                 </div>
             </div>
         `,
@@ -554,37 +562,39 @@
                 <button data-transportation-tab="grand-to-mygo" class="transportation-tab-btn">飯店 → MyGO聖地</button>
                 <button data-transportation-tab="grand-to-nrt" class="transportation-tab-btn">飯店 → 機場</button>
             </div>
-            <div id="nrt-to-mustard" class="transportation-content">
-                <h4 class="font-display text-xl">成田機場 (NRT) → 下北澤芥末飯店 ✈️➡️🏨</h4>
-                <ul class="list-none space-y-1 mt-4">
-                    <li><strong>方式:</strong> 成田特快 (N'EX) + 京王井之頭線</li>
-                    <li><strong>說明:</strong> 搭乘N'EX至澀谷站，再轉乘京王井之頭線至下北澤站。</li>
-                    <li><strong>預估費用 (每人):</strong> 約 ¥3,250</li>
-                </ul>
-            </div>
-            <div id="mustard-to-grand" class="transportation-content hidden">
-                <h4 class="font-display text-xl">下北澤芥末飯店 → 東京中央大飯店 🏨➡️🏨</h4>
-                <ul class="list-none space-y-1 mt-4">
-                    <li><strong>方式:</strong> 京王井之頭線 + JR山手線/中央線</li>
-                    <li><strong>說明:</strong> 從下北澤搭至澀谷或新宿，再轉乘JR線至神田站。</li>
-                    <li><strong>預估費用 (每人):</strong> 約 ¥350</li>
-                </ul>
-            </div>
-            <div id="grand-to-mygo" class="transportation-content hidden">
-                <h4 class="font-display text-xl">東京中央大飯店 → MyGO聖地 (飛鳥山/舊古河庭園) 🏨➡️🌸</h4>
-                <ul class="list-none space-y-1 mt-4">
-                    <li><strong>方式:</strong> JR山手線/京濱東北線</li>
-                    <li><strong>說明:</strong> 從神田站搭乘JR線至王子站或上中里站。</li>
-                    <li><strong>預估費用 (每人):</strong> 約 ¥170</li>
-                </ul>
-            </div>
-            <div id="grand-to-nrt" class="transportation-content hidden">
-                <h4 class="font-display text-xl">東京中央大飯店 → 成田機場 (NRT) 🏨➡️✈️</h4>
-                <ul class="list-none space-y-1 mt-4">
-                    <li><strong>方式:</strong> JR山手線 + 京成Skyliner</li>
-                    <li><strong>說明:</strong> 從神田站搭JR至日暮里或上野，再轉乘Skyliner。</li>
-                    <li><strong>預估費用 (每人):</strong> 約 ¥2,720</li>
-                </ul>
+            <div class="mt-8">
+                <div id="nrt-to-mustard" class="transportation-content">
+                    <h4 class="font-display text-xl">成田機場 (NRT) → 下北澤芥末飯店 ✈️➡️🏨</h4>
+                    <ul class="list-none space-y-1 mt-4">
+                        <li><strong>方式:</strong> 成田特快 (N'EX) + 京王井之頭線</li>
+                        <li><strong>說明:</strong> 搭乘N'EX至澀谷站，再轉乘京王井之頭線至下北澤站。</li>
+                        <li><strong>預估費用 (每人):</strong> 約 ¥3,250</li>
+                    </ul>
+                </div>
+                <div id="mustard-to-grand" class="transportation-content hidden">
+                    <h4 class="font-display text-xl">下北澤芥末飯店 → 東京中央大飯店 🏨➡️🏨</h4>
+                    <ul class="list-none space-y-1 mt-4">
+                        <li><strong>方式:</strong> 京王井之頭線 + JR山手線/中央線</li>
+                        <li><strong>說明:</strong> 從下北澤搭至澀谷或新宿，再轉乘JR線至神田站。</li>
+                        <li><strong>預估費用 (每人):</strong> 約 ¥350</li>
+                    </ul>
+                </div>
+                <div id="grand-to-mygo" class="transportation-content hidden">
+                    <h4 class="font-display text-xl">東京中央大飯店 → MyGO聖地 (飛鳥山/舊古河庭園) 🏨➡️🌸</h4>
+                    <ul class="list-none space-y-1 mt-4">
+                        <li><strong>方式:</strong> JR山手線/京濱東北線</li>
+                        <li><strong>說明:</strong> 從神田站搭乘JR線至王子站或上中里站。</li>
+                        <li><strong>預估費用 (每人):</strong> 約 ¥170</li>
+                    </ul>
+                </div>
+                <div id="grand-to-nrt" class="transportation-content hidden">
+                    <h4 class="font-display text-xl">東京中央大飯店 → 成田機場 (NRT) 🏨➡️✈️</h4>
+                    <ul class="list-none space-y-1 mt-4">
+                        <li><strong>方式:</strong> JR山手線 + 京成Skyliner</li>
+                        <li><strong>說明:</strong> 從神田站搭JR至日暮里或上野，再轉乘Skyliner。</li>
+                        <li><strong>預估費用 (每人):</strong> 約 ¥2,720</li>
+                    </ul>
+                </div>
             </div>
         `,
         shoppingList: `
@@ -650,11 +660,10 @@
             '路地裏咖哩 侍 下北澤店': 2255,
             '白髭泡芙工房': 999,
             'Village Vanguard Diner Shimokitazawa': 2999,
-            'えくぶり': 1999, // Assuming similar to Cocofulu
-            '吟味焼肉 じゃんか 道玄坂': 1999,
-            '人形町今半 人形町本店': 19999,
+            'えくぶり': 999,
+            '吟味焼肉 じゃんか 道玄坂': 4999,
+            '人形町今半 人形町本店': 25000,
             'ココフル': 1999,
-            '廚房南海 神保町店': 1999,
             'とんこつラーメン博多風龍 秋葉原総本店': 1999,
             'とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店': 1999,
             '超商晚餐': 1000, // Estimate
@@ -681,13 +690,13 @@
             costsJPY: {
                 accommodation: 79381,
                 transportation: 9000,
-                food: totalFoodCostTwoPeople, // Updated food cost
-                shopping: 125000,
+                food: totalFoodCostTwoPeople, 
+                shopping: 71429, // 15000 NTD / 0.21
                 tickets: 150
             },
             costsNTD: {
                 flights: 33076,
-                prep: (878 + 394 + 159) * 2 // New prep costs for two people
+                prep: (878 + 394 + 159) * 2
             },
             exchangeRate: 0.21
         };
