@@ -66,6 +66,13 @@
         .attraction-tab-btn {
             border-radius: 9999px;
         }
+        .prose-custom ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .prose-custom ol li {
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -468,7 +475,7 @@
                          <ul class="list-none space-y-1 mt-4 text-sm">
                              <li><strong>推薦料理：</strong>極上壽喜燒套餐。</li>
                              <li><strong>每人平均用餐價位：</strong>￥15,000 - ￥25,000</li>
-                             <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1301/A130101/13002645/" target="_blank">Tabelog 連結</a></li>
+                             <li><strong>參考資料：</strong><a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1301/A130101/13016566/" target="_blank">日本餐廳評論網站</a></li>
                          </ul>
                     </div>
                 </div>
@@ -638,8 +645,17 @@
                 <li><input type="checkbox" id="pre_travel_insurance"><label for="pre_travel_insurance" class="ml-2">旅平險 🛡️</label></li>
                 <li><input type="checkbox" id="pre_credit_card"><label for="pre_credit_card" class="ml-2">申辦日本旅遊信用卡 💳</label></li>
                 <li><input type="checkbox" id="pre_japan_sim"><label for="pre_japan_sim" class="ml-2">日本網卡 📶</label></li>
-                <li><input type="checkbox" id="pre_common_meds"><label for="pre_common_meds" class="ml-2">常用藥物購買（防止胃脹氣、胃酸過多；消炎止痛藥、透氣膠帶、ＯＫ蹦）🩹</label></li>
-                <li><input type="checkbox" id="pre_rest_order"><label for="pre_rest_order" class="ml-2">餐廳事前預約🫕</label></li>
+                <li><input type="checkbox" id="pre_common_meds"><label for="pre_common_meds" class="ml-2">常用藥物購買 🩹</label>
+                    <ol class="list-decimal list-inside ml-8 mt-2 text-sm text-gray-600">
+                        <li>胃藥</li>
+                        <li>止痛藥</li>
+                        <li>透氣膠帶</li>
+                        <li>OK蹦</li>
+                        <li>鼻噴劑</li>
+                    </ol>
+                </li>
+                <li><input type="checkbox" id="pre_rest_order"><label for="pre_rest_order" class="ml-2">餐廳事前預約 🫕</label></li>
+                <li><input type="checkbox" id="pre_earplugs"><label for="pre_earplugs" class="ml-2">醫用軟耳塞 👂</label></li>
             </ul>
             <h3 class="font-display text-2xl mt-8 mb-4">旅遊必備品</h3>
             <ul class="list-none space-y-3">
@@ -656,7 +672,7 @@
                 <li><input type="checkbox" id="item_water_bottle"><label for="item_water_bottle" class="ml-2">水瓶（一點點水）💧</label></li>
                 <li><input type="checkbox" id="item_waist_bag"><label for="item_waist_bag" class="ml-2">腰包 👝</label></li>
                 <li><input type="checkbox" id="item_backpack"><label for="item_backpack" class="ml-2">方便攜帶的後背包 🎒</label></li>
-                <li><input type="checkbox" id="item_earplugs"><label for="item_earplugs" class="ml-2">醫用耳塞與牙間刷 👂</label></li>
+                <li><input type="checkbox" id="item_earplugs_dental"><label for="item_earplugs_dental" class="ml-2">醫用耳塞與牙間刷 🦷</label></li>
                 <li><input type="checkbox" id="item_twd_cash"><label for="item_twd_cash" class="ml-2">台幣現鈔（5000以內以備不時之需）💵</label></li>
             </ul>
         `
