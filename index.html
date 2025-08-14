@@ -1,181 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>第一次去東京就上手｜朝聖MyGO、孤獨搖滾旅遊手冊</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一次去東京就上手｜朝聖MyGO、孤獨搖滾旅遊手冊 (深色主題)</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 字型：Inter（標題） + Noto Sans TC（中文） -->
+    
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Chart.js for budget charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* =========================
-           柔和現代主題變數
-           ========================= */
-        :root{
-            --bg: #FBFBFC;           /* 全局背景 */
-            --surface: #FFFFFF;      /* 卡片背景 */
-            --muted: #6B7280;        /* 文字次要色 */
-            --text: #111827;         /* 主要文字 */
-            --glass: rgba(255,255,255,0.6); /* header 玻璃背景 */
-            --primary-500: #8B5CF6;  /* 主色 (柔和紫) */
-            --primary-300: #DCCBFF;  /* 主色淺 */
-            --accent-500: #FF9AA2;   /* 點綴粉 */
-            --shadow: 0 8px 24px rgba(15,23,42,0.06);
-            --soft-shadow: 0 6px 18px rgba(15,23,42,0.05);
-            --radius-lg: 16px;
-            --radius-md: 12px;
+        /* --- 風格變數 (深色主題) --- */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --muted-text-color: #b0b0b0; /* 提升對比度，增加易讀性 */
+            --accent-color: #4FB286; /* 點綴綠 */
+            --accent-color-darker: #3E9C72;
+            --shadow-color: rgba(0, 0, 0, 0.5);
         }
 
         /* --- 基本樣式 --- */
-        html,body { height:100%; }
         body {
-            margin:0;
-            font-family: 'Noto Sans TC', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background-color: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
-            line-height:1.6;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .font-display {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             font-weight: 700;
-            letter-spacing: -0.01em;
         }
 
-        /* 柔和漸層標題 (subtle) */
         .gradient-text {
-            background: linear-gradient(90deg, rgba(139,92,246,0.95), rgba(255,154,162,0.9));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
+            background: linear-gradient(45deg, var(--accent-color), #86efac);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        main > section { padding-top:3.5rem; padding-bottom:3.5rem; }
-        @media (min-width:768px){ main > section { padding-top:5rem; padding-bottom:5rem; } }
+        main > section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        @media (min-width: 768px) {
+            main > section {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+            }
+        }
 
-        /* --- Header --- */
+        /* --- 頁首橫幅 --- */
+        .hero-cover {
+            height: 75vh;
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop');
+        }
+
+        /* --- 導覽列 --- */
         header.sticky {
-            backdrop-filter: blur(6px);
-            background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.75));
-            box-shadow: var(--soft-shadow);
-            border-bottom: 1px solid rgba(15,23,42,0.04);
+            background-color: rgba(30, 30, 30, 0.85); /* --surface-color with opacity */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #desktop-nav a {
+            color: var(--muted-text-color);
+        }
+         #desktop-nav a:hover, #desktop-nav a.active {
+            color: var(--accent-color);
+        }
+        #mobile-nav {
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* --- 封面 --- */
-        .hero {
-            min-height: 88vh;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            text-align:center;
-            padding:2rem;
+        /* --- 卡片 & 容器 --- */
+        .content-card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+        
+        /* --- 頁籤系統 --- */
+        .tab-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--muted-text-color);
+            transition: all 0.3s ease;
+        }
+        .tab-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+        }
+        .tab-btn.active {
+            background-color: var(--accent-color);
             color: #ffffff;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 4px 14px 0 rgba(79, 178, 134, 0.3);
         }
-        .hero .overlay {
-            position:absolute; inset:0;
-            background: linear-gradient(180deg, rgba(11,9,23,0.35), rgba(11,9,23,0.45));
-            mix-blend-mode: multiply;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
+        .tab-pane {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
         }
-        .hero h1 { font-size:2.75rem; line-height:1.05; }
-        @media(min-width:768px){ .hero h1 { font-size:4rem; } }
-
-        /* --- 卡片用樣式 --- */
-        .card {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
-            padding:1.25rem;
-        }
-        .card-sm { border-radius: var(--radius-md); padding:1rem; box-shadow: var(--soft-shadow); }
-
-        /* --- 按鈕 --- */
-        .btn {
-            display:inline-flex; align-items:center; justify-content:center;
-            padding:0.6rem 1.1rem; border-radius:999px; font-weight:600;
-            transition: transform .18s ease, box-shadow .18s ease;
-            box-shadow: 0 6px 18px rgba(139,92,246,0.08);
-        }
-        .btn-primary {
-            background: linear-gradient(90deg,var(--primary-500), #C084FC);
-            color:white;
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(139,92,246,0.12); }
-
-        /* --- 分類頁籤 --- */
-        .tabs [data-tab-toggle]{
-            border-radius: 999px;
-            padding:0.5rem .9rem;
-            background: rgba(15,23,42,0.04);
-            color:var(--muted);
-            border: 1px solid rgba(15,23,42,0.03);
-            transition: all .22s ease;
-            box-shadow: none;
-        }
-        .tabs [data-tab-toggle]:hover{ transform: translateY(-4px); color: var(--text); }
-
-        .itinerary-tab-btn.active,
-        .category-tab-btn.active,
-        .attraction-tab-btn.active,
-        .transportation-tab-btn.active {
-            background: linear-gradient(90deg,var(--primary-300), #F2E6FF);
-            color: var(--text);
-            box-shadow: 0 8px 20px rgba(139,92,246,0.08);
-            border: none;
+        .tab-pane.active {
+            display: block;
+            opacity: 1;
         }
 
-        /* --- tab 內容過渡 --- */
-        .tab-pane { display:none; opacity:0; transform: translateY(6px); transition: opacity .32s ease, transform .32s ease; }
-        .tab-pane.active { display:block; opacity:1; transform: translateY(0); }
-
-        /* --- 互動勾選清單 --- */
-        .interactive-checklist input[type="checkbox"]{
-            width:18px; height:18px; vertical-align:middle; accent-color: var(--primary-500);
-            border-radius:4px;
+        /* --- 互動式清單 --- */
+        .interactive-checklist input[type="checkbox"] {
+            accent-color: var(--accent-color);
         }
         .interactive-checklist input:checked + label {
             text-decoration: line-through;
-            color: #9CA3AF;
+            color: var(--muted-text-color);
         }
-        .interactive-checklist label { cursor:pointer; margin-left:0.6rem; }
 
-        /* --- 連結樣式 --- */
+        /* --- 其他組件 --- */
         .tabelog-link {
-            color: var(--accent-500) !important;
-            font-weight:600;
+            color: var(--accent-color) !important;
+            font-weight: 500;
             text-decoration: underline;
         }
-        .tabelog-link:hover { color: var(--primary-500) !important; text-decoration:none; }
+        .tabelog-link:hover {
+            color: #86efac !important;
+        }
+        .prose-custom ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .prose-custom ol li {
+            margin-bottom: 0.5rem;
+        }
 
         /* --- 表格 --- */
-        table#budget-table th, table#budget-table td { border-bottom: none; padding:0.6rem 0; }
-        table#budget-table thead tr { border-bottom: 1px solid rgba(15,23,42,0.05); }
-        table#budget-table tfoot tr { border-top: 2px solid rgba(15,23,42,0.06); }
-
-        /* --- 細部微調 --- */
-        .prose-custom ol { padding-left:1.35rem; }
-        .prose-custom li { margin-bottom:0.45rem; color: var(--muted); }
-
-        footer { background: transparent; color: var(--muted); }
+        #budget-table thead tr {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        #budget-table tfoot tr {
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+        }
     </style>
 </head>
-<body class="bg-[color:var(--bg)] text-[color:var(--text)]">
+<body>
 
     <!-- Cover Page -->
-    <div class="hero relative bg-cover bg-center flex flex-col justify-center items-center text-white text-center p-6" style="background-image: url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop');">
-        <div class="overlay" aria-hidden="true"></div>
-        <h1 class="font-display text-4xl md:text-6xl font-bold drop-shadow-lg">第一次去東京就上手</h1>
-        <p class="mt-4 text-base md:text-lg max-w-2xl drop-shadow-sm">您的專屬動漫聖地與美食探險之旅</p>
-        <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'});" class="mt-8 btn btn-primary">
+    <div class="hero-cover bg-cover bg-center flex flex-col justify-center items-center text-white text-center p-4">
+        <h1 class="font-display text-5xl md:text-7xl font-bold drop-shadow-lg">第一次去東京就上手</h1>
+        <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">您的專屬動漫聖地與美食探險之旅</p>
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'});" class="mt-8 px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105" style="background-color: var(--accent-color);">
             開始探索
         </button>
     </div>
@@ -183,19 +172,19 @@
     <!-- Sticky Header -->
     <header class="sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="font-display text-xl font-bold gradient-text">東京動漫聖地巡禮</div>
-            <div id="desktop-nav" class="hidden lg:flex items-center space-x-5">
-                <a href="#overview" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">總覽</a>
-                <a href="#itinerary" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">每日行程</a>
-                <a href="#attractions" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">景點美食</a>
-                <a href="#transportation" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">交通資訊</a>
-                <a href="#budget" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">預算分析</a>
-                <a href="#travel-tips" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">旅遊注意事項</a>
-                <a href="#shopping-list" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">購物清單</a>
-                <a href="#checklist" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">行前準備</a>
+            <div class="font-display text-2xl font-bold gradient-text">東京動漫聖地巡禮</div>
+            <div id="desktop-nav" class="hidden lg:flex items-center space-x-6">
+                <a href="#overview">總覽</a>
+                <a href="#itinerary">每日行程</a>
+                <a href="#attractions">景點美食</a>
+                <a href="#transportation">交通資訊</a>
+                <a href="#budget">預算分析</a>
+                <a href="#travel-tips">旅遊注意事項</a>
+                <a href="#shopping-list">購物清單</a>
+                <a href="#checklist">行前準備</a>
             </div>
             <div class="lg:hidden">
-                <select id="mobile-nav" class="border border-gray-200 rounded-md p-2" onchange="document.querySelector(this.value).scrollIntoView({behavior: 'smooth'});">
+                <select id="mobile-nav" class="rounded-md p-2" onchange="document.querySelector(this.value).scrollIntoView({behavior: 'smooth'});">
                     <option value="#overview">總覽</option>
                     <option value="#itinerary">每日行程</option>
                     <option value="#attractions">景點美食</option>
@@ -213,30 +202,30 @@
 
         <!-- Overview Section -->
         <section id="overview" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">行程總覽</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">一目了然您的東京之旅核心資訊：費用、時間與目的地。</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">行程總覽</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">一目了然您的東京之旅核心資訊：費用、時間與目的地。</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="card text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="content-card p-6 text-center">
                     <span class="text-4xl">💰</span>
-                    <h3 class="mt-2 text-sm font-semibold text-[color:var(--muted)]">預估總費用 (2人)</h3>
-                    <p id="total-cost-display" class="text-2xl font-bold text-[color:var(--primary-500)]"></p>
+                    <h3 class="mt-2 text-lg font-semibold" style="color: var(--muted-text-color);">預估總費用 (2人)</h3>
+                    <p id="total-cost-display" class="text-3xl font-bold" style="color: var(--accent-color);"></p>
                 </div>
-                <div class="card text-center">
+                <div class="content-card p-6 text-center">
                     <span class="text-4xl">🗓️</span>
-                    <h3 class="mt-2 text-sm font-semibold text-[color:var(--muted)]">旅行期間</h3>
-                    <p class="text-2xl font-bold text-[color:var(--primary-500)]">6天5夜</p>
+                    <h3 class="mt-2 text-lg font-semibold" style="color: var(--muted-text-color);">旅行期間</h3>
+                    <p class="text-3xl font-bold" style="color: var(--accent-color);">6天5夜</p>
                 </div>
-                <div class="card text-center">
+                <div class="content-card p-6 text-center">
                     <span class="text-4xl">📍</span>
-                    <h3 class="mt-2 text-sm font-semibold text-[color:var(--muted)]">核心目的地</h3>
-                    <p class="text-xl font-bold text-[color:var(--primary-500)]">下北澤 / 澀谷 / 秋葉原</p>
+                    <h3 class="mt-2 text-lg font-semibold" style="color: var(--muted-text-color);">核心目的地</h3>
+                    <p class="text-2xl font-bold" style="color: var(--accent-color);">下北澤/澀谷/秋葉原</p>
                 </div>
             </div>
-            <div class="card">
-                <h3 class="font-display text-xl font-bold text-center mb-4">預算費用分佈</h3>
-                <div class="chart-container h-72 mx-auto" style="max-width:520px;">
+            <div class="content-card p-6">
+                <h3 class="font-display text-2xl font-bold text-center mb-6">預算費用分佈</h3>
+                <div class="chart-container h-80 mx-auto" style="max-width: 400px;">
                     <canvas id="budgetDonutChart"></canvas>
                 </div>
             </div>
@@ -244,103 +233,99 @@
 
         <!-- Itinerary Section -->
         <section id="itinerary" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">每日行程規劃</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">點擊下方日期，探索每一天的詳細活動與動漫聖地巡禮！</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">每日行程規劃</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">點擊下方日期，探索每一天的詳細活動與動漫聖地巡禮！</p>
             </div>
             <div id="itinerary-container"></div>
         </section>
 
         <!-- Attractions Section -->
         <section id="attractions" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">景點、美食介紹</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">深入了解行程中各個地點的特色與推薦資訊。</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">景點、美食介紹</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">深入了解行程中各個地點的特色與推薦資訊。</p>
             </div>
             <div id="attractions-container"></div>
         </section>
 
         <!-- Transportation Section -->
         <section id="transportation" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">交通資訊</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">各主要景點與餐廳之間的移動方式與交通費用概覽。</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">交通資訊</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">各主要景點與餐廳之間的移動方式與交通費用概覽。</p>
             </div>
             <div id="transportation-container"></div>
         </section>
 
         <!-- Budget Section -->
         <section id="budget" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">預算分析</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">深入了解各項開銷的細節，有效控管您的旅行預算。</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">預算分析</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">深入了解各項開銷的細節，有效控管您的旅行預算。</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="card">
-                    <h3 class="font-display text-xl font-bold text-center mb-4">各項費用比較 (JPY)</h3>
-                    <div class="chart-container h-80">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="content-card p-6">
+                    <h3 class="font-display text-2xl font-bold text-center mb-6">各項費用比較 (JPY)</h3>
+                    <div class="chart-container h-96">
                         <canvas id="expenseBarChart"></canvas>
                     </div>
                 </div>
-                <div class="card">
-                    <h3 class="font-display text-xl font-bold text-center mb-4">費用明細表 (2人)</h3>
+                <div class="content-card p-6">
+                    <h3 class="font-display text-2xl font-bold text-center mb-6">費用明細表 (2人)</h3>
                     <table class="w-full" id="budget-table">
                         <thead>
-                            <tr class="">
-                                <th class="py-2 text-left text-[color:var(--muted)]">費用類別</th>
-                                <th class="py-2 text-right text-[color:var(--muted)]">費用 (JPY)</th>
-                                <th class="py-2 text-right text-[color:var(--muted)]">費用 (NTD)</th>
+                            <tr>
+                                <th class="py-2 text-left">費用類別</th>
+                                <th class="py-2 text-right">費用 (JPY)</th>
+                                <th class="py-2 text-right">費用 (NTD)</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
-                        <tfoot></tfoot>
+                        <tfoot></tbody>
                     </table>
-                    <p class="text-xs text-[color:var(--muted)] mt-2 text-right">*日圓與台幣換算匯率以0.21估算，實際費用可能變動。</p>
+                    <p class="text-xs mt-2 text-right" style="color: var(--muted-text-color);">*日圓與台幣換算匯率以0.21估算，實際費用可能變動。</p>
                 </div>
             </div>
         </section>
-
+        
         <!-- Travel Tips Section -->
-        <section id="travel-tips" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">初次旅遊注意事項</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">為您的第一次日本行提供實用建議，讓旅途更順暢無憂。</p>
+         <section id="travel-tips" class="scroll-mt-20">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">初次旅遊注意事項</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">為您的第一次日本行提供實用建議，讓旅途更順暢無憂。</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- 卡片略，保留原內容 -->
-                <div class="card">
-                    <h3 class="font-display text-lg font-bold mb-3">💳 行前準備：金融與證件篇</h3>
-                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
-                        <li><strong>聯絡信用卡公司：</strong>出發前務必致電您的信用卡銀行，告知他們您將有海外消費。</li>
-                        <li><strong>申辦高回饋信用卡：</strong>若常出國，可考慮申辦海外消費高現金回饋或免手續費的卡。</li>
-                        <li><strong>準備備用現金：</strong>建議隨身攜帶適量日圓現金與零錢包。</li>
-                        <li><strong>護照效期檢查：</strong>確認護照效期是否足夠，並備份電子影本。</li>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="content-card p-6 flex flex-col">
+                    <h3 class="font-display text-2xl font-bold mb-4"><i class="fas fa-credit-card mr-2" style="color: var(--accent-color);"></i>金融與證件篇</h3>
+                    <ul class="list-disc list-inside space-y-4">
+                        <li><strong>聯絡信用卡公司：</strong>出發前務必致電您的信用卡銀行，告知他們您將有海外消費，避免卡片被誤認為盜刷而被鎖卡。</li>
+                        <li><strong>申辦高回饋信用卡：</strong>若常出國，可考慮申辦一張海外消費高現金回饋或免手續費的信用卡，長期下來能省下不少錢。</li>
+                        <li><strong>準備備用現金：</strong>許多在地小餐館、市集或神社仍只收現金。建議隨身攜帶足夠的日圓現金，並準備一個零錢包。</li>
+                        <li><strong>護照效期檢查：</strong>確認所有同行者的護照有效期是否在半年以上。建議將護照、簽證等重要證件拍照或影印一份，與正本分開存放。</li>
                     </ul>
                 </div>
-
-                <div class="card">
-                    <h3 class="font-display text-lg font-bold mb-3">� 行前準備：數位與機場篇</h3>
-                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
-                        <li><strong>完成 Visit Japan Web：</strong>建議在出發前1-2天線上填寫並截圖保存。</li>
-                        <li><strong>註冊機場自動通關 (e-Gate)：</strong>可在出發當天於機場櫃檯辦理（視情況而定）。</li>
-                        <li><strong>安裝旅遊APP：</strong>Google Maps、Jorudan、Google 翻譯、Tabelog 等。</li>
+                <div class="content-card p-6 flex flex-col">
+                    <h3 class="font-display text-2xl font-bold mb-4"><i class="fas fa-mobile-alt mr-2" style="color: var(--accent-color);"></i>數位與機場篇</h3>
+                    <ul class="list-disc list-inside space-y-4">
+                        <li><strong>完成 Visit Japan Web：</strong>建議在出發前1-2天線上填寫並截圖保存QR Code，可以大幅加快您入境日本的速度。</li>
+                        <li><strong>註冊機場自動通關 (e-Gate)：</strong>若尚未申辦，可在出發當天提早到桃園機場的移民署櫃檯免費辦理，未來出入境台灣都能快速通關。</li>
+                        <li><strong>安裝旅遊APP：</strong>Google Maps (交通)、Google 翻譯 (翻譯)、Tabelog (美食)。</li>
                     </ul>
                 </div>
-
-                <div class="card">
-                    <h3 class="font-display text-lg font-bold mb-3">🌪️ 緊急應變篇</h3>
-                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
+                <div class="content-card p-6 flex flex-col">
+                    <h3 class="font-display text-2xl font-bold mb-4"><i class="fas fa-exclamation-triangle mr-2" style="color: var(--accent-color);"></i>緊急應變篇</h3>
+                    <ul class="list-disc list-inside space-y-4">
                         <li><strong>遇到颱風怎麼辦：</strong>注意交通公告，儲備糧食並保持聯繫。</li>
-                        <li><strong>旅遊不便險理賠：</strong>保留所有單據並向航空公司索取證明。</li>
+                        <li><strong>旅遊不便險理賠：</strong>保留所有單據並向航空公司索取「延誤/取消證明」。</li>
                     </ul>
                 </div>
-
-                <div class="card">
-                    <h3 class="font-display text-lg font-bold mb-3">👍 當地禮儀與實用技巧</h3>
-                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
+                <div class="content-card p-6 flex flex-col">
+                    <h3 class="font-display text-2xl font-bold mb-4"><i class="fas fa-hands-helping mr-2" style="color: var(--accent-color);"></i>當地禮儀與實用技巧</h3>
+                    <ul class="list-disc list-inside space-y-4">
                         <li><strong>電車上保持安靜：</strong>請將手機轉為靜音，避免高聲談話。</li>
-                        <li><strong>電扶梯站位：</strong>東京靠左站，關西靠右。</li>
-                        <li><strong>垃圾不落地：</strong>建議自備小垃圾袋，將垃圾帶回飯店再丟。</li>
+                        <li><strong>電扶梯靠左站：</strong>在東京，習慣靠左站立，將右側通道留給趕時間的人。</li>
+                        <li><strong>垃圾不落地：</strong>日本街頭垃圾桶很少，建議自備小垃圾袋，將垃圾帶回飯店或車站再丟。</li>
                         <li><strong>免稅規則：</strong>當日未稅滿 5,000 日圓可辦理退稅，需出示護照。</li>
                     </ul>
                 </div>
@@ -349,521 +334,191 @@
 
         <!-- Shopping List Section -->
         <section id="shopping-list" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">購物 & 伴手禮清單</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">確保不漏掉任何想買的物品或送給親友的伴手禮！</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">購物 & 伴手禮清單</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">確保不漏掉任何想買的物品或送給親友的伴手禮！</p>
             </div>
-            <div class="card interactive-checklist" id="shopping-checklist-container"></div>
+            <div class="content-card p-6 md:p-8 interactive-checklist" id="shopping-checklist-container"></div>
         </section>
 
         <!-- Checklist Section -->
         <section id="checklist" class="scroll-mt-20">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-3xl font-bold gradient-text">行前準備清單</h2>
-                <p class="mt-2 text-sm text-[color:var(--muted)]">確保萬事俱備，讓您的旅程順暢無憂。</p>
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold gradient-text">行前準備清單</h2>
+                <p class="mt-2 text-lg" style="color: var(--muted-text-color);">確保萬事俱備，讓您的旅程順暢無憂。</p>
             </div>
-            <div class="card interactive-checklist" id="pre-trip-checklist-container"></div>
+            <div class="content-card p-6 md:p-8 interactive-checklist" id="pre-trip-checklist-container"></div>
         </section>
 
     </main>
 
-    <footer class="py-8 mt-12 text-center">
-        <p class="text-sm text-[color:var(--muted)]">此互動儀表板根據您提供的旅遊報告生成。</p>
+    <footer class="text-center py-8 mt-12" style="background-color: var(--surface-color);">
+        <p style="color: var(--muted-text-color);">此互動儀表板根據您提供的旅遊報告生成。</p>
     </footer>
-
+    
     <script>
     // =================================================================================
     // 旅遊資料庫 (Single Source of Truth)
-    // 所有的行程、景點、預算等資料都集中在這裡。
-    // 未來要修改任何內容，只需要編輯這個 tripData 物件即可。
     // =================================================================================
     const tripData = {
-        // --- 預算資料 ---
         budget: {
-            costsJPY: {
-                accommodation: 80905,
-                transportation: 17000,
-                shopping: 71429,
-                tickets: 150,
-            },
-            costsNTD: {
-                flights: 33076,
-                prep: 2862, // (878 + 394 + 159) * 2
-            },
-            // 各餐廳的 "單人" 預估費用
-            mealCostsPerPerson: {
-                'curry_samurai': 2255,
-                'shirahige_choux': 999,
-                'village_vanguard_diner': 2999,
-                'ekuburi': 999,
-                'janka_dogenzaka': 4999,
-                'imahan_ginza': 15972,
-                'cocofulu': 1999,
-                'hakata_furyu': 1999,
-                'tonkatsu_ippe': 1999,
-                'conbini_dinner': 1000,
-                'conbini_breakfast': 800,
-                'food_truck': 1500,
-                'random_lunch': 1500,
-                'airport_dinner': 2000
-            },
+            costsJPY: { accommodation: 80905, transportation: 17000, shopping: 71429, tickets: 150 },
+            costsNTD: { flights: 33076, prep: 2862 },
+            mealCostsPerPerson: { 'curry_samurai': 2255, 'shirahige_choux': 999, 'village_vanguard_diner': 2999, 'ekuburi': 999, 'janka_dogenzaka': 4999, 'imahan_ginza': 15972, 'cocofulu': 1999, 'hakata_furyu': 1999, 'tonkatsu_ippe': 1999, 'conbini_dinner': 1000, 'conbini_breakfast': 800, 'food_truck': 1500, 'random_lunch': 1500, 'airport_dinner': 2000 },
             exchangeRate: 0.21
         },
-        // --- 每日行程 ---
         itinerary: [
-            { day: 1, date: "8/18 (一)", title: "抵達與下北澤初探", description: "抵達東京成田機場(NRT)後，搭乘 N'EX 至澀谷，再轉乘京王井之頭線抵達充滿文青與復古風情的下北澤。入住飯店後，準備開始您的《孤獨搖rock！》聖地巡禮！", events: [
-                { time: "08:00-09:30", emoji: "🛌", text: "起床梳洗，準備行李" },
-                { time: "09:30-11:30", emoji: "✈️", text: "抵達桃園國際機場" },
-                { time: "11:30-12:30", emoji: "📝", text: "準備登機手續並過關" },
-                { time: "12:30-14:15", emoji: "🍔", text: "過關後在機場進食" },
-                { time: "14:15-18:35", emoji: "🛫", text: "(日本時間 15:15-19:35) 桃園國際機場到東京成田機場" },
-                { time: "19:35-22:00", emoji: "🏨", text: "調整手機時間為日本時間，搭車前往下北澤芥末飯店" },
-                { time: "22:00-23:00", emoji: "🛒", text: "在附近超商買晚餐回飯店食用", mealKey: 'conbini_dinner' },
-                { time: "23:00-24:00", emoji: "🛀", text: "洗澡" },
-                { time: "00:00-08:00", emoji: "😴", text: "睡覺" },
-            ]},
-            { day: 2, date: "8/19 (二)", title: "下北澤深度探索", description: "今日將深度探索下北澤，進行《孤獨搖滾！》聖地巡禮，並品嚐當地特色美食。", events: [
-                { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗" },
-                { time: "09:00-10:00", emoji: "☕", text: "附近超商吃早餐", mealKey: 'conbini_breakfast' },
-                { time: "10:00-12:00", emoji: "🎸", text: "前往孤獨搖滾聖地Shelter Live House (STARRY原型)、🅿️ Times 下北澤第八停車場 (團體照拍攝地)" },
-                { time: "12:00-13:30", emoji: "🍛", text: "午餐 路地裏咖哩 侍 下北澤店 用餐", mealKey: 'curry_samurai' },
-                { time: "13:30-15:30", emoji: "🛍️", text: "探索下北澤一番街的獨特店鋪與古著店" },
-                { time: "16:00-17:00", emoji: "🍮", text: "白髭泡芙工房 吃龍貓泡芙", mealKey: 'shirahige_choux' },
-                { time: "17:00-18:00", emoji: "🚶", text: "在下北澤街道繼續閒逛" },
-                { time: "18:00-19:00", emoji: "🍔", text: "Village Vanguard Diner Shimokitazawa 用餐（已預訂）", mealKey: 'village_vanguard_diner' },
-                { time: "19:00-20:00", emoji: "🌃", text: "到下北澤夜市逛逛，看有沒有便宜衣服" },
-                { time: "20:00-22:00", emoji: "🚿", text: "回到飯店洗澡休息" },
-                { time: "22:00-23:00", emoji: "✅", text: "確認隔日行程並準備睡覺" },
-                { time: "23:00-07:00", emoji: "😴", text: "睡覺" },
-            ]},
-            { day: 3, date: "8/20 (三)", title: "澀谷、新宿一日遊 & 前進秋葉原", description: "前往新宿、澀谷逛逛吃美食，傍晚，搭乘JR線前往動漫與電子的聖地——秋葉原，並入住新飯店。", events: [
-                { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" },
-                { time: "08:00-08:30", emoji: "🏨", text: "準備退房離開飯店" },
-                { time: "08:30-9:30", emoji: "☕", text: "えくぶり 用餐", mealKey: 'ekuburi' },
-                { time: "9:30-10:20", emoji: "🚆", text: "從東北澤車站搭車到四谷站" },
-                { time: "10:20-12:00", emoji: "🪙", text: "前往Tokyo Bitcoin Base，與當地人交流產業與推薦的幣圈餐廳與景點" },
-                { time: "12:00-13:00", emoji: "🚚", text: "在Tokyo Bitcoin Base周遭的餐車用餐（可使用比特幣支付）", mealKey: 'food_truck' },
-                { time: "13:00-13:40", emoji: "🛍️", text: "前往ユニクロ 渋谷道玄坂店、涉谷GU" },
-                { time: "13:40-17:00", emoji: "👕", text: "在上述地點採買衣服（也要幫老媽買）" },
-                { time: "17:00-17:30", emoji: "🚶", text: "抵達吟味焼肉 じゃんか 道玄坂" },
-                { time: "17:30-19:00", emoji: "🍖", text: "在吟味焼肉 じゃんか 道玄坂用餐（已預訂）", mealKey: 'janka_dogenzaka' },
-                { time: "19:00-20:00", emoji: "🧳", text: "搭車前往東京中央大飯店 Check In" },
-                { time: "20:00-21:00", emoji: "🏪", text: "逛一下飯店周邊與超商購買零食與明天早餐" },
-                { time: "21:00-22:30", emoji: "🛀", text: "回到飯店洗澡休息" },
-                { time: "22:30-23:00", emoji: "✅", text: "確認明天行程" },
-                { time: "23:00-07:00", emoji: "😴", text: "睡覺" },
-            ]},
-            { day: 4, date: "8/21 (四)", title: "《MyGO!!!!!》聖地巡禮日", description: "今日是《MyGO!!!!!》的聖地巡禮日！前往飛鳥山公園、舊古河庭園，朝聖爽世與祥子戰鬥過，以及祥子成為人類的橋。", events: [
-                { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" },
-                { time: "08:00-09:30", emoji: "☕", text: "吃昨天準備的早餐" },
-                { time: "09:30-10:00", emoji: "🌳", text: "搭車前往飛鳥山公園" },
-                { time: "10:00-11:00", emoji: "🚶‍♀️", text: "朝聖爽世與祥子戰鬥過的地方，可搭鐵軌逛公園" },
-                { time: "11:00-11:20", emoji: "🏡", text: "走路前往舊古河庭園" },
-                { time: "11:20-12:20", emoji: "🌸", text: "在舊古河庭園朝聖祥子的家" },
-                { time: "12:00-12:10", emoji: "🚶", text: "到旁邊的ココフル" },
-                { time: "12:10-13:40", emoji: "🍔", text: "在ココフル 用餐", mealKey: 'cocofulu' },
-                { time: "13:40-14:30", emoji: "🚗", text: "搭車前往千登世步道橋，朝聖成為人類橋" },
-                { time: "14:30-15:30", emoji: "🤝", text: "在千登世步道橋周圍逛逛（可提早離開）" },
-                { time: "15:30-16:10", emoji: "🚆", text: "搭車回到東京中央大飯店" },
-                { time: "16:10-17:00", emoji: "😴", text: "在飯店休息" },
-                { time: "17:00-17:30", emoji: "🚶‍♀️", text: "搭車前往人形町今半 銀座店" },
-                { time: "17:30-19:30", emoji: "🍲", text: "在 人形町今半 銀座店 用餐（已預訂）", mealKey: 'imahan_ginza' },
-                { time: "19:30-20:30", emoji: "🛒", text: "回到飯店購買隔日早餐" },
-                { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" },
-                { time: "22:00-23:00", emoji: "✅", text: "確認明天行程" },
-                { time: "23:00-07:00", emoji: "😴", text: "睡覺" },
-            ]},
-            { day: 5, date: "8/22 (五)", title: "秋葉原動漫之旅", description: "今日將深度探索秋葉原的動漫文化，從電器、模型到各式周邊商品，讓您滿載而歸！", events: [
-                { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" },
-                { time: "08:00-10:00", emoji: "☕", text: "吃飯店的早餐或者附近超商", mealKey: 'conbini_breakfast' },
-                { time: "10:00-12:00", emoji: "📺", text: "前往秋葉原ラジオ會館" },
-                { time: "12:00-12:30", emoji: "🚶", text: "前往とんこつラーメン博多風龍 秋葉原総本店" },
-                { time: "12:30-14:00", emoji: "🍛", text: "在とんこつラーメン博多風龍 秋葉原総本店 用餐（無法預約）", mealKey: 'hakata_furyu' },
-                { time: "14:00-17:00", emoji: "🎮", text: "繼續逛秋葉原ラジオ會館、e-earphone 秋葉原店等店面（尋找SONY WH-1000XM5二手貨，5000台幣內）" },
-                { time: "17:00-18:00", emoji: "🛍️", text: "前往SEEKBASE、2k540手工藝品店逛逛" },
-                { time: "18:00-19:30", emoji: "🍜", text: "前往とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 用餐（無法預約）", mealKey: 'tonkatsu_ippe' },
-                { time: "19:30-20:30", emoji: "🛒", text: "先買明天早餐並回到飯店" },
-                { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" },
-                { time: "22:00-23:00", emoji: "✅", text: "確認明天行程與退房時間" },
-                { time: "23:00-08:00", emoji: "😴", text: "睡覺" },
-            ]},
-            { day: 6, date: "8/23 (六)", title: "伴手禮採買日&啟程返家", description: "整理行囊，享受在東京的最後一天。從秋葉原地區購買伴手禮，中午隨意吃喝，下午搭車到成田機場，準備搭晚上的班機平安返家。", events: [
-                { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗吃早餐" },
-                { time: "09:00-10:00", emoji: "🏨", text: "準備行李與確認重要物品並退房" },
-                { time: "10:00-10:30", emoji: "🚶‍♀️", text: "前往秋葉原ラジオ會館" },
-                { time: "10:30-12:30", emoji: "🛍️", text: "在會館一樓的ギフトショップ The AkiBa 購買伴手禮、在附近的全家購買蘋果乾兩包（子儀伴手禮）" },
-                { time: "12:30-14:30", emoji: "🍜", text: "隨便找一間店用餐", mealKey: 'random_lunch' },
-                { time: "14:30-16:30", emoji: "🚆", text: "搭車前往成田機場" },
-                { time: "16:30-17:30", emoji: "🛂", text: "在機場準備登機手續，並調整手機時間為台灣時間" },
-                { time: "17:30-19:30", emoji: "🍔", text: "用餐並等待搭接駁車", mealKey: 'airport_dinner' },
-                { time: "19:30-20:30", emoji: "🚌", text: "搭接駁車到登機處" },
-                { time: "20:30-23:35", emoji: "🛫", text: "(台灣時間 19:30-22:35) 揮手告別東京，搭機返回台灣" },
-                { time: "22:35-23:35", emoji: "🚕", text: "搭計程車前往租屋處" },
-            ]},
+            { day: 1, date: "8/18 (一)", title: "抵達與下北澤初探", description: "抵達東京成田機場(NRT)後，搭乘 N'EX 至澀谷，再轉乘京王井之頭線抵達充滿文青與復古風情的下北澤。入住飯店後，準備開始您的《孤獨搖rock！》聖地巡禮！", events: [ { time: "08:00-09:30", emoji: "🛌", text: "起床梳洗，準備行李" }, { time: "09:30-11:30", emoji: "✈️", text: "抵達桃園國際機場" }, { time: "11:30-12:30", emoji: "📝", text: "準備登機手續並過關" }, { time: "12:30-14:15", emoji: "🍔", text: "過關後在機場進食" }, { time: "14:15-18:35", emoji: "🛫", text: "(日本時間 15:15-19:35) 桃園國際機場到東京成田機場" }, { time: "19:35-22:00", emoji: "🏨", text: "調整手機時間為日本時間，搭車前往下北澤芥末飯店" }, { time: "22:00-23:00", emoji: "🛒", text: "在附近超商買晚餐回飯店食用", mealKey: 'conbini_dinner' }, { time: "23:00-24:00", emoji: "🛀", text: "洗澡" }, { time: "00:00-08:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 2, date: "8/19 (二)", title: "下北澤深度探索", description: "今日將深度探索下北澤，進行《孤獨搖滾！》聖地巡禮，並品嚐當地特色美食。", events: [ { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗" }, { time: "09:00-10:00", emoji: "☕", text: "附近超商吃早餐", mealKey: 'conbini_breakfast' }, { time: "10:00-12:00", emoji: "🎸", text: "前往孤獨搖滾聖地Shelter Live House (STARRY原型)、🅿️ Times 下北澤第八停車場 (團體照拍攝地)" }, { time: "12:00-13:30", emoji: "🍛", text: "午餐 路地裏咖哩 侍 下北澤店 用餐", mealKey: 'curry_samurai' }, { time: "13:30-15:30", emoji: "🛍️", text: "探索下北澤一番街的獨特店鋪與古著店" }, { time: "16:00-17:00", emoji: "🍮", text: "白髭泡芙工房 吃龍貓泡芙", mealKey: 'shirahige_choux' }, { time: "17:00-18:00", emoji: "🚶", text: "在下北澤街道繼續閒逛" }, { time: "18:00-19:00", emoji: "🍔", text: "Village Vanguard Diner Shimokitazawa 用餐（已預訂）", mealKey: 'village_vanguard_diner' }, { time: "19:00-20:00", emoji: "🌃", text: "到下北澤夜市逛逛，看有沒有便宜衣服" }, { time: "20:00-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認隔日行程並準備睡覺" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 3, date: "8/20 (三)", title: "澀谷、新宿一日遊 & 前進秋葉原", description: "前往新宿、澀谷逛逛吃美食，傍晚，搭乘JR線前往動漫與電子的聖地——秋葉原，並入住新飯店。", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-08:30", emoji: "🏨", text: "準備退房離開飯店" }, { time: "08:30-9:30", emoji: "☕", text: "えくぶり 用餐", mealKey: 'ekuburi' }, { time: "9:30-10:20", emoji: "🚆", text: "從東北澤車站搭車到四谷站" }, { time: "10:20-12:00", emoji: "🪙", text: "前往Tokyo Bitcoin Base，與當地人交流產業與推薦的幣圈餐廳與景點" }, { time: "12:00-13:00", emoji: "🚚", text: "在Tokyo Bitcoin Base周遭的餐車用餐（可使用比特幣支付）", mealKey: 'food_truck' }, { time: "13:00-13:40", emoji: "🛍️", text: "前往ユニクロ 渋谷道玄坂店、涉谷GU" }, { time: "13:40-17:00", emoji: "👕", text: "在上述地點採買衣服（也要幫老媽買）" }, { time: "17:00-17:30", emoji: "🚶", text: "抵達吟味焼肉 じゃんか 道玄坂" }, { time: "17:30-19:00", emoji: "🍖", text: "在吟味焼肉 じゃんか 道玄坂用餐（已預訂）", mealKey: 'janka_dogenzaka' }, { time: "19:00-20:00", emoji: "🧳", text: "搭車前往東京中央大飯店 Check In" }, { time: "20:00-21:00", emoji: "🏪", text: "逛一下飯店周邊與超商購買零食與明天早餐" }, { time: "21:00-22:30", emoji: "🛀", text: "回到飯店洗澡休息" }, { time: "22:30-23:00", emoji: "✅", text: "確認明天行程" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 4, date: "8/21 (四)", title: "《MyGO!!!!!》聖地巡禮日", description: "今日是《MyGO!!!!!》的聖地巡禮日！前往飛鳥山公園、舊古河庭園，朝聖爽世與祥子戰鬥過，以及祥子成為人類的橋。", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-09:30", emoji: "☕", text: "吃昨天準備的早餐" }, { time: "09:30-10:00", emoji: "🌳", text: "搭車前往飛鳥山公園" }, { time: "10:00-11:00", emoji: "🚶‍♀️", text: "朝聖爽世與祥子戰鬥過的地方，可搭鐵軌逛公園" }, { time: "11:00-11:20", emoji: "🏡", text: "走路前往舊古河庭園" }, { time: "11:20-12:20", emoji: "🌸", text: "在舊古河庭園朝聖祥子的家" }, { time: "12:00-12:10", emoji: "🚶", text: "到旁邊的ココフル" }, { time: "12:10-13:40", emoji: "🍔", text: "在ココフル 用餐", mealKey: 'cocofulu' }, { time: "13:40-14:30", emoji: "🚗", text: "搭車前往千登世步道橋，朝聖成為人類橋" }, { time: "14:30-15:30", emoji: "🤝", text: "在千登世步道橋周圍逛逛（可提早離開）" }, { time: "15:30-16:10", emoji: "🚆", text: "搭車回到東京中央大飯店" }, { time: "16:10-17:00", emoji: "😴", text: "在飯店休息" }, { time: "17:00-17:30", emoji: "🚶‍♀️", text: "搭車前往人形町今半 銀座店" }, { time: "17:30-19:30", emoji: "🍲", text: "在 人形町今半 銀座店 用餐（已預訂）", mealKey: 'imahan_ginza' }, { time: "19:30-20:30", emoji: "🛒", text: "回到飯店購買隔日早餐" }, { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認明天行程" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 5, date: "8/22 (五)", title: "秋葉原動漫之旅", description: "今日將深度探索秋葉原的動漫文化，從電器、模型到各式周邊商品，讓您滿載而歸！", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-10:00", emoji: "☕", text: "吃飯店的早餐或者附近超商", mealKey: 'conbini_breakfast' }, { time: "10:00-12:00", emoji: "📺", text: "前往秋葉原ラジオ會館" }, { time: "12:00-12:30", emoji: "🚶", text: "前往とんこつラーメン博多風龍 秋葉原総本店" }, { time: "12:30-14:00", emoji: "🍛", text: "在とんこつラーメン博多風龍 秋葉原総本店 用餐（無法預約）", mealKey: 'hakata_furyu' }, { time: "14:00-17:00", emoji: "🎮", text: "繼續逛秋葉原ラジオ會館、e-earphone 秋葉原店等店面（尋找SONY WH-1000XM5二手貨，5000台幣內）" }, { time: "17:00-18:00", emoji: "🛍️", text: "前往SEEKBASE、2k540手工藝品店逛逛" }, { time: "18:00-19:30", emoji: "🍜", text: "前往とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 用餐（無法預約）", mealKey: 'tonkatsu_ippe' }, { time: "19:30-20:30", emoji: "🛒", text: "先買明天早餐並回到飯店" }, { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認明天行程與退房時間" }, { time: "23:00-08:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 6, date: "8/23 (六)", title: "伴手禮採買日&啟程返家", description: "整理行囊，享受在東京的最後一天。從秋葉原地區購買伴手禮，中午隨意吃喝，下午搭車到成田機場，準備搭晚上的班機平安返家。", events: [ { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗吃早餐" }, { time: "09:00-10:00", emoji: "🏨", text: "準備行李與確認重要物品並退房" }, { time: "10:00-10:30", emoji: "🚶‍♀️", text: "前往秋葉原ラジオ會館" }, { time: "10:30-12:30", emoji: "🛍️", text: "在會館一樓的ギフトショップ The AkiBa 購買伴手禮、在附近的全家購買蘋果乾兩包（子儀伴手禮）" }, { time: "12:30-14:30", emoji: "🍜", text: "隨便找一間店用餐", mealKey: 'random_lunch' }, { time: "14:30-16:30", emoji: "🚆", text: "搭車前往成田機場" }, { time: "16:30-17:30", emoji: "🛂", text: "在機場準備登機手續，並調整手機時間為台灣時間" }, { time: "17:30-19:30", emoji: "🍔", text: "用餐並等待搭接駁車", mealKey: 'airport_dinner' }, { time: "19:30-20:30", emoji: "🚌", text: "搭接駁車到登機處" }, { time: "20:30-23:35", emoji: "🛫", text: "(台灣時間 19:30-22:35) 揮手告別東京，搭機返回台灣" }, { time: "22:35-23:35", emoji: "🚕", text: "搭計程車前往租屋處" }, ]},
         ],
-        // --- 景點與美食 ---
         attractions: [
-            { 
-                key: 'shimokita', 
-                name: '下北澤區域', 
-                places: [
-                    { key: 'hotel-mustard', name: '下北澤芥末飯店', emoji: '🏨', description: '位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。'},
-                    { key: 'shelter-live-house', name: 'Shelter Live House (STARRY原型)', emoji: '🎤', description: '東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。'},
-                    { key: 'times-parking', name: 'Times 下北澤第八停車場 (團體照拍攝地)', emoji: '🅿️', description: '因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。'},
-                    { key: 'curry-samurai', name: '路地裏咖哩 侍 下北澤店', emoji: '🍛', description: '下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。', details: [
-                        { label: '推薦料理', value: '招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。' },
-                        { label: '每人平均用餐價位', value: '￥1,320 - ￥2,255' },
-                        { label: '支付方式', value: '不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a>' }
-                    ]},
-                    { key: 'shirahige-choux', name: '白髭泡芙工房', emoji: '🍮', description: '宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。', details: [
-                        { label: '推薦料理', value: '龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。' },
-                        { label: '每人平均用餐價位', value: '￥999' },
-                        { label: '支付方式', value: '不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a>' }
-                    ]},
-                    { key: 'village-vanguard-diner', name: 'Village Vanguard Diner Shimokitazawa', emoji: '🍔', description: '由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。', details: [
-                        { label: '推薦料理', value: '多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。' },
-                        { label: '每人平均用餐價位', value: '午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。' },
-                        { label: '支付方式', value: '接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a>' }
-                    ]},
-                    { key: 'ekuburi', name: 'えくぶり', emoji: '☕', description: '這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。', details: [
-                        { label: '推薦料理', value: '日式早餐套餐、各式吐司、咖啡等。' },
-                        { label: '每人平均用餐價位', value: '￥999' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a>' }
-                    ]} 
-                ]
-            },
-            {
-                key: 'shibuya-shinjuku',
-                name: '澀谷/新宿區域',
-                places: [
-                    { key: 'uniqlo-shibuya', name: 'ユニクロ 渋谷道玄坂店', emoji: '👕', description: '位於澀谷的 Uniqlo 分店，提供最新款式的服飾，是採購基本款與潮流單品的好去處。'},
-                    { key: 'gu-shibuya', name: 'GU 渋谷店', emoji: '👖', description: 'Uniqlo 的姊妹品牌，以更親民的價格提供時尚潮流服飾，深受年輕人喜愛。'},
-                    { key: 'janka-dogenzaka', name: '吟味焼肉 じゃんか 道玄坂', emoji: '🍖', description: '澀谷知名的燒肉店，以提供高品質的肉品（特別是和牛）聞名，讓您能品嚐到入口即化的美味燒肉。', details: [
-                        { label: '推薦料理', value: '各部位的和牛燒肉、特選拼盤。' },
-                        { label: '每人平均用餐價位', value: '￥4,000－￥4,999' },
-                        { label: '支付方式', value: '可接受信用卡、不接受電子現金（西瓜卡等）、接受PayPay支付（QRCode）' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1303/A130301/13007287/" target="_blank">日本餐廳評論網站</a>' }
-                    ]},
-                    { key: 'tokyo-bitcoin-base', name: 'Tokyo Bitcoin Base', emoji: '🪙', description: '一個與加密貨幣、區塊鏈相關的實體空間或社群據點，吸引著對區塊鏈技術和文化感興趣的人士。'},
-                    { key: 'imahan-ginza', name: '人形町今半 銀座店', emoji: '🍲', description: '創業於明治28年的壽喜燒超級名店，以最頂級的和牛與秘傳的醬汁聞名。銀座店提供極致奢華的用餐體驗。', details: [
-                        { label: '推薦料理', value: '極上壽喜燒套餐。' },
-                        { label: '每人平均用餐價位', value: '￥15,000 - ￥25,000' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1301/A130101/13016566/" target="_blank">日本餐廳評論網站</a>' }
-                    ]}
-                ]
-            },
-            {
-                key: 'mygo-area',
-                name: 'MyGO!!!!!聖地',
-                places: [
-                    { key: 'asukayama-park', name: '飛鳥山公園', emoji: '🌸', description: '江戶時代起就是著名的賞櫻勝地，也是《MyGO!!!!!》動畫的聖地，可以尋找動畫中爽世與祥子「戰鬥」過的噴水池等景點。'},
-                    { key: 'kyu-furukawa-garden', name: '舊古河庭園', emoji: '🌹', description: '融合了日式庭園與西式洋館的獨特設計，是《MyGO!!!!!》動畫中祥子家的原型地。'},
-                    { key: 'chitose-bridge', name: '千登世步道橋', emoji: '🌉', description: '《MyGO!!!!!》動畫中，祥子邀請燈組成樂團，經典的「祥子成為人類的橋」，是粉絲必訪的朝聖地點。'},
-                    { key: 'cocofulu', name: 'ココフル', emoji: '☕', description: '位於飛鳥山公園附近的咖啡店或簡餐店，適合在遊覽公園後稍作休息，補充能量。', details: [
-                        { label: '推薦料理', value: '通常提供咖啡、輕食、或簡餐。' },
-                        { label: '每人平均用餐價位', value: '￥1,000－￥1,999' },
-                        { label: '支付方式', value: '可接受信用卡、可接受電子現金（西瓜卡等）' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1323/A132303/13202218/" target="_blank">日本餐廳評論網站</a>' }
-                    ]}
-                ]
-            },
-            {
-                key: 'akiba',
-                name: '秋葉原/人形町',
-                places: [
-                    { key: 'hotel-grand-central', name: '東京中央大飯店', emoji: '🏨', description: '位於交通樞紐，鄰近神田、秋葉原等地，是一家提供經典舒適住宿體驗的飯店，方便前往東京各個角落。'},
-                    { key: 'akiba-radio-hall', name: '秋葉原ラジオ會館', emoji: '🗼', description: '秋葉原的地標性建築之一，是動漫、模型、卡牌和偶像周邊商品的聚集地，動漫迷的天堂。'},
-                    { key: 'hakata-furyu', name: 'とんこつラーメン博多風龍 秋葉原総本店', emoji: '🍜', description: '提供正宗的博多豚骨拉麵，以其濃郁的湯頭和可以免費續加兩次的細麵為特色，CP值極高。', details: [
-                        { label: '推薦料理', value: '豚骨拉麵，可自選麵的硬度。' },
-                        { label: '每人平均用餐價位', value: '￥1,000－￥1,999' },
-                        { label: '支付方式', value: '不接受信用卡、可接受電子現金（西瓜卡等）、可接受PayPay支付（QRCode）' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1311/A131101/13096267/" target="_blank">日本餐廳評論網站</a>' }
-                    ]},
-                    { key: 'e-earphone', name: 'e-earphone 秋葉原店', emoji: '🎧', description: '耳機與音響發燒友的聖地，提供極為豐富的各品牌耳機、播放器試聽與選購服務。'},
-                    { key: 'tonkatsu-ippe', name: 'とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店', emoji: '🐷', description: '以高品質的炸豬排和獨特的咖哩醬聞名，提供酥脆多汁的炸豬排與濃郁咖哩的完美結合。', details: [
-                        { label: '推薦料理', value: '招牌炸豬排咖哩飯。' },
-                        { label: '每人平均用餐價位', value: '￥1,000－￥1,999' },
-                        { label: '支付方式', value: '只接受日圓現金' },
-                        { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1311/A131101/13259701/" target="_blank">日本餐廳評論網站</a>' }
-                    ]},
-                    { key: 'the-akiba', name: 'ギフトショップ The AkiBa', emoji: '🎁', description: '位於秋葉原ラジオ會館一樓的伴手禮店，販售各種與秋葉原、動漫文化相關的特色商品與點心。'}
-                ]
-            }
+            { key: 'shimokita', name: '下北澤區域', places: [ { key: 'hotel-mustard', name: '下北澤芥末飯店', emoji: '🏨', description: '位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。'}, { key: 'shelter-live-house', name: 'Shelter Live House (STARRY原型)', emoji: '🎤', description: '東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。'}, { key: 'times-parking', name: 'Times 下北澤第八停車場 (團體照拍攝地)', emoji: '🅿️', description: '因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。'}, { key: 'curry-samurai', name: '路地裏咖哩 侍 下北澤店', emoji: '🍛', description: '下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。', details: [ { label: '推薦料理', value: '招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。' }, { label: '每人平均用餐價位', value: '￥1,320 - ￥2,255' }, { label: '支付方式', value: '不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'shirahige-choux', name: '白髭泡芙工房', emoji: '🍮', description: '宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。', details: [ { label: '推薦料理', value: '龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。' }, { label: '每人平均用餐價位', value: '￥999' }, { label: '支付方式', value: '不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'village-vanguard-diner', name: 'Village Vanguard Diner Shimokitazawa', emoji: '🍔', description: '由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。', details: [ { label: '推薦料理', value: '多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。' }, { label: '每人平均用餐價位', value: '午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。' }, { label: '支付方式', value: '接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'ekuburi', name: 'えくぶり', emoji: '☕', description: '這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。', details: [ { label: '推薦料理', value: '日式早餐套餐、各式吐司、咖啡等。' }, { label: '每人平均用餐價位', value: '￥999' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a>' } ]} ]},
+            { key: 'shibuya-shinjuku', name: '澀谷/新宿區域', places: [ { key: 'uniqlo-shibuya', name: 'ユニクロ 渋谷道玄坂店', emoji: '👕', description: '位於澀谷的 Uniqlo 分店，提供最新款式的服飾，是採購基本款與潮流單品的好去處。'}, { key: 'gu-shibuya', name: 'GU 渋谷店', emoji: '👖', description: 'Uniqlo 的姊妹品牌，以更親民的價格提供時尚潮流服飾，深受年輕人喜愛。'}, { key: 'janka-dogenzaka', name: '吟味焼肉 じゃんか 道玄坂', emoji: '🍖', description: '澀谷知名的燒肉店，以提供高品質的肉品（特別是和牛）聞名，讓您能品嚐到入口即化的美味燒肉。', details: [ { label: '推薦料理', value: '各部位的和牛燒肉、特選拼盤。' }, { label: '每人平均用餐價位', value: '￥4,000－￥4,999' }, { label: '支付方式', value: '可接受信用卡、不接受電子現金（西瓜卡等）、接受PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1303/A130301/13007287/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'tokyo-bitcoin-base', name: 'Tokyo Bitcoin Base', emoji: '🪙', description: '一個與加密貨幣、區塊鏈相關的實體空間或社群據點，吸引著對區塊鏈技術和文化感興趣的人士。'}, { key: 'imahan-ginza', name: '人形町今半 銀座店', emoji: '🍲', description: '創業於明治28年的壽喜燒超級名店，以最頂級的和牛與秘傳的醬汁聞名。銀座店提供極致奢華的用餐體驗。', details: [ { label: '推薦料理', value: '極上壽喜燒套餐。' }, { label: '每人平均用餐價位', value: '￥15,000 - ￥25,000' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1301/A130101/13016566/" target="_blank">日本餐廳評論網站</a>' } ]} ]},
+            { key: 'mygo-area', name: 'MyGO!!!!!聖地', places: [ { key: 'asukayama-park', name: '飛鳥山公園', emoji: '🌸', description: '江戶時代起就是著名的賞櫻勝地，也是《MyGO!!!!!》動畫的聖地，可以尋找動畫中爽世與祥子「戰鬥」過的噴水池等景點。'}, { key: 'kyu-furukawa-garden', name: '舊古河庭園', emoji: '🌹', description: '融合了日式庭園與西式洋館的獨特設計，是《MyGO!!!!!》動畫中祥子家的原型地。'}, { key: 'chitose-bridge', name: '千登世步道橋', emoji: '🌉', description: '《MyGO!!!!!》動畫中，祥子邀請燈組成樂團，經典的「祥子成為人類的橋」，是粉絲必訪的朝聖地點。'}, { key: 'cocofulu', name: 'ココフル', emoji: '☕', description: '位於飛鳥山公園附近的咖啡店或簡餐店，適合在遊覽公園後稍作休息，補充能量。', details: [ { label: '推薦料理', value: '通常提供咖啡、輕食、或簡餐。' }, { label: '每人平均用餐價位', value: '￥1,000－￥1,999' }, { label: '支付方式', value: '可接受信用卡、可接受電子現金（西瓜卡等）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1323/A132303/13202218/" target="_blank">日本餐廳評論網站</a>' } ]} ]},
+            { key: 'akiba', name: '秋葉原/人形町', places: [ { key: 'hotel-grand-central', name: '東京中央大飯店', emoji: '🏨', description: '位於交通樞紐，鄰近神田、秋葉原等地，是一家提供經典舒適住宿體驗的飯店，方便前往東京各個角落。'}, { key: 'akiba-radio-hall', name: '秋葉原ラジオ會館', emoji: '🗼', description: '秋葉原的地標性建築之一，是動漫、模型、卡牌和偶像周邊商品的聚集地，動漫迷的天堂。'}, { key: 'hakata-furyu', name: 'とんこつラーメン博多風龍 秋葉原総本店', emoji: '🍜', description: '提供正宗的博多豚骨拉麵，以其濃郁的湯頭和可以免費續加兩次的細麵為特色，CP值極高。', details: [ { label: '推薦料理', value: '豚骨拉麵，可自選麵的硬度。' }, { label: '每人平均用餐價位', value: '￥1,000－￥1,999' }, { label: '支付方式', value: '不接受信用卡、可接受電子現金（西瓜卡等）、可接受PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1311/A131101/13096267/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'e-earphone', name: 'e-earphone 秋葉原店', emoji: '🎧', description: '耳機與音響發燒友的聖地，提供極為豐富的各品牌耳機、播放器試聽與選購服務。'}, { key: 'tonkatsu-ippe', name: 'とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店', emoji: '🐷', description: '以高品質的炸豬排和獨特的咖哩醬聞名，提供酥脆多汁的炸豬排與濃郁咖哩的完美結合。', details: [ { label: '推薦料理', value: '招牌炸豬排咖哩飯。' }, { label: '每人平均用餐價位', value: '￥1,000－￥1,999' }, { label: '支付方式', value: '只接受日圓現金' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1311/A131101/13259701/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'the-akiba', name: 'ギフトショップ The AkiBa', emoji: '🎁', description: '位於秋葉原ラジオ會館一樓的伴手禮店，販售各種與秋葉原、動漫文化相關的特色商品與點心。'} ]}
         ],
-        // --- 交通資訊 ---
         transportation: [
-            { key: 'nrt-to-mustard', title: '機場 → 下北澤', from: '成田機場 (NRT)', to: '下北澤芥末飯店', emoji: '✈️➡️🏨', method: '成田特快 (N\\'EX) + 京王井之頭線', details: '搭乘N\\'EX至澀谷站，再轉乘京王井之頭線至下北澤站。', cost: '約 ¥3,250' },
-            { key: 'yotsuya-to-shibuya', title: '四谷 → 澀谷', from: 'Tokyo Bitcoin Base', to: '澀谷車站', emoji: '🪙➡️🛍️', method: 'JR中央・總武線 + JR山手線', details: '從四谷站搭乘JR線至新宿站，轉乘山手線至澀谷站。', cost: '約 ¥170' },
-            { key: 'shibuya-to-kanda', title: '澀谷 → 神田', from: '澀谷車站', to: '神田車站 (飯店)', emoji: '🛍️➡️🏨', method: '東京Metro銀座線', details: '從澀谷站搭乘銀座線直達神田站。', cost: '約 ¥200' },
-            { key: 'kanda-to-oji', title: '神田 → 王子', from: '神田車站', to: '王子車站 (飛鳥山公園)', emoji: '🏨➡️🌳', method: 'JR京濱東北線', details: '從神田站搭乘京濱東北線直達王子站。', cost: '約 ¥170' },
-            { key: 'kanda-to-ginza', title: '神田 → 銀座', from: '神田車站', to: '銀座車站 (人形町今半)', emoji: '🏨➡️🍲', method: '東京Metro銀座線', details: '從神田站搭乘銀座線直達銀座站。', cost: '約 ¥170' },
-            { key: 'grand-to-nrt', title: '飯店 → 機場', from: '東京中央大飯店', to: '成田機場 (NRT)', emoji: '🏨➡️✈️', method: 'JR山手線 + 京成Skyliner', details: '從神田站搭JR至日暮里或上野，再轉乘Skyliner。', cost: '約 ¥2,720' },
+            { key: 'nrt-to-mustard', title: '機場 → 下北澤', from: '成田機場 (NRT)', to: '下北澤芥末飯店', emoji: '✈️➡️🏨', method: '成田特快 (N\'EX) + 京王井之頭線', details: '搭乘N\'EX至澀谷站，再轉乘京王井之頭線至下北澤站。', cost: '約 ¥3,250' }, { key: 'yotsuya-to-shibuya', title: '四谷 → 澀谷', from: 'Tokyo Bitcoin Base', to: '澀谷車站', emoji: '🪙➡️🛍️', method: 'JR中央・總武線 + JR山手線', details: '從四谷站搭乘JR線至新宿站，轉乘山手線至澀谷站。', cost: '約 ¥170' }, { key: 'shibuya-to-kanda', title: '澀谷 → 神田', from: '澀谷車站', to: '神田車站 (飯店)', emoji: '🛍️➡️🏨', method: '東京Metro銀座線', details: '從澀谷站搭乘銀座線直達神田站。', cost: '約 ¥200' }, { key: 'kanda-to-oji', title: '神田 → 王子', from: '神田車站', to: '王子車站 (飛鳥山公園)', emoji: '🏨➡️🌳', method: 'JR京濱東北線', details: '從神田站搭乘京濱東北線直達王子站。', cost: '約 ¥170' }, { key: 'kanda-to-ginza', title: '神田 → 銀座', from: '神田車站', to: '銀座車站 (人形町今半)', emoji: '🏨➡️🍲', method: '東京Metro銀座線', details: '從神田站搭乘銀座線直達銀座站。', cost: '約 ¥170' }, { key: 'grand-to-nrt', title: '飯店 → 機場', from: '東京中央大飯店', to: '成田機場 (NRT)', emoji: '🏨➡️✈️', method: 'JR山手線 + 京成Skyliner', details: '從神田站搭JR至日暮里或上野，再轉乘Skyliner。', cost: '約 ¥2,720' },
         ],
-        // --- 購物與伴手禮清單 ---
         shoppingList: [
-            {
-                title: '購物清單 🛍️',
-                items: [
-                    { id: 'shop_3c', text: '3C用品：藍芽耳機、手機殼與行動電源' },
-                    { id: 'shop_clothes', text: '服飾：可在UN、GQ等便宜地方購買 👕' }
-                ]
-            },
-            {
-                title: '伴手禮 🎁',
-                items: [
-                    { id: 'souvenir_top', text: '女性上衣（UN、GQ）👚' },
-                    { id: 'souvenir_earphone', text: 'SONY WH-1000XM5二手貨，5000台幣內🎧' },
-                    { id: 'souvenir_apple', text: '全家蘋果乾兩包 🍎' },
-                    { id: 'souvenir_akiba', text: '秋葉原百貨商店的伴手禮（家人、同事）🛍️' }
-                ]
-            }
+            { title: '購物清單 🛍️', items: [ { id: 'shop_3c', text: '3C用品：藍芽耳機、手機殼與行動電源' }, { id: 'shop_clothes', text: '服飾：可在UN、GQ等便宜地方購買 👕' } ] },
+            { title: '伴手禮 🎁', items: [ { id: 'souvenir_top', text: '女性上衣（UN、GQ）👚' }, { id: 'souvenir_earphone', text: 'SONY WH-1000XM5二手貨，5000台幣內🎧' }, { id: 'souvenir_apple', text: '全家蘋果乾兩包 🍎' }, { id: 'souvenir_akiba', text: '秋葉原百貨商店的伴手禮（家人、同事）🛍️' } ] }
         ],
-        // --- 行前準備清單 ---
         preTripChecklist: [
-            {
-                title: '行前準備',
-                items: [
-                    { id: 'pre_covid_vaccine', text: '新冠疫苗施打 💉' },
-                    { id: 'pre_tigerair_email', text: '虎航行程確認單（在Email裡）📧' },
-                    { id: 'pre_visit_japan_web', text: 'Visit Japan Web入境手續 ✅' },
-                    { id: 'pre_travel_insurance', text: '旅平險 🛡️' },
-                    { id: 'pre_credit_card', text: '申辦日本旅遊信用卡 💳' },
-                    { id: 'pre_japan_sim', text: '日本網卡 📶' },
-                    { id: 'pre_common_meds', text: '常用藥物購買 🩹', subItems: ['胃藥', '止痛藥', '透氣膠帶', 'OK蹦', '鼻噴劑'] },
-                    { id: 'pre_rest_order', text: '餐廳事前預約 🫕' },
-                    { id: 'pre_earplugs_soft', text: '醫用軟耳塞 👂' }
-                ]
-            },
-            {
-                title: '旅遊必備品',
-                items: [
-                    { id: 'item_passport', text: '護照 🛂' },
-                    { id: 'item_phone', text: '手機 📱' },
-                    { id: 'item_charger', text: '充電器 🔌' },
-                    { id: 'item_power_bank', text: '行動電源 🔋' },
-                    { id: 'item_universal_adapter', text: '萬國充 🌍' },
-                    { id: 'item_wallet', text: '錢包（信用卡）💰' },
-                    { id: 'item_yen', text: '日圓（ATM領取或兌換）💴' },
-                    { id: 'item_clothes', text: '換洗衣物（三天份）👕👖' },
-                    { id: 'item_motion_sickness_med', text: '暈車藥吃了沒 💊' },
-                    { id: 'item_room_key', text: '房門鑰匙 🔑' },
-                    { id: 'item_water_bottle', text: '水瓶（一點點水）💧' },
-                    { id: 'item_waist_bag', text: '腰包 👝' },
-                    { id: 'item_backpack', text: '方便攜帶的後背包 🎒' },
-                    { id: 'item_earplugs_dental', text: '醫用耳塞與牙間刷 🦷' },
-                    { id: 'item_twd_cash', text: '台幣現鈔（5000以內以備不時之需）💵' }
-                ]
-            }
+            { title: '行前準備', items: [ { id: 'pre_covid_vaccine', text: '新冠疫苗施打 💉' }, { id: 'pre_tigerair_email', text: '虎航行程確認單（在Email裡）📧' }, { id: 'pre_visit_japan_web', text: 'Visit Japan Web入境手續 ✅' }, { id: 'pre_travel_insurance', text: '旅平險 🛡️' }, { id: 'pre_credit_card', text: '申辦日本旅遊信用卡 💳' }, { id: 'pre_japan_sim', text: '日本網卡 📶' }, { id: 'pre_common_meds', text: '常用藥物購買 🩹', subItems: ['胃藥', '止痛藥', '透氣膠帶', 'OK蹦', '鼻噴劑'] }, { id: 'pre_rest_order', text: '餐廳事前預約 🫕' }, { id: 'pre_earplugs_soft', text: '醫用軟耳塞 👂' } ] },
+            { title: '旅遊必備品', items: [ { id: 'item_passport', text: '護照 🛂' }, { id: 'item_phone', text: '手機 📱' }, { id: 'item_charger', text: '充電器 🔌' }, { id: 'item_power_bank', text: '行動電源 🔋' }, { id: 'item_universal_adapter', text: '萬國充 🌍' }, { id: 'item_wallet', text: '錢包（信用卡）💰' }, { id: 'item_yen', text: '日圓（ATM領取或兌換）💴' }, { id: 'item_clothes', text: '換洗衣物（三天份）👕👖' }, { id: 'item_motion_sickness_med', text: '暈車藥吃了沒 💊' }, { id: 'item_room_key', text: '房門鑰匙 🔑' }, { id: 'item_water_bottle', text: '水瓶（一點點水）💧' }, { id: 'item_waist_bag', text: '腰包 👝' }, { id: 'item_backpack', text: '方便攜帶的後背包 🎒' }, { id: 'item_earplugs_dental', text: '醫用耳塞與牙間刷 🦷' }, { id: 'item_twd_cash', text: '台幣現鈔（5000以內以備不時之需）💵' } ] }
         ]
     };
-
 
     // =================================================================================
     // 應用程式初始化與主要功能
     // =================================================================================
     document.addEventListener('DOMContentLoaded', () => {
         
-        // --- 全域變數 ---
         let calculatedBudget = {};
 
-        // --- 渲染函式 (將資料轉換為HTML) ---
-
-        /**
-         * 渲染每日行程
-         */
         function renderItinerary() {
             const container = document.getElementById('itinerary-container');
             if (!container) return;
-
             const tabs = tripData.itinerary.map((day, index) => `
-                <button 
-                    data-tab-toggle="itinerary-day${day.day}" 
-                    class="tab-btn itinerary-tab-btn px-4 py-2 rounded-full font-semibold bg-gray-200 hover:bg-pink-500 hover:text-white ${index === 0 ? 'active' : ''}">
+                <button data-tab-toggle="itinerary-day${day.day}" class="tab-btn px-4 py-2 rounded-full font-semibold ${index === 0 ? 'active' : ''}">
                     Day ${day.day} (${day.date})
-                </button>
-            `).join('');
-
+                </button>`).join('');
             const content = tripData.itinerary.map((day, index) => `
                 <div id="itinerary-day${day.day}" class="tab-pane prose-custom ${index === 0 ? 'active' : ''}">
                     <h3 class="font-display text-2xl mb-4">${day.title}</h3>
-                    <p>${day.description}</p>
-                    <ul class="list-none space-y-2">
+                    <p style="color: var(--muted-text-color);">${day.description}</p>
+                    <ul class="list-none space-y-2 mt-4">
                         ${day.events.map(event => `<li>${event.emoji} ${event.time} ${event.text}</li>`).join('')}
                     </ul>
-                </div>
-            `).join('');
-
+                </div>`).join('');
             container.innerHTML = `
                 <div class="tabs flex flex-wrap justify-center gap-2 mb-8" data-tab-group="itinerary">
                     ${tabs}
                 </div>
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg relative">
+                <div class="content-card p-6 md:p-8 relative">
                     ${content}
-                </div>
-            `;
+                </div>`;
         }
 
-        /**
-         * 渲染景點與美食介紹 (包含巢狀頁籤)
-         */
         function renderAttractions() {
             const container = document.getElementById('attractions-container');
             if (!container) return;
-
             const categoryTabs = tripData.attractions.map((category, index) => `
-                <button 
-                    data-tab-toggle="category-${category.key}"
-                    class="tab-btn category-tab-btn px-4 py-2 rounded-full font-semibold bg-gray-200 hover:bg-indigo-600 hover:text-white ${index === 0 ? 'active' : ''}">
+                <button data-tab-toggle="category-${category.key}" class="tab-btn px-4 py-2 rounded-full font-semibold ${index === 0 ? 'active' : ''}">
                     ${category.name}
-                </button>
-            `).join('');
-
+                </button>`).join('');
             const categoryContent = tripData.attractions.map((category, index) => {
                 const attractionTabs = category.places.map((place, placeIndex) => `
-                    <button 
-                        data-tab-toggle="attraction-${place.key}"
-                        class="tab-btn attraction-tab-btn px-3 py-1.5 text-sm font-medium bg-gray-100 hover:bg-purple-700 hover:text-white ${placeIndex === 0 ? 'active' : ''}">
+                    <button data-tab-toggle="attraction-${place.key}" class="tab-btn px-3 py-1.5 text-sm font-medium ${placeIndex === 0 ? 'active' : ''}">
                         ${place.name}
-                    </button>
-                `).join('');
-
+                    </button>`).join('');
                 const attractionContent = category.places.map((place, placeIndex) => `
                     <div id="attraction-${place.key}" class="tab-pane ${placeIndex === 0 ? 'active' : ''}">
-                        <h4 class="font-display text-xl">${place.name} ${place.emoji}</h4>
-                        <p>${place.description}</p>
-                        ${place.details ? `
-                            <ul class="list-none space-y-1 mt-4 text-sm">
-                                ${place.details.map(detail => `<li><strong>${detail.label}:</strong> ${detail.value}</li>`).join('')}
-                            </ul>
-                        ` : ''}
-                    </div>
-                `).join('');
-
+                        <h4 class="font-display text-xl">${place.emoji} ${place.name}</h4>
+                        <p class="mt-2" style="color: var(--muted-text-color);">${place.description}</p>
+                        ${place.details ? `<ul class="list-none space-y-2 mt-4 text-sm">
+                                ${place.details.map(detail => `<li><strong style="color:var(--accent-color);">${detail.label}:</strong> ${detail.value}</li>`).join('')}
+                            </ul>` : ''}
+                    </div>`).join('');
                 return `
                     <div id="category-${category.key}" class="tab-pane ${index === 0 ? 'active' : ''}">
-                        <div class="tabs flex flex-wrap justify-start items-center gap-2" data-tab-group="attraction-${category.key}">
+                        <div class="tabs flex flex-wrap justify-start items-center gap-2 mb-6" data-tab-group="attraction-${category.key}">
                             ${attractionTabs}
                         </div>
-                        <div class="mt-8 relative">
+                        <div class="relative">
                             ${attractionContent}
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }).join('');
-
             container.innerHTML = `
                 <div class="tabs flex flex-wrap justify-center gap-2 mb-8" data-tab-group="category">
                     ${categoryTabs}
                 </div>
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg prose-custom relative">
+                <div class="content-card p-6 md:p-8 prose-custom relative">
                     ${categoryContent}
-                </div>
-            `;
+                </div>`;
         }
         
-        /**
-         * 渲染交通資訊
-         */
         function renderTransportation() {
             const container = document.getElementById('transportation-container');
             if (!container) return;
-
             const tabs = tripData.transportation.map((route, index) => `
-                <button 
-                    data-tab-toggle="transportation-${route.key}" 
-                    class="tab-btn transportation-tab-btn px-4 py-2 rounded-full font-semibold bg-gray-200 hover:bg-purple-700 hover:text-white ${index === 0 ? 'active' : ''}">
+                <button data-tab-toggle="transportation-${route.key}" class="tab-btn px-4 py-2 rounded-full font-semibold ${index === 0 ? 'active' : ''}">
                     ${route.title}
-                </button>
-            `).join('');
-
+                </button>`).join('');
             const content = tripData.transportation.map((route, index) => `
                 <div id="transportation-${route.key}" class="tab-pane prose-custom ${index === 0 ? 'active' : ''}">
                     <h4 class="font-display text-xl">${route.from} → ${route.to} ${route.emoji}</h4>
-                    <ul class="list-none space-y-1 mt-4">
+                    <ul class="list-none space-y-2 mt-4">
                         <li><strong>方式:</strong> ${route.method}</li>
                         <li><strong>說明:</strong> ${route.details}</li>
                         <li><strong>預估費用 (每人):</strong> ${route.cost}</li>
                     </ul>
-                </div>
-            `).join('');
-
+                </div>`).join('');
             container.innerHTML = `
                 <div class="tabs flex flex-wrap justify-center gap-2 mb-8" data-tab-group="transportation">
                     ${tabs}
                 </div>
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg relative">
+                <div class="content-card p-6 md:p-8 relative">
                     ${content}
-                </div>
-            `;
+                </div>`;
         }
 
-        /**
-         * 渲染可勾選的清單 (通用函式)
-         * @param {string} containerId - 容器的ID
-         * @param {Array} data - 清單資料
-         * @param {string} storageKey - 用於localStorage的鍵
-         */
         function renderChecklist(containerId, data, storageKey) {
             const container = document.getElementById(containerId);
             if (!container) return;
-
             const html = data.map(category => `
                 <h3 class="font-display text-2xl mb-4 ${data.indexOf(category) > 0 ? 'mt-8' : ''}">${category.title}</h3>
                 <ul class="list-none space-y-3">
                     ${category.items.map(item => `
                         <li>
-                            <input type="checkbox" id="${item.id}" data-storage-key="${storageKey}">
-                            <label for="${item.id}" class="ml-2 cursor-pointer transition-colors">${item.text}</label>
-                            ${item.subItems ? `
-                                <ol class="list-decimal list-inside ml-8 mt-2 text-sm text-gray-600">
+                            <input type="checkbox" id="${item.id}" data-storage-key="${storageKey}" class="w-5 h-5 align-middle rounded">
+                            <label for="${item.id}" class="ml-3 cursor-pointer transition-colors">${item.text}</label>
+                            ${item.subItems ? `<ol class="prose-custom list-decimal list-inside ml-8 mt-2 text-sm" style="color: var(--muted-text-color);">
                                     ${item.subItems.map(sub => `<li>${sub}</li>`).join('')}
-                                </ol>
-                            ` : ''}
-                        </li>
-                    `).join('')}
-                </ul>
-            `).join('');
-            
+                                </ol>` : ''}
+                        </li>`).join('')}
+                </ul>`).join('');
             container.innerHTML = html;
         }
 
-        /**
-         * 計算總餐飲費用
-         * @returns {number} 兩人總餐飲費用 (JPY)
-         */
-        function calculateTotalFoodCost() {
-            let totalFoodCostPerPerson = 0;
-            tripData.itinerary.forEach(day => {
-                day.events.forEach(event => {
-                    if (event.mealKey && tripData.budget.mealCostsPerPerson[event.mealKey]) {
-                        totalFoodCostPerPerson += tripData.budget.mealCostsPerPerson[event.mealKey];
-                    }
-                });
-            });
-            return totalFoodCostPerPerson * 2;
-        }
-
-        /**
-         * 計算並渲染預算相關內容
-         */
         function calculateAndRenderBudget() {
-            const foodCost = calculateTotalFoodCost();
+            const foodCost = tripData.itinerary.flatMap(d => d.events).filter(e => e.mealKey).reduce((sum, e) => sum + tripData.budget.mealCostsPerPerson[e.mealKey], 0) * 2;
             const costsJPY = { ...tripData.budget.costsJPY, food: foodCost };
             const costsNTD = tripData.budget.costsNTD;
             const rate = tripData.budget.exchangeRate;
-
             const totalJPY = Object.values(costsJPY).reduce((sum, cost) => sum + cost, 0);
-            const jpyInNtd = totalJPY * rate;
-            const totalNTD = jpyInNtd + Object.values(costsNTD).reduce((sum, cost) => sum + cost, 0);
+            const totalNTD = (totalJPY * rate) + Object.values(costsNTD).reduce((sum, cost) => sum + cost, 0);
             
             document.getElementById('total-cost-display').textContent = `NTD ${Math.round(totalNTD).toLocaleString()}`;
 
             const tableBody = document.querySelector('#budget-table tbody');
             const tableFoot = document.querySelector('#budget-table tfoot');
-            
             const budgetItems = [
                 { label: '機票', jpy: null, ntd: costsNTD.flights },
                 { label: '住宿', jpy: costsJPY.accommodation, ntd: costsJPY.accommodation * rate },
@@ -873,23 +528,18 @@
                 { label: '景點門票', jpy: costsJPY.tickets, ntd: costsJPY.tickets * rate },
                 { label: '行前準備', jpy: null, ntd: costsNTD.prep },
             ];
-
             tableBody.innerHTML = budgetItems.map(item => `
                 <tr>
                     <td class="py-2 font-medium">${item.label}</td>
                     <td class="py-2 text-right">${item.jpy ? `¥${item.jpy.toLocaleString()}` : '-'}</td>
                     <td class="py-2 text-right">${Math.round(item.ntd).toLocaleString()}</td>
-                </tr>
-            `).join('');
-
+                </tr>`).join('');
             tableFoot.innerHTML = `
-                <tr class="border-t-2 border-gray-300 font-bold">
+                <tr class="font-bold">
                     <td class="py-2">總計</td>
                     <td class="py-2 text-right">¥${totalJPY.toLocaleString()}</td>
                     <td class="py-2 text-right">NTD ${Math.round(totalNTD).toLocaleString()}</td>
-                </tr>
-            `;
-
+                </tr>`;
             calculatedBudget = {
                 labels: budgetItems.map(i => i.label),
                 valuesNTD: budgetItems.map(i => i.ntd),
@@ -898,18 +548,14 @@
             };
         }
 
-        /**
-         * 設定圖表
-         */
         function setupCharts() {
-            Chart.defaults.color = 'rgba(55, 65, 81, 0.8)';
+            Chart.defaults.color = 'var(--text-color)';
             Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
             const commonTooltip = {
-                backgroundColor: 'rgba(30, 30, 30, 0.9)', titleFont: { size: 14, weight: 'bold' },
+                backgroundColor: 'rgba(0, 0, 0, 0.8)', titleFont: { size: 14, weight: 'bold' },
                 bodyFont: { size: 12 }, padding: 10, cornerRadius: 6,
-                borderColor: 'rgba(236, 72, 153, 0.5)', borderWidth: 1
+                borderColor: 'var(--accent-color)', borderWidth: 1
             };
-
             const donutCtx = document.getElementById('budgetDonutChart')?.getContext('2d');
             if (donutCtx) {
                 new Chart(donutCtx, {
@@ -918,26 +564,19 @@
                         labels: calculatedBudget.labels,
                         datasets: [{
                             data: calculatedBudget.valuesNTD,
-                            backgroundColor: ['#4f46e5', '#ec4899', '#f59e0b', '#10b981', '#6366f1', '#8b5cf6', '#d946ef'],
-                            borderColor: '#f8f9fa', borderWidth: 4,
+                            backgroundColor: ['#4FB286', '#3E9C72', '#2c7a5b', '#1b5844', '#86efac', '#a7f3d0', '#6ee7b7'],
+                            borderColor: 'var(--surface-color)', borderWidth: 4,
                         }]
                     },
                     options: {
                         responsive: true, maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { padding: 20, color: '#343a40' } },
-                            tooltip: { ...commonTooltip, callbacks: {
-                                label: function(context) {
-                                    const label = context.label || '';
-                                    const value = context.raw;
-                                    return `${label}: NT$${Math.round(value).toLocaleString()}`;
-                                }
-                            }}
+                            legend: { position: 'bottom', labels: { padding: 20, color: 'var(--muted-text-color)' } },
+                            tooltip: { ...commonTooltip, callbacks: { label: c => `${c.label}: NT$${Math.round(c.raw).toLocaleString()}` } }
                         }
                     }
                 });
             }
-
             const barCtx = document.getElementById('expenseBarChart')?.getContext('2d');
             if(barCtx) {
                 new Chart(barCtx, {
@@ -946,168 +585,110 @@
                         labels: calculatedBudget.jpyLabels, 
                         datasets: [{
                             label: '預估花費 (JPY)', data: calculatedBudget.jpyValues,
-                            backgroundColor: 'rgba(79, 70, 229, 0.6)', borderColor: 'rgba(79, 70, 229, 1)', borderWidth: 1
+                            backgroundColor: 'rgba(79, 178, 134, 0.6)', borderColor: 'rgba(79, 178, 134, 1)', borderWidth: 1
                         }]
                     },
                     options: {
                         indexAxis: 'y', responsive: true, maintainAspectRatio: false,
                         scales: {
-                            x: { grid: { color: '#e5e7eb' }, ticks: { color: '#4b5563' } },
-                            y: { grid: { display: false }, ticks: { color: '#4b5563' } }
+                            x: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'var(--text-color)' } },
+                            y: { grid: { display: false }, ticks: { color: 'var(--text-color)' } }
                         },
                         plugins: { 
                             legend: { display: false }, 
-                            tooltip: { ...commonTooltip, callbacks: {
-                                label: function(context) {
-                                    const valueJPY = context.raw;
-                                    const valueNTD = Math.round(valueJPY * tripData.budget.exchangeRate);
-                                    return `日圓: ¥${valueJPY.toLocaleString()} | 新台幣: NT$${valueNTD.toLocaleString()}`;
-                                }
-                            }}
+                            tooltip: { ...commonTooltip, callbacks: { label: c => `日圓: ¥${c.raw.toLocaleString()} | 新台幣: NT$${Math.round(c.raw * tripData.budget.exchangeRate).toLocaleString()}` } }
                         }
                     }
                 });
             }
         }
 
-        /**
-         * 通用頁籤系統設定 (使用事件委派)
-         */
         function setupTabSystems() {
             document.body.addEventListener('click', (e) => {
                 const toggleButton = e.target.closest('[data-tab-toggle]');
                 if (!toggleButton) return;
-
                 const tabGroupContainer = toggleButton.closest('[data-tab-group]');
                 if (!tabGroupContainer) return;
-
-                // 處理按鈕的 active 狀態
                 tabGroupContainer.querySelectorAll('[data-tab-toggle]').forEach(btn => btn.classList.remove('active'));
                 toggleButton.classList.add('active');
-
-                // 處理內容的 active 狀態
                 const targetId = toggleButton.dataset.tabToggle;
-                const contentContainer = tabGroupContainer.nextElementSibling; // 假設內容容器緊跟在按鈕容器之後
-                
+                const contentContainer = tabGroupContainer.nextElementSibling;
                 if (contentContainer) {
-                    contentContainer.querySelectorAll('.tab-pane').forEach(pane => {
-                        pane.classList.remove('active');
-                    });
+                    contentContainer.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
                     const targetPane = contentContainer.querySelector(`#${targetId}`);
                     if (targetPane) {
-                        // 使用 setTimeout 確保 display: block 生效後再改變 opacity
                         setTimeout(() => targetPane.classList.add('active'), 10);
                     }
                 }
             });
         }
 
-        /**
-         * 設定互動式清單 (使用事件委派與 localStorage)
-         */
         function setupChecklists() {
-            const checklists = document.querySelectorAll('.interactive-checklist');
-            checklists.forEach(container => {
+            document.querySelectorAll('.interactive-checklist').forEach(container => {
                 const storageKey = container.id;
-                // 讀取儲存的狀態
                 try {
                     const savedState = JSON.parse(localStorage.getItem(storageKey)) || {};
                     container.querySelectorAll('input[type="checkbox"]').forEach(input => {
-                        if (savedState[input.id]) {
-                            input.checked = true;
-                        }
+                        if (savedState[input.id]) input.checked = true;
                     });
-                } catch (e) {
-                    console.error("Failed to parse checklist state from localStorage:", e);
-                }
-
-                // 監聽變更
+                } catch (e) { console.error("讀取清單狀態失敗:", e); }
                 container.addEventListener('change', e => {
                     if (e.target.type === 'checkbox') {
                         try {
                             const currentState = JSON.parse(localStorage.getItem(storageKey)) || {};
                             currentState[e.target.id] = e.target.checked;
                             localStorage.setItem(storageKey, JSON.stringify(currentState));
-                        } catch (err) {
-                            console.error("Failed to save checklist state to localStorage:", err);
-                        }
+                        } catch (err) { console.error("儲存清單狀態失敗:", err); }
                     }
                 });
             });
         }
 
-        /**
-         * 設定滾動監聽，以高亮顯示目前的導覽連結
-         */
         function setupScrollSpy() {
             const sections = document.querySelectorAll('main section');
             const navLinks = document.querySelectorAll('#desktop-nav a');
             const mobileNav = document.getElementById('mobile-nav');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
                         navLinks.forEach(link => {
-                            link.classList.toggle('text-pink-500', link.getAttribute('href') === `#${id}`);
-                            link.classList.toggle('text-gray-600', link.getAttribute('href') !== `#${id}`);
+                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
                         });
                         if (mobileNav.value !== `#${id}`) {
                             mobileNav.value = `#${id}`;
                         }
                     }
                 });
-            }, { rootMargin: "-50% 0px -50% 0px" }); // 當區塊位於視窗中央時觸發
-
+            }, { rootMargin: "-30% 0px -70% 0px" });
             sections.forEach(section => observer.observe(section));
         }
         
-        /**
-         * 如果在旅行期間，自動切換到當天的行程
-         */
         function highlightCurrentDay() {
             const tripStartDate = new Date('2025-08-18T00:00:00');
             const today = new Date();
-            // 為了測試，可以手動設定日期
-            // const today = new Date('2025-08-20T12:00:00'); 
-            
-            // 計算日本時間 (UTC+9)
             const nowUtc = today.getTime() + (today.getTimezoneOffset() * 60000);
             const japanTime = new Date(nowUtc + (3600000 * 9));
-
             const diffTime = japanTime - tripStartDate;
             if (diffTime < 0) return; 
-            
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-
             if (diffDays >= 1 && diffDays <= tripData.itinerary.length) {
-                const currentDayTab = document.querySelector(`.itinerary-tab-btn[data-tab-toggle="itinerary-day${diffDays}"]`);
-                if (currentDayTab) {
-                    // 使用 .click() 來觸發我們設定的事件委派邏輯
-                    currentDayTab.click(); 
-                }
+                const currentDayTab = document.querySelector(`.tab-btn[data-tab-toggle="itinerary-day${diffDays}"]`);
+                if (currentDayTab) currentDayTab.click(); 
             }
         }
 
-        // --- 🚀 執行所有初始化函式 ---
         function initializeApp() {
-            // 1. 渲染靜態內容
             renderItinerary();
             renderAttractions();
             renderTransportation();
             renderChecklist('shopping-checklist-container', tripData.shoppingList, 'shopping-checklist-state');
             renderChecklist('pre-trip-checklist-container', tripData.preTripChecklist, 'pre-trip-checklist-state');
-
-            // 2. 計算與渲染預算
             calculateAndRenderBudget();
-
-            // 3. 設定互動功能
             setupCharts();
             setupTabSystems();
             setupChecklists();
             setupScrollSpy();
-
-            // 4. 特殊功能
             highlightCurrentDay();
         }
 
