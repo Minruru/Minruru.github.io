@@ -1,124 +1,201 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>第一次去東京就上手｜朝聖MyGO、孤獨搖滾旅遊手冊</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 字型：Inter（標題） + Noto Sans TC（中文） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
+        /* =========================
+           柔和現代主題變數
+           ========================= */
+        :root{
+            --bg: #FBFBFC;           /* 全局背景 */
+            --surface: #FFFFFF;      /* 卡片背景 */
+            --muted: #6B7280;        /* 文字次要色 */
+            --text: #111827;         /* 主要文字 */
+            --glass: rgba(255,255,255,0.6); /* header 玻璃背景 */
+            --primary-500: #8B5CF6;  /* 主色 (柔和紫) */
+            --primary-300: #DCCBFF;  /* 主色淺 */
+            --accent-500: #FF9AA2;   /* 點綴粉 */
+            --shadow: 0 8px 24px rgba(15,23,42,0.06);
+            --soft-shadow: 0 6px 18px rgba(15,23,42,0.05);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+        }
+
         /* --- 基本樣式 --- */
+        html,body { height:100%; }
         body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
+            margin:0;
+            font-family: 'Noto Sans TC', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background-color: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.6;
         }
+
         .font-display {
-            font-family: 'Noto Sans TC', sans-serif;
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
             font-weight: 700;
+            letter-spacing: -0.01em;
         }
+
+        /* 柔和漸層標題 (subtle) */
         .gradient-text {
-            background: linear-gradient(45deg, #4f46e5, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: linear-gradient(90deg, rgba(139,92,246,0.95), rgba(255,154,162,0.9));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
-        main > section {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
+
+        main > section { padding-top:3.5rem; padding-bottom:3.5rem; }
+        @media (min-width:768px){ main > section { padding-top:5rem; padding-bottom:5rem; } }
+
+        /* --- Header --- */
+        header.sticky {
+            backdrop-filter: blur(6px);
+            background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.75));
+            box-shadow: var(--soft-shadow);
+            border-bottom: 1px solid rgba(15,23,42,0.04);
         }
-        @media (min-width: 768px) {
-            main > section {
-                padding-top: 6rem;
-                padding-bottom: 6rem;
-            }
+
+        /* --- 封面 --- */
+        .hero {
+            min-height: 88vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:2rem;
+            color: #ffffff;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
-        /* --- 頁籤按鈕樣式 --- */
-        .tab-btn {
-            transition: all 0.3s ease;
+        .hero .overlay {
+            position:absolute; inset:0;
+            background: linear-gradient(180deg, rgba(11,9,23,0.35), rgba(11,9,23,0.45));
+            mix-blend-mode: multiply;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
-        .itinerary-tab-btn.active {
-            background-color: #ec4899;
-            color: white;
-            box-shadow: 0 4px 14px 0 rgb(236 72 153 / 30%);
+        .hero h1 { font-size:2.75rem; line-height:1.05; }
+        @media(min-width:768px){ .hero h1 { font-size:4rem; } }
+
+        /* --- 卡片用樣式 --- */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding:1.25rem;
         }
-        .category-tab-btn.active {
-            background-color: #4f46e5;
-            color: white;
-            box-shadow: 0 4px 14px 0 rgb(79 70 229 / 30%);
+        .card-sm { border-radius: var(--radius-md); padding:1rem; box-shadow: var(--soft-shadow); }
+
+        /* --- 按鈕 --- */
+        .btn {
+            display:inline-flex; align-items:center; justify-content:center;
+            padding:0.6rem 1.1rem; border-radius:999px; font-weight:600;
+            transition: transform .18s ease, box-shadow .18s ease;
+            box-shadow: 0 6px 18px rgba(139,92,246,0.08);
         }
-        .attraction-tab-btn.active, .transportation-tab-btn.active {
-            background-color: #6d28d9;
-            color: white;
-            box-shadow: 0 4px 14px 0 rgb(109 40 217 / 30%);
+        .btn-primary {
+            background: linear-gradient(90deg,var(--primary-500), #C084FC);
+            color:white;
         }
-        /* --- 頁籤內容過渡效果 --- */
-        .tab-pane {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(139,92,246,0.12); }
+
+        /* --- 分類頁籤 --- */
+        .tabs [data-tab-toggle]{
+            border-radius: 999px;
+            padding:0.5rem .9rem;
+            background: rgba(15,23,42,0.04);
+            color:var(--muted);
+            border: 1px solid rgba(15,23,42,0.03);
+            transition: all .22s ease;
+            box-shadow: none;
         }
-        .tab-pane.active {
-            display: block;
-            opacity: 1;
+        .tabs [data-tab-toggle]:hover{ transform: translateY(-4px); color: var(--text); }
+
+        .itinerary-tab-btn.active,
+        .category-tab-btn.active,
+        .attraction-tab-btn.active,
+        .transportation-tab-btn.active {
+            background: linear-gradient(90deg,var(--primary-300), #F2E6FF);
+            color: var(--text);
+            box-shadow: 0 8px 20px rgba(139,92,246,0.08);
+            border: none;
         }
-        /* --- 互動式清單 --- */
+
+        /* --- tab 內容過渡 --- */
+        .tab-pane { display:none; opacity:0; transform: translateY(6px); transition: opacity .32s ease, transform .32s ease; }
+        .tab-pane.active { display:block; opacity:1; transform: translateY(0); }
+
+        /* --- 互動勾選清單 --- */
+        .interactive-checklist input[type="checkbox"]{
+            width:18px; height:18px; vertical-align:middle; accent-color: var(--primary-500);
+            border-radius:4px;
+        }
         .interactive-checklist input:checked + label {
             text-decoration: line-through;
-            color: #6b7280;
+            color: #9CA3AF;
         }
-        .interactive-checklist input:checked + label::before {
-            background-color: #ec4899;
-            border-color: #ec4899;
-        }
-        /* --- 其他組件 --- */
+        .interactive-checklist label { cursor:pointer; margin-left:0.6rem; }
+
+        /* --- 連結樣式 --- */
         .tabelog-link {
-            color: #c026d3 !important;
-            font-weight: 500;
+            color: var(--accent-500) !important;
+            font-weight:600;
             text-decoration: underline;
         }
-        .tabelog-link:hover {
-            color: #ec4899 !important;
-        }
-        .prose-custom ol {
-            list-style-type: decimal;
-            padding-left: 1.5rem;
-        }
-        .prose-custom ol li {
-            margin-bottom: 0.5rem;
-        }
+        .tabelog-link:hover { color: var(--primary-500) !important; text-decoration:none; }
+
+        /* --- 表格 --- */
+        table#budget-table th, table#budget-table td { border-bottom: none; padding:0.6rem 0; }
+        table#budget-table thead tr { border-bottom: 1px solid rgba(15,23,42,0.05); }
+        table#budget-table tfoot tr { border-top: 2px solid rgba(15,23,42,0.06); }
+
+        /* --- 細部微調 --- */
+        .prose-custom ol { padding-left:1.35rem; }
+        .prose-custom li { margin-bottom:0.45rem; color: var(--muted); }
+
+        footer { background: transparent; color: var(--muted); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-[color:var(--bg)] text-[color:var(--text)]">
 
     <!-- Cover Page -->
-    <div class="h-screen bg-cover bg-center flex flex-col justify-center items-center text-white text-center p-4" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop');">
-        <h1 class="font-display text-5xl md:text-7xl font-bold drop-shadow-lg">第一次去東京就上手</h1>
-        <p class="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">您的專屬動漫聖地與美食探險之旅</p>
-        <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'});" class="mt-8 px-8 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105">
+    <div class="hero relative bg-cover bg-center flex flex-col justify-center items-center text-white text-center p-6" style="background-image: url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2070&auto=format&fit=crop');">
+        <div class="overlay" aria-hidden="true"></div>
+        <h1 class="font-display text-4xl md:text-6xl font-bold drop-shadow-lg">第一次去東京就上手</h1>
+        <p class="mt-4 text-base md:text-lg max-w-2xl drop-shadow-sm">您的專屬動漫聖地與美食探險之旅</p>
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior: 'smooth'});" class="mt-8 btn btn-primary">
             開始探索
         </button>
     </div>
 
     <!-- Sticky Header -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-md">
+    <header class="sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="font-display text-2xl font-bold gradient-text">東京動漫聖地巡禮</div>
-            <div id="desktop-nav" class="hidden lg:flex items-center space-x-6">
-                <a href="#overview" class="text-gray-600 hover:text-pink-500 transition">總覽</a>
-                <a href="#itinerary" class="text-gray-600 hover:text-pink-500 transition">每日行程</a>
-                <a href="#attractions" class="text-gray-600 hover:text-pink-500 transition">景點美食</a>
-                <a href="#transportation" class="text-gray-600 hover:text-pink-500 transition">交通資訊</a>
-                <a href="#budget" class="text-gray-600 hover:text-pink-500 transition">預算分析</a>
-                <a href="#travel-tips" class="text-gray-600 hover:text-pink-500 transition">旅遊注意事項</a>
-                <a href="#shopping-list" class="text-gray-600 hover:text-pink-500 transition">購物清單</a>
-                <a href="#checklist" class="text-gray-600 hover:text-pink-500 transition">行前準備</a>
+            <div class="font-display text-xl font-bold gradient-text">東京動漫聖地巡禮</div>
+            <div id="desktop-nav" class="hidden lg:flex items-center space-x-5">
+                <a href="#overview" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">總覽</a>
+                <a href="#itinerary" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">每日行程</a>
+                <a href="#attractions" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">景點美食</a>
+                <a href="#transportation" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">交通資訊</a>
+                <a href="#budget" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">預算分析</a>
+                <a href="#travel-tips" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">旅遊注意事項</a>
+                <a href="#shopping-list" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">購物清單</a>
+                <a href="#checklist" class="text-sm text-[color:var(--muted)] hover:text-[color:var(--accent-500)] transition">行前準備</a>
             </div>
             <div class="lg:hidden">
-                <select id="mobile-nav" class="border border-gray-300 rounded-md p-2" onchange="document.querySelector(this.value).scrollIntoView({behavior: 'smooth'});">
+                <select id="mobile-nav" class="border border-gray-200 rounded-md p-2" onchange="document.querySelector(this.value).scrollIntoView({behavior: 'smooth'});">
                     <option value="#overview">總覽</option>
                     <option value="#itinerary">每日行程</option>
                     <option value="#attractions">景點美食</option>
@@ -136,30 +213,30 @@
 
         <!-- Overview Section -->
         <section id="overview" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">行程總覽</h2>
-                <p class="mt-2 text-lg text-gray-600">一目了然您的東京之旅核心資訊：費用、時間與目的地。</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">行程總覽</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">一目了然您的東京之旅核心資訊：費用、時間與目的地。</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="card text-center">
                     <span class="text-4xl">💰</span>
-                    <h3 class="mt-2 text-lg font-semibold text-gray-500">預估總費用 (2人)</h3>
-                    <p id="total-cost-display" class="text-3xl font-bold text-indigo-600"></p>
+                    <h3 class="mt-2 text-sm font-semibold text-[color:var(--muted)]">預估總費用 (2人)</h3>
+                    <p id="total-cost-display" class="text-2xl font-bold text-[color:var(--primary-500)]"></p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                <div class="card text-center">
                     <span class="text-4xl">🗓️</span>
-                    <h3 class="mt-2 text-lg font-semibold text-gray-500">旅行期間</h3>
-                    <p class="text-3xl font-bold text-indigo-600">6天5夜</p>
+                    <h3 class="mt-2 text-sm font-semibold text-[color:var(--muted)]">旅行期間</h3>
+                    <p class="text-2xl font-bold text-[color:var(--primary-500)]">6天5夜</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                <div class="card text-center">
                     <span class="text-4xl">📍</span>
-                    <h3 class="mt-2 text-lg font-semibold text-gray-500">核心目的地</h3>
-                    <p class="text-2xl font-bold text-indigo-600">下北澤/澀谷/秋葉原</p>
+                    <h3 class="mt-2 text-sm font-semibold text-[color:var(--muted)]">核心目的地</h3>
+                    <p class="text-xl font-bold text-[color:var(--primary-500)]">下北澤 / 澀谷 / 秋葉原</p>
                 </div>
             </div>
-            <div class="bg-white p-6 rounded-xl shadow-lg">
-                <h3 class="font-display text-2xl font-bold text-center mb-6">預算費用分佈</h3>
-                <div class="chart-container h-80 mx-auto" style="max-width: 400px;">
+            <div class="card">
+                <h3 class="font-display text-xl font-bold text-center mb-4">預算費用分佈</h3>
+                <div class="chart-container h-72 mx-auto" style="max-width:520px;">
                     <canvas id="budgetDonutChart"></canvas>
                 </div>
             </div>
@@ -167,163 +244,133 @@
 
         <!-- Itinerary Section -->
         <section id="itinerary" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">每日行程規劃</h2>
-                <p class="mt-2 text-lg text-gray-600">點擊下方日期，探索每一天的詳細活動與動漫聖地巡禮！</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">每日行程規劃</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">點擊下方日期，探索每一天的詳細活動與動漫聖地巡禮！</p>
             </div>
-            <!-- 每日行程的頁籤和內容將由JS動態生成 -->
             <div id="itinerary-container"></div>
         </section>
 
         <!-- Attractions Section -->
         <section id="attractions" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">景點、美食介紹</h2>
-                <p class="mt-2 text-lg text-gray-600">深入了解行程中各個地點的特色與推薦資訊。</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">景點、美食介紹</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">深入了解行程中各個地點的特色與推薦資訊。</p>
             </div>
-            <!-- 景點美食的頁籤和內容將由JS動態生成 -->
             <div id="attractions-container"></div>
         </section>
 
         <!-- Transportation Section -->
         <section id="transportation" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">交通資訊</h2>
-                <p class="mt-2 text-lg text-gray-600">各主要景點與餐廳之間的移動方式與交通費用概覽。</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">交通資訊</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">各主要景點與餐廳之間的移動方式與交通費用概覽。</p>
             </div>
-             <!-- 交通資訊的頁籤和內容將由JS動態生成 -->
             <div id="transportation-container"></div>
         </section>
 
         <!-- Budget Section -->
         <section id="budget" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">預算分析</h2>
-                <p class="mt-2 text-lg text-gray-600">深入了解各項開銷的細節，有效控管您的旅行預算。</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">預算分析</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">深入了解各項開銷的細節，有效控管您的旅行預算。</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="font-display text-2xl font-bold text-center mb-6">各項費用比較 (JPY)</h3>
-                    <div class="chart-container h-96">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="font-display text-xl font-bold text-center mb-4">各項費用比較 (JPY)</h3>
+                    <div class="chart-container h-80">
                         <canvas id="expenseBarChart"></canvas>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg">
-                    <h3 class="font-display text-2xl font-bold text-center mb-6">費用明細表 (2人)</h3>
+                <div class="card">
+                    <h3 class="font-display text-xl font-bold text-center mb-4">費用明細表 (2人)</h3>
                     <table class="w-full" id="budget-table">
                         <thead>
-                            <tr class="border-b-2 border-gray-200">
-                                <th class="py-2 text-left">費用類別</th>
-                                <th class="py-2 text-right">費用 (JPY)</th>
-                                <th class="py-2 text-right">費用 (NTD)</th>
+                            <tr class="">
+                                <th class="py-2 text-left text-[color:var(--muted)]">費用類別</th>
+                                <th class="py-2 text-right text-[color:var(--muted)]">費用 (JPY)</th>
+                                <th class="py-2 text-right text-[color:var(--muted)]">費用 (NTD)</th>
                             </tr>
                         </thead>
-                        <tbody><!-- 由JS動態生成 --></tbody>
-                        <tfoot><!-- 由JS動態生成 --></tfoot>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
                     </table>
-                    <p class="text-xs text-gray-500 mt-2 text-right">*日圓與台幣換算匯率以0.21估算，實際費用可能變動。</p>
+                    <p class="text-xs text-[color:var(--muted)] mt-2 text-right">*日圓與台幣換算匯率以0.21估算，實際費用可能變動。</p>
                 </div>
             </div>
         </section>
-        
+
         <!-- Travel Tips Section -->
- <section id="travel-tips" class="scroll-mt-20">
-    <div class="text-center mb-16">
-        <h2 class="font-display text-4xl font-bold gradient-text">初次旅遊注意事項</h2>
-        <p class="mt-2 text-lg text-gray-600">為您的第一次日本行提供實用建議，讓旅途更順暢無憂。</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- 金融與證件篇 -->
-        <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
-            <h3 class="font-display text-2xl font-bold mb-4">💳 行前準備：金融與證件篇</h3>
-            <ul class="list-disc list-inside space-y-4 text-gray-700">
-                <li><strong>聯絡信用卡公司：</strong>出發前務必致電您的信用卡銀行，告知他們您將有海外消費，避免卡片被誤認為盜刷而被鎖卡。同時，也可以詢問海外刷卡手續費與回饋。</li>
-                <li><strong>申辦高回饋信用卡：</strong>若常出國，可考慮申辦一張海外消費高現金回饋（通常需 >1.5% 才划算）或免手續費的信用卡，長期下來能省下不少錢。</li>
-                <li><strong>準備備用現金：</strong>雖然大城市刷卡方便，但許多在地小餐館、市集或神社的御守販售處仍只收現金。建議隨身攜帶足夠的日圓現金，並準備一個零錢包，因為日本的硬幣面額很大。</li>
-                <li><strong>護照效期檢查：</strong>確認所有同行者的護照有效期是否在半年以上。建議將護照、簽證等重要證件拍照或影印一份，與正本分開存放。</li>
-            </ul>
-        </div>
-
-        <!-- 數位與機場篇 -->
-        <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
-            <h3 class="font-display text-2xl font-bold mb-4">� 行前準備：數位與機場篇</h3>
-            <ul class="list-disc list-inside space-y-4 text-gray-700">
-                <li><strong>完成 Visit Japan Web：</strong>建議在出發前1-2天線上填寫。它會整合您的入境審查和海關申報，產生兩個QR Code。截圖保存下來，可以大幅加快您入境日本的速度。</li>
-                <li><strong>註冊機場自動通關 (e-Gate)：</strong>若您尚未申辦，可在出發當天提早到桃園機場的移民署櫃檯免費辦理（通常在報到櫃檯附近）。只需攜帶護照和另一張有照片的證件（如身分證），幾分鐘即可完成，未來出入境台灣都能快速通關。</li>
-                <li>
-                    <strong>安裝旅遊APP：</strong>
-                    <ul class="list-none space-y-2 mt-2 ml-4">
-                        <li><strong>交通：</strong>Google Maps 或 Japan Transit Planner (Jorudan)。</li>
-                        <li><strong>翻譯：</strong>Google 翻譯 (善用語音和相機翻譯)。</li>
-                        <li><strong>美食：</strong>Tabelog (食べログ)，日本最具公信力的美食評論網。</li>
+        <section id="travel-tips" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">初次旅遊注意事項</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">為您的第一次日本行提供實用建議，讓旅途更順暢無憂。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 卡片略，保留原內容 -->
+                <div class="card">
+                    <h3 class="font-display text-lg font-bold mb-3">💳 行前準備：金融與證件篇</h3>
+                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
+                        <li><strong>聯絡信用卡公司：</strong>出發前務必致電您的信用卡銀行，告知他們您將有海外消費。</li>
+                        <li><strong>申辦高回饋信用卡：</strong>若常出國，可考慮申辦海外消費高現金回饋或免手續費的卡。</li>
+                        <li><strong>準備備用現金：</strong>建議隨身攜帶適量日圓現金與零錢包。</li>
+                        <li><strong>護照效期檢查：</strong>確認護照效期是否足夠，並備份電子影本。</li>
                     </ul>
-                </li>
-            </ul>
-        </div>
+                </div>
 
-        <!-- 緊急應變篇 -->
-        <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
-            <h3 class="font-display text-2xl font-bold mb-4">🌪️ 緊急應變篇</h3>
-            <ul class="list-disc list-inside space-y-4 text-gray-700">
-                <li>
-                    <strong>遇到颱風怎麼辦：</strong>
-                    <ul class="list-none space-y-2 mt-2 ml-4">
-                        <li><strong>注意交通：</strong>颱風期間，JR、地鐵、新幹線等大眾運輸可能會延誤或停駛。請密切關注交通營運商的官方網站或APP。</li>
-                        <li><strong>儲備糧食：</strong>若預計颱風會登陸，可提早到超商或超市購買一些飲水和乾糧，以防店家暫停營業。</li>
-                        <li><strong>保持聯繫：</strong>確保手機電力充足，並告知在台灣的親友您的狀況。</li>
+                <div class="card">
+                    <h3 class="font-display text-lg font-bold mb-3">� 行前準備：數位與機場篇</h3>
+                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
+                        <li><strong>完成 Visit Japan Web：</strong>建議在出發前1-2天線上填寫並截圖保存。</li>
+                        <li><strong>註冊機場自動通關 (e-Gate)：</strong>可在出發當天於機場櫃檯辦理（視情況而定）。</li>
+                        <li><strong>安裝旅遊APP：</strong>Google Maps、Jorudan、Google 翻譯、Tabelog 等。</li>
                     </ul>
-                </li>
-                <li>
-                    <strong>旅遊不便險理賠：</strong>
-                     <ul class="list-none space-y-2 mt-2 ml-4">
-                        <li><strong>班機延誤/取消：</strong>務必向航空公司索取「延誤/取消證明」。</li>
-                        <li><strong>保留所有單據：</strong>因延誤而產生的額外花費（如住宿、交通、餐飲）的收據或發票，皆需妥善保留作為理賠依據。</li>
-                        <li><strong>了解理賠範圍：</strong>出發前仔細閱讀您的保險條款，了解理賠項目與金額上限。</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+                </div>
 
-        <!-- 當地禮儀與實用技巧 -->
-        <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col">
-            <h3 class="font-display text-2xl font-bold mb-4">👍 當地禮儀與實用技巧</h3>
-            <ul class="list-disc list-inside space-y-4 text-gray-700">
-                <li><strong>電車上保持安靜：</strong>請將手機轉為靜音，避免講電話或高聲談話。</li>
-                <li><strong>電扶梯靠左站：</strong>在東京，習慣靠左站立，將右側通道留給趕時間的人。（關西地區則相反，習慣靠右站）</li>
-                <li><strong>垃圾不落地：</strong>日本街頭垃圾桶很少，建議自備小垃圾袋，將垃圾帶回飯店或車站再丟。</li>
-                <li><strong>免稅 (Tax-Free) 規則：</strong>在貼有「Tax-Free」標誌的店家，當日消費滿5,000日圓（未稅）即可辦理退稅。結帳時需出示護照，店家會將商品密封，在離開日本前不可拆封。</li>
-            </ul>
-        </div>
-    </div>
-</section>
+                <div class="card">
+                    <h3 class="font-display text-lg font-bold mb-3">🌪️ 緊急應變篇</h3>
+                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
+                        <li><strong>遇到颱風怎麼辦：</strong>注意交通公告，儲備糧食並保持聯繫。</li>
+                        <li><strong>旅遊不便險理賠：</strong>保留所有單據並向航空公司索取證明。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="font-display text-lg font-bold mb-3">👍 當地禮儀與實用技巧</h3>
+                    <ul class="list-disc list-inside space-y-3 text-[color:var(--muted)]">
+                        <li><strong>電車上保持安靜：</strong>請將手機轉為靜音，避免高聲談話。</li>
+                        <li><strong>電扶梯站位：</strong>東京靠左站，關西靠右。</li>
+                        <li><strong>垃圾不落地：</strong>建議自備小垃圾袋，將垃圾帶回飯店再丟。</li>
+                        <li><strong>免稅規則：</strong>當日未稅滿 5,000 日圓可辦理退稅，需出示護照。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Shopping List Section -->
         <section id="shopping-list" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">購物 & 伴手禮清單</h2>
-                <p class="mt-2 text-lg text-gray-600">確保不漏掉任何想買的物品或送給親友的伴手禮！</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">購物 & 伴手禮清單</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">確保不漏掉任何想買的物品或送給親友的伴手禮！</p>
             </div>
-            <!-- 購物清單將由JS動態生成 -->
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg interactive-checklist" id="shopping-checklist-container"></div>
+            <div class="card interactive-checklist" id="shopping-checklist-container"></div>
         </section>
 
         <!-- Checklist Section -->
         <section id="checklist" class="scroll-mt-20">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold gradient-text">行前準備清單</h2>
-                <p class="mt-2 text-lg text-gray-600">確保萬事俱備，讓您的旅程順暢無憂。</p>
+            <div class="text-center mb-12">
+                <h2 class="font-display text-3xl font-bold gradient-text">行前準備清單</h2>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">確保萬事俱備，讓您的旅程順暢無憂。</p>
             </div>
-            <!-- 行前準備清單將由JS動態生成 -->
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg interactive-checklist" id="pre-trip-checklist-container"></div>
+            <div class="card interactive-checklist" id="pre-trip-checklist-container"></div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-200 text-center py-8 mt-12">
-        <p class="text-gray-600">此互動儀表板根據您提供的旅遊報告生成。</p>
+    <footer class="py-8 mt-12 text-center">
+        <p class="text-sm text-[color:var(--muted)]">此互動儀表板根據您提供的旅遊報告生成。</p>
     </footer>
-    
+
     <script>
     // =================================================================================
     // 旅遊資料庫 (Single Source of Truth)
@@ -485,7 +532,7 @@
                         { label: '推薦料理', value: '日式早餐套餐、各式吐司、咖啡等。' },
                         { label: '每人平均用餐價位', value: '￥999' },
                         { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a>' }
-                    ]}
+                    ]} 
                 ]
             },
             {
@@ -548,7 +595,7 @@
         ],
         // --- 交通資訊 ---
         transportation: [
-            { key: 'nrt-to-mustard', title: '機場 → 下北澤', from: '成田機場 (NRT)', to: '下北澤芥末飯店', emoji: '✈️➡️🏨', method: '成田特快 (N\'EX) + 京王井之頭線', details: '搭乘N\'EX至澀谷站，再轉乘京王井之頭線至下北澤站。', cost: '約 ¥3,250' },
+            { key: 'nrt-to-mustard', title: '機場 → 下北澤', from: '成田機場 (NRT)', to: '下北澤芥末飯店', emoji: '✈️➡️🏨', method: '成田特快 (N\\'EX) + 京王井之頭線', details: '搭乘N\\'EX至澀谷站，再轉乘京王井之頭線至下北澤站。', cost: '約 ¥3,250' },
             { key: 'yotsuya-to-shibuya', title: '四谷 → 澀谷', from: 'Tokyo Bitcoin Base', to: '澀谷車站', emoji: '🪙➡️🛍️', method: 'JR中央・總武線 + JR山手線', details: '從四谷站搭乘JR線至新宿站，轉乘山手線至澀谷站。', cost: '約 ¥170' },
             { key: 'shibuya-to-kanda', title: '澀谷 → 神田', from: '澀谷車站', to: '神田車站 (飯店)', emoji: '🛍️➡️🏨', method: '東京Metro銀座線', details: '從澀谷站搭乘銀座線直達神田站。', cost: '約 ¥200' },
             { key: 'kanda-to-oji', title: '神田 → 王子', from: '神田車站', to: '王子車站 (飛鳥山公園)', emoji: '🏨➡️🌳', method: 'JR京濱東北線', details: '從神田站搭乘京濱東北線直達王子站。', cost: '約 ¥170' },
@@ -1069,8 +1116,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
