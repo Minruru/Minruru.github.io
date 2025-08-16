@@ -224,7 +224,7 @@
                 </div>
             </div>
             <div class="content-card p-6">
-                <h3 class="font-display text-2xl font-bold text-center mb-6">預算費用分佈</h3>
+                <h3 class="font-display text-2xl font-bold text-center mb-6" style="color: var(--text-color);">預算費用分佈</h3>
                 <div class="chart-container h-80 mx-auto" style="max-width: 400px;">
                     <canvas id="budgetDonutChart"></canvas>
                 </div>
@@ -266,7 +266,7 @@
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="content-card p-6">
-                    <h3 class="font-display text-2xl font-bold text-center mb-6">各項費用比較 (JPY)</h3>
+                    <h3 class="font-display text-2xl font-bold text-center mb-6" style="color: var(--text-color);">各項費用比較 (JPY)</h3>
                     <div class="chart-container h-96">
                         <canvas id="expenseBarChart"></canvas>
                     </div>
@@ -310,7 +310,15 @@
                     <ul class="list-disc list-inside space-y-4">
                         <li><strong>完成 Visit Japan Web：</strong>建議在出發前1-2天線上填寫並截圖保存QR Code，可以大幅加快您入境日本的速度。</li>
                         <li><strong>註冊機場自動通關 (e-Gate)：</strong>若尚未申辦，可在出發當天提早到桃園機場的移民署櫃檯免費辦理，未來出入境台灣都能快速通關。</li>
-                        <li><strong>安裝旅遊APP：</strong>Google Maps (交通)、Google 翻譯 (翻譯)、Tabelog (美食)。</li>
+                        <li><strong>行李規定：</strong>出發前務必確認航空公司的手提與托運行李大小、重量規定。通常手提行李液體（含水）容量不可超過100ml。</li>
+                        <li><strong>提早排隊：</strong>日本機場的航空公司櫃檯，通常在尚未開櫃時就可前去排隊，提早處理登機手續可避免人潮。</li>
+                        <li><strong>安裝旅遊APP：</strong>
+                             <ul class="list-none space-y-2 mt-2 ml-4">
+                                <li>- Google Maps (交通)、Google 翻譯</li>
+                                <li>- Tabelog (美食)、Suica（西瓜卡）iPhone手機</li>
+                                <li>- VoiceTra (語音翻譯)</li>
+                             </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="content-card p-6 flex flex-col">
@@ -318,6 +326,13 @@
                     <ul class="list-disc list-inside space-y-4">
                         <li><strong>遇到颱風怎麼辦：</strong>注意交通公告，儲備糧食並保持聯繫。</li>
                         <li><strong>旅遊不便險理賠：</strong>保留所有單據並向航空公司索取「延誤/取消證明」。</li>
+                        <li><strong>緊急狀況應對：</strong>
+                            <ul class="list-none space-y-2 mt-2 ml-4">
+                                <li>- <strong>偷竊：</strong>立即向最近的警察局或派出所（交番）報案，並索取報案證明以利後續保險理賠。</li>
+                                <li>- <strong>車禍：</strong>保持冷靜，立即撥打110報警、119叫救護車（若有人受傷）。切勿私下和解，等待警察到場處理。</li>
+                                <li>- <strong>生病：</strong>若狀況輕微可至藥妝店諮詢藥師。若需就醫，可請飯店協助或查詢日本觀光局提供的醫療機構名單。</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="content-card p-6 flex flex-col">
@@ -326,7 +341,13 @@
                         <li><strong>電車上保持安靜：</strong>請將手機轉為靜音，避免高聲談話。</li>
                         <li><strong>電扶梯靠左站：</strong>在東京，習慣靠左站立，將右側通道留給趕時間的人。</li>
                         <li><strong>垃圾不落地：</strong>日本街頭垃圾桶很少，建議自備小垃圾袋，將垃圾帶回飯店或車站再丟。</li>
-                        <li><strong>免稅規則：</strong>當日未稅滿 5,000 日圓可辦理退稅，需出示護照。</li>
+                        <li><strong>免稅規則詳解：</strong>
+                            <ul class="list-none space-y-2 mt-2 ml-4">
+                                <li>- <u><strong>適用對象：</strong></u> 在貼有「Tax-Free」標誌的店家，當日消費滿5,000日圓（未稅）即可辦理。</li>
+                                <li>- <u><strong>商品分類：</strong></u> 分為「一般用品」（如電器、服飾）與「消耗品」（如食品、藥妝）。兩者需分開計算，且消耗品會被密封，離開日本前不可拆封。</li>
+                                <li>- <u><strong>如何申請：</strong></u> 結帳時出示護照正本，店家會協助處理退稅手續，可能直接從帳單扣除或在專門櫃台退還現金。</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -368,12 +389,12 @@
             exchangeRate: 0.21
         },
         itinerary: [
-            { day: 1, date: "8/18 (一)", title: "抵達與下北澤初探", description: "抵達東京成田機場(NRT)後，搭乘 N'EX 至澀谷，再轉乘京王井之頭線抵達充滿文青與復古風情的下北澤。入住飯店後，準備開始您的《孤獨搖rock！》聖地巡禮！", events: [ { time: "08:00-09:30", emoji: "🛌", text: "起床梳洗，準備行李" }, { time: "09:30-11:30", emoji: "✈️", text: "抵達桃園國際機場" }, { time: "11:30-12:30", emoji: "📝", text: "準備登機手續並過關" }, { time: "12:30-14:15", emoji: "🍔", text: "過關後在機場進食" }, { time: "14:15-18:35", emoji: "🛫", text: "(日本時間 15:15-19:35) 桃園國際機場到東京成田機場" }, { time: "19:35-22:00", emoji: "🏨", text: "調整手機時間為日本時間，搭車前往下北澤芥末飯店" }, { time: "22:00-23:00", emoji: "🛒", text: "在附近超商買晚餐回飯店食用", mealKey: 'conbini_dinner' }, { time: "23:00-24:00", emoji: "🛀", text: "洗澡" }, { time: "00:00-08:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 1, date: "8/18 (一)", title: "抵達與下北澤初探", description: "抵達東京成田機場(NRT)後，搭乘 N'EX 至澀谷，再轉乘京王井之頭線抵達充滿文青與復古風情的下北澤。入住飯店後，準備開始您的《孤獨搖rock！》聖地巡禮！", events: [ { time: "08:00-09:30", emoji: "🛌", text: "起床梳洗，準備行李" }, { time: "09:30-11:30", emoji: "✈️", text: "抵達桃園國際機場" }, { time: "11:30-12:30", emoji: "📝", text: "準備登機手續並過關" }, { time: "12:30-14:15", emoji: "🍔", text: "過關後在機場進食" }, { time: "14:15-18:35", emoji: "🛫", text: "(日本時間 18:35 抵達）桃園國際機場到東京成田機場" }, { time: "18:35-22:00", emoji: "🏨", text: "調整手機時間為日本時間，搭車前往下北澤芥末飯店" }, { time: "22:00-23:00", emoji: "🛒", text: "在附近超商買晚餐回飯店食用", mealKey: 'conbini_dinner' }, { time: "23:00-24:00", emoji: "🛀", text: "洗澡" }, { time: "00:00-08:00", emoji: "😴", text: "睡覺" }, ]},
             { day: 2, date: "8/19 (二)", title: "下北澤深度探索", description: "今日將深度探索下北澤，進行《孤獨搖滾！》聖地巡禮，並品嚐當地特色美食。", events: [ { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗" }, { time: "09:00-10:00", emoji: "☕", text: "附近超商吃早餐", mealKey: 'conbini_breakfast' }, { time: "10:00-12:00", emoji: "🎸", text: "前往孤獨搖滾聖地Shelter Live House (STARRY原型)、🅿️ Times 下北澤第八停車場 (團體照拍攝地)" }, { time: "12:00-13:30", emoji: "🍛", text: "午餐 路地裏咖哩 侍 下北澤店 用餐", mealKey: 'curry_samurai' }, { time: "13:30-15:30", emoji: "🛍️", text: "探索下北澤一番街的獨特店鋪與古著店" }, { time: "16:00-17:00", emoji: "🍮", text: "白髭泡芙工房 吃龍貓泡芙", mealKey: 'shirahige_choux' }, { time: "17:00-18:00", emoji: "🚶", text: "在下北澤街道繼續閒逛" }, { time: "18:00-19:00", emoji: "🍔", text: "Village Vanguard Diner Shimokitazawa 用餐（已預訂）", mealKey: 'village_vanguard_diner' }, { time: "19:00-20:00", emoji: "🌃", text: "到下北澤夜市逛逛，看有沒有便宜衣服" }, { time: "20:00-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認隔日行程並準備睡覺" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
             { day: 3, date: "8/20 (三)", title: "澀谷、新宿一日遊 & 前進秋葉原", description: "前往新宿、澀谷逛逛吃美食，傍晚，搭乘JR線前往動漫與電子的聖地——秋葉原，並入住新飯店。", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-08:30", emoji: "🏨", text: "準備退房離開飯店" }, { time: "08:30-9:30", emoji: "☕", text: "えくぶり 用餐", mealKey: 'ekuburi' }, { time: "9:30-10:20", emoji: "🚆", text: "從東北澤車站搭車到四谷站" }, { time: "10:20-12:00", emoji: "🪙", text: "前往Tokyo Bitcoin Base，與當地人交流產業與推薦的幣圈餐廳與景點" }, { time: "12:00-13:00", emoji: "🚚", text: "在Tokyo Bitcoin Base周遭的餐車用餐（可使用比特幣支付）", mealKey: 'food_truck' }, { time: "13:00-13:40", emoji: "🛍️", text: "前往ユニクロ 渋谷道玄坂店、涉谷GU" }, { time: "13:40-17:00", emoji: "👕", text: "在上述地點採買衣服（也要幫老媽買）" }, { time: "17:00-17:30", emoji: "🚶", text: "抵達吟味焼肉 じゃんか 道玄坂" }, { time: "17:30-19:00", emoji: "🍖", text: "在吟味焼肉 じゃんか 道玄坂用餐（已預訂）", mealKey: 'janka_dogenzaka' }, { time: "19:00-20:00", emoji: "🧳", text: "搭車前往東京中央大飯店 Check In" }, { time: "20:00-21:00", emoji: "🏪", text: "逛一下飯店周邊與超商購買零食與明天早餐" }, { time: "21:00-22:30", emoji: "🛀", text: "回到飯店洗澡休息" }, { time: "22:30-23:00", emoji: "✅", text: "確認明天行程" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
-            { day: 4, date: "8/21 (四)", title: "《MyGO!!!!!》聖地巡禮日", description: "今日是《MyGO!!!!!》的聖地巡禮日！前往飛鳥山公園、舊古河庭園，朝聖爽世與祥子戰鬥過，以及祥子成為人類的橋。", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-09:30", emoji: "☕", text: "吃昨天準備的早餐" }, { time: "09:30-10:00", emoji: "🌳", text: "搭車前往飛鳥山公園" }, { time: "10:00-11:00", emoji: "🚶‍♀️", text: "朝聖爽世與祥子戰鬥過的地方，可搭鐵軌逛公園" }, { time: "11:00-11:20", emoji: "🏡", text: "走路前往舊古河庭園" }, { time: "11:20-12:20", emoji: "🌸", text: "在舊古河庭園朝聖祥子的家" }, { time: "12:00-12:10", emoji: "🚶", text: "到旁邊的ココフル" }, { time: "12:10-13:40", emoji: "🍔", text: "在ココフル 用餐", mealKey: 'cocofulu' }, { time: "13:40-14:30", emoji: "🚗", text: "搭車前往千登世步道橋，朝聖成為人類橋" }, { time: "14:30-15:30", emoji: "🤝", text: "在千登世步道橋周圍逛逛（可提早離開）" }, { time: "15:30-16:10", emoji: "🚆", text: "搭車回到東京中央大飯店" }, { time: "16:10-17:00", emoji: "😴", text: "在飯店休息" }, { time: "17:00-17:30", emoji: "🚶‍♀️", text: "搭車前往人形町今半 銀座店" }, { time: "17:30-19:30", emoji: "🍲", text: "在 人形町今半 銀座店 用餐（已預訂）", mealKey: 'imahan_ginza' }, { time: "19:30-20:30", emoji: "🛒", text: "回到飯店購買隔日早餐" }, { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認明天行程" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
+            { day: 4, date: "8/21 (四)", title: "《MyGO!!!!!》聖地巡禮日", description: "今日是《MyGO!!!!!》的聖地巡禮日！前往飛鳥山公園、舊古河庭園，朝聖爽世與祥子戰鬥過，以及祥子成為人類的橋。", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-09:30", emoji: "☕", text: "吃昨天準備的早餐" }, { time: "09:30-10:00", emoji: "🌳", text: "搭車前往飛鳥山公園" }, { time: "10:00-11:00", emoji: "🚶‍♀️", text: "朝聖爽世與祥子戰鬥過的地方，可搭鐵軌逛公園" }, { time: "11:00-11:20", emoji: "🏡", text: "走路前往舊古河庭園" }, { time: "11:20-12:20", emoji: "🌸", text: "在舊古河庭園朝聖祥子的家" }, { time: "12:00-12:10", emoji: "🚶", text: "到旁邊のココフル" }, { time: "12:10-13:40", emoji: "🍔", text: "在ココフル 用餐", mealKey: 'cocofulu' }, { time: "13:40-14:30", emoji: "🚗", text: "搭車前往千登世步道橋，朝聖成為人類橋" }, { time: "14:30-15:30", emoji: "🤝", text: "在千登世步道橋周圍逛逛（可提早離開）" }, { time: "15:30-16:10", emoji: "🚆", text: "搭車回到東京中央大飯店" }, { time: "16:10-17:00", emoji: "😴", text: "在飯店休息" }, { time: "17:00-17:30", emoji: "🚶‍♀️", text: "搭車前往人形町今半 銀座店" }, { time: "17:30-19:30", emoji: "🍲", text: "在 人形町今半 銀座店 用餐（已預訂）", mealKey: 'imahan_ginza' }, { time: "19:30-20:30", emoji: "🛒", text: "回到飯店購買隔日早餐" }, { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認明天行程" }, { time: "23:00-07:00", emoji: "😴", text: "睡覺" }, ]},
             { day: 5, date: "8/22 (五)", title: "秋葉原動漫之旅", description: "今日將深度探索秋葉原的動漫文化，從電器、模型到各式周邊商品，讓您滿載而歸！", events: [ { time: "07:00-08:00", emoji: "🛌", text: "起床梳洗" }, { time: "08:00-10:00", emoji: "☕", text: "吃飯店的早餐或者附近超商", mealKey: 'conbini_breakfast' }, { time: "10:00-12:00", emoji: "📺", text: "前往秋葉原ラジオ會館" }, { time: "12:00-12:30", emoji: "🚶", text: "前往とんこつラーメン博多風龍 秋葉原総本店" }, { time: "12:30-14:00", emoji: "🍛", text: "在とんこつラーメン博多風龍 秋葉原総本店 用餐（無法預約）", mealKey: 'hakata_furyu' }, { time: "14:00-17:00", emoji: "🎮", text: "繼續逛秋葉原ラジオ會館、e-earphone 秋葉原店等店面（尋找SONY WH-1000XM5二手貨，5000台幣內）" }, { time: "17:00-18:00", emoji: "🛍️", text: "前往SEEKBASE、2k540手工藝品店逛逛" }, { time: "18:00-19:30", emoji: "🍜", text: "前往とんかつ檍のカレー屋 いっぺこっぺ 秋葉原店 用餐（無法預約）", mealKey: 'tonkatsu_ippe' }, { time: "19:30-20:30", emoji: "🛒", text: "先買明天早餐並回到飯店" }, { time: "20:30-22:00", emoji: "🚿", text: "回到飯店洗澡休息" }, { time: "22:00-23:00", emoji: "✅", text: "確認明天行程與退房時間" }, { time: "23:00-08:00", emoji: "😴", text: "睡覺" }, ]},
-            { day: 6, date: "8/23 (六)", title: "伴手禮採買日&啟程返家", description: "整理行囊，享受在東京的最後一天。從秋葉原地區購買伴手禮，中午隨意吃喝，下午搭車到成田機場，準備搭晚上的班機平安返家。", events: [ { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗吃早餐" }, { time: "09:00-10:00", emoji: "🏨", text: "準備行李與確認重要物品並退房" }, { time: "10:00-10:30", emoji: "🚶‍♀️", text: "前往秋葉原ラジオ會館" }, { time: "10:30-12:30", emoji: "🛍️", text: "在會館一樓的ギフトショップ The AkiBa 購買伴手禮、在附近的全家購買蘋果乾兩包（子儀伴手禮）" }, { time: "12:30-14:30", emoji: "🍜", text: "隨便找一間店用餐", mealKey: 'random_lunch' }, { time: "14:30-16:30", emoji: "🚆", text: "搭車前往成田機場" }, { time: "16:30-17:30", emoji: "🛂", text: "在機場準備登機手續，並調整手機時間為台灣時間" }, { time: "17:30-19:30", emoji: "🍔", text: "用餐並等待搭接駁車", mealKey: 'airport_dinner' }, { time: "19:30-20:30", emoji: "🚌", text: "搭接駁車到登機處" }, { time: "20:30-23:35", emoji: "🛫", text: "(台灣時間 19:30-22:35) 揮手告別東京，搭機返回台灣" }, { time: "22:35-23:35", emoji: "🚕", text: "搭計程車前往租屋處" }, ]},
+            { day: 6, date: "8/23 (六)", title: "伴手禮採買日&啟程返家", description: "整理行囊，享受在東京的最後一天。從秋葉原地區購買伴手禮，中午隨意吃喝，下午搭車到成田機場，準備搭晚上的班機平安返家。", events: [ { time: "08:00-09:00", emoji: "🛌", text: "起床梳洗吃早餐" }, { time: "09:00-10:00", emoji: "🏨", text: "準備行李與確認重要物品並退房" }, { time: "10:00-10:30", emoji: "🚶‍♀️", text: "前往秋葉原ラジオ會館" }, { time: "10:30-12:00", emoji: "🛍️", text: "在會館一樓的ギフトショップ The AkiBa 購買伴手禮、在附近的全家購買蘋果乾兩包（子儀伴手禮）" }, { time: "12:00-13:30", emoji: "🍜", text: "隨便找一間店用餐", mealKey: 'random_lunch' }, { time: "13:30-16:00", emoji: "🚆", text: "搭車前往成田機場" }, { time: "16:00-17:00", emoji: "🛂", text: "在機場準備登機手續" }, { time: "17:00-18:30", emoji: "🍔", text: "用餐並等待搭接駁車", mealKey: 'airport_dinner' }, { time: "18:30-19:30", emoji: "🚌", text: "搭接駁車到登機處" }, { time: "19:30-22:35", emoji: "🛫", text: "(台灣時間 22:35 抵達) 揮手告別東京，搭機返回台灣" }, { time: "22:35-23:35", emoji: "🚕", text: "搭計程車前往租屋處" }, ]},
         ],
         attractions: [
             { key: 'shimokita', name: '下北澤區域', places: [ { key: 'hotel-mustard', name: '下北澤芥末飯店', emoji: '🏨', description: '位於下北澤心臟地帶的設計旅店，以其簡約時尚的風格和便利的地理位置著稱，是體驗下北澤文創氛圍的絕佳起點。'}, { key: 'shelter-live-house', name: 'Shelter Live House (STARRY原型)', emoji: '🎤', description: '東京歷史悠久的知名 Live House，也是《孤獨搖滾！》中「STARRY」Live House 的原型。'}, { key: 'times-parking', name: 'Times 下北澤第八停車場 (團體照拍攝地)', emoji: '🅿️', description: '因《孤獨搖滾！》動畫中「團結Band」在此拍攝經典團體照而聞名，成為粉絲們爭相模仿拍照的聖地。'}, { key: 'curry-samurai', name: '路地裏咖哩 侍 下北澤店', emoji: '🍛', description: '下北澤地區知名的湯咖哩專賣店，以其豐富的蔬菜、濃郁的湯頭和多樣的客製化選擇受到歡迎。', details: [ { label: '推薦料理', value: '招牌湯咖哩，可選擇辣度、湯頭種類和多種配料（如雞腿、豬肉、海鮮或各式蔬菜）。' }, { label: '每人平均用餐價位', value: '￥1,320 - ￥2,255' }, { label: '支付方式', value: '不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13165636/dtlmenu/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'shirahige-choux', name: '白髭泡芙工房', emoji: '🍮', description: '宮崎駿動畫迷必訪的可愛咖啡廳！這裡提供獨特的龍貓造型泡芙，造型可愛，內餡口味多樣。', details: [ { label: '推薦料理', value: '龍貓造型泡芙 (口味有卡士達、巧克力、季節限定等)。' }, { label: '每人平均用餐價位', value: '￥999' }, { label: '支付方式', value: '不接受信用卡付款、不接受電子現金、接受PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131812/13161008/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'village-vanguard-diner', name: 'Village Vanguard Diner Shimokitazawa', emoji: '🍔', description: '由知名雜貨店經營的漢堡店，以其「大人漢堡」為特色，嚴選食材，提供美味且令人愉悅的正宗漢堡體驗。', details: [ { label: '推薦料理', value: '多汁的牛肉餅漢堡，如鳳梨燒烤漢堡、辣椒起司漢堡等。' }, { label: '每人平均用餐價位', value: '午餐約 ¥1,000 - ¥1,999；晚餐約 ¥2,000 - ¥2,999。' }, { label: '支付方式', value: '接受信用卡付款、電子現金（部分電子錢包）、PayPay支付（QRCode）' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tw/tokyo/A1318/A131802/13022465/" target="_blank">日本餐廳評論網站</a>' } ]}, { key: 'ekuburi', name: 'えくぶり', emoji: '☕', description: '這是一家提供舒適早餐體驗的咖啡店，適合在行程開始前享用一份悠閒的早點。', details: [ { label: '推薦料理', value: '日式早餐套餐、各式吐司、咖啡等。' }, { label: '每人平均用餐價位', value: '￥999' }, { label: '參考資料', value: '<a class="tabelog-link" href="https://tabelog.com/tokyo/A1318/A131802/13243840/" target="_blank">Tabelog 連結</a>' } ]} ]},
@@ -549,7 +570,7 @@
         }
 
         function setupCharts() {
-            Chart.defaults.color = 'var(--text-color)';
+            Chart.defaults.color = '#e0e0e0';
             Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
             const commonTooltip = {
                 backgroundColor: 'rgba(0, 0, 0, 0.8)', titleFont: { size: 14, weight: 'bold' },
@@ -571,7 +592,7 @@
                     options: {
                         responsive: true, maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { padding: 20, color: 'var(--muted-text-color)' } },
+                            legend: { position: 'bottom', labels: { padding: 20, color: '#b0b0b0' } },
                             tooltip: { ...commonTooltip, callbacks: { label: c => `${c.label}: NT$${Math.round(c.raw).toLocaleString()}` } }
                         }
                     }
@@ -591,8 +612,8 @@
                     options: {
                         indexAxis: 'y', responsive: true, maintainAspectRatio: false,
                         scales: {
-                            x: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'var(--text-color)' } },
-                            y: { grid: { display: false }, ticks: { color: 'var(--text-color)' } }
+                            x: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#e0e0e0' } },
+                            y: { grid: { display: false }, ticks: { color: '#e0e0e0' } }
                         },
                         plugins: { 
                             legend: { display: false }, 
